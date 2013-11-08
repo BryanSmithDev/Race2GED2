@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <style name="Theme.Race2ged" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_race2ged</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Race2ged</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Race2ged</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Race2ged</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Race2ged</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Race2ged</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_race2ged</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_race2ged</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Race2ged</item>
+		
+		    <item name="android:editTextBackground">@drawable/edit_text_holo_light</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewrace2ged</item>
+
+    <item name="android:listChoiceIndicatorMultiple">@drawable/btn_check_holo_light</item>
+
+    <item name="android:listChoiceIndicatorSingle">@drawable/btn_radio_holo_light</item>
+
+    <item name="android:buttonStyle">@style/Buttonrace2ged</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonrace2ged</item>
+
+    <item name="android:dropDownSpinnerStyle">@style/Spinnerrace2ged</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarrace2ged</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarrace2ged</item>
+
+    <item name="android:buttonStyleToggle">@style/Togglerace2ged</item>
+
+    <item name="android:listChoiceBackgroundIndicator">@drawable/list_selector_holo_light</item>
+
+    <item name="android:activatedBackgroundIndicator">@drawable/activated_background_holo_light</item>
+
+    <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb_holo</item>
+        
+                <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/Theme.Race2ged.Widget</item>
+
+    </style>
+
+    <style name="ActionBar.Solid.Race2ged" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/ab_background_textured_race2ged</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_race2ged</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_race2ged</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Race2ged</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Race2ged" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_race2ged</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Race2ged</item>
+    </style>
+    
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Race2ged.Widget" parent="@style/Theme.AppCompat">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Race2ged</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Race2ged</item>
+    </style>
+
+	  <style name="AutoCompleteTextViewrace2ged" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/list_selector_holo_light</item>
+	    <item name="android:background">@drawable/edit_text_holo_light</item>
+  </style>
+
+  <style name="Buttonrace2ged" parent="android:Widget.Holo.Light.Button">
+	  <item name="android:background">@drawable/btn_default_holo_light</item>
+  </style>
+
+  <style name="ImageButtonrace2ged" parent="android:Widget.Holo.Light.ImageButton">
+	  <item name="android:background">@drawable/btn_default_holo_light</item>
+  </style>
+
+  <style name="Spinnerrace2ged" parent="android:Widget.Holo.Light.Spinner">
+      <item name="android:background">@drawable/spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/list_selector_holo_light</item>
+  </style>
+
+  <style name="ProgressBarrace2ged" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/progress_indeterminate_horizontal_holo_light</item>
+  </style>
+
+  <style name="SeekBarrace2ged" parent="android:Widget.Holo.Light.SeekBar">
+      <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/scrubber_progress_horizontal_holo_light</item>
+      <item name="android:thumb">@drawable/scrubber_control_selector_holo_light</item>
+  </style>
+
+  <style name="Togglerace2ged" parent="android:Widget.Holo.Light.Button.Toggle">
+      <item name="android:background">@drawable/btn_toggle_holo_light</item>
+  </style>
+
+</resources>

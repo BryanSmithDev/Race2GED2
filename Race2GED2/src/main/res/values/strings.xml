@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Race2GED</string>
+    <array name="navTitles" >
+        <item>Home</item>
+        <item>The GED</item>
+        <item>Classes</item>
+        <item>Study</item>
+        <item>Testing</item>
+        <item>Resources</item>
+        <item>Stats</item>
+        <item>Settings</item>
+        <item>About</item>
+    </array>
+    <string-array name="navIcons">
+        <item>@drawable/home</item>
+        <item>@drawable/ged</item>
+        <item>@drawable/classes</item>
+        <item>@drawable/study</item>
+        <item>@drawable/testing</item>
+        <item>@drawable/resources</item>
+        <item>@drawable/stats</item>
+        <item>@drawable/settings</item>
+        <item>@drawable/about</item>
+    </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+</resources>

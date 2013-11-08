@@ -1,0 +1,13 @@
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/navList"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:choiceMode="singleChoice"
+    android:divider="#33808080"
+    android:dividerHeight="1dp"
+    tools:context="edu.mecc.race2ged.navigation.NavigationDrawerFragment"
+    android:listSelector="@drawable/selectable_background_race2ged"
+    android:addStatesFromChildren="true"
+    android:clickable="true"
+    android:background="#e8e7dd" />
