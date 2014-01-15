@@ -26,4 +26,4 @@ Some Facts:
 
 ---
 
-##[License] (https://raw.github.com/BryanSmithDev/Race2GED2/master/LICENSE)
+##[License] (https://raw.github.com/RegionalAdultEducation/Race2GED2/master/LICENSE)
