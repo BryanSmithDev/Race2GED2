@@ -1,14 +1,16 @@
 package edu.mecc.race2ged.navigation;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import edu.mecc.race2ged.R;
 
@@ -55,6 +58,7 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    private View mPreviouslySelectedView = null;
 
 
 
@@ -78,6 +82,7 @@ public class NavigationDrawerFragment extends Fragment {
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
 
+
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
     }
@@ -85,24 +90,33 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+        View mDrawerView = inflater.inflate(R.layout.side_panel_list, container, false);
+        mDrawerListView = (ListView) mDrawerView.findViewById(R.id.side_panel_list_view);
+
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (mPreviouslySelectedView != null)
+                    ((TextView) mPreviouslySelectedView.findViewById(R.id.text)).setTypeface(Typeface.DEFAULT);
+                mPreviouslySelectedView = view;
+                ((TextView) view.findViewById(R.id.text)).setTypeface(Typeface.DEFAULT_BOLD);
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new NavDrawerListAdapter(
-                getActionBar().getThemedContext(),
-                R.layout.navigation_list_item,
-                R.id.navListItemText,
-                getResources().getStringArray(R.array.navTitles),
-                R.id.navListItemIcon,
-                getResources().obtainTypedArray(R.array.navIcons)));
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
-        return mDrawerListView;
+        NavDrawerListAdapter adapter = new NavDrawerListAdapter(getActivity().getBaseContext());
+        String[] mPrimaryNavItems = getResources().getStringArray(R.array.navPrimaryTitles);
+        String[] mSecondaryNavItems = getResources().getStringArray(R.array.navSecondaryTitles);
+        TypedArray mNavIcons = getResources().obtainTypedArray(R.array.navSecondaryTitlesIcons);
+
+        adapter.populate(R.id.text, mPrimaryNavItems, R.id.icon, mSecondaryNavItems, mNavIcons);
+
+        mNavIcons.recycle();
+
+        mDrawerListView.setAdapter(adapter);
+        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        return mDrawerView;
     }
 
     public boolean isDrawerOpen() {

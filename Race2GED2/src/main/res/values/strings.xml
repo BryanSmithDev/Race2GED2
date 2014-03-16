@@ -2,32 +2,30 @@
 <resources>
 
     <string name="app_name">Race2GED</string>
-    <array name="navTitles" >
-        <item>Home</item>
+    <array name="navPrimaryTitles">
+    <item>Home</item>
         <item>The GED</item>
         <item>Classes</item>
         <item>Study</item>
         <item>Testing</item>
         <item>Resources</item>
-        <item>Stats</item>
-        <item>Settings</item>
-        <item>About</item>
     </array>
-    <string-array name="navIcons">
-        <item>@drawable/home</item>
-        <item>@drawable/ged</item>
-        <item>@drawable/classes</item>
-        <item>@drawable/study</item>
-        <item>@drawable/testing</item>
-        <item>@drawable/resources</item>
-        <item>@drawable/stats</item>
-        <item>@drawable/settings</item>
-        <item>@drawable/about</item>
+    <array name="navSecondaryTitles">
+        <item>Settings</item>
+        <item>Help</item>
+    </array>
+    <string-array name="navSecondaryTitlesIcons">
+        <item>@drawable/ic_gear</item>
+        <item>@drawable/ic_help</item>
     </string-array>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
+
+    <string name="checking_for_class_updates">Checking for Class Schedule updates...</string>
+    <string name="error_no_connection">Cannot check for updates. No WiFi or mobile data connection available.</string>
+    <string name="error_no_wifi">Cannot check for updates. No WiFi connection available.</string>
 
 </resources>

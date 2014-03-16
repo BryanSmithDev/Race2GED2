@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- File created by the Android Action Bar Style Generator
+<?xml version="1.0" encoding="utf-8"?><!-- File created by the Android Action Bar Style Generator
 
      Copyright (C) 2011 The Android Open Source Project
      Copyright (C) 2012 readyState Software Ltd
@@ -18,17 +17,31 @@
 -->
 
 <resources>
+    <color name="black_overlay">#66000000</color>
     <color name="pressed_race2ged">#CC70AB1B</color>
     <color name="navListItemSelectedBG">#ffb4b4b4</color>
     <!-- Main color, used for splash screen background and top banner background -->
     <color name="primary_color">#135182</color>
-
-    <!--Background color of all screens -->
-    <color name="background_color">#ffffff</color>
 
     <!-- Used sparingly for contrast with the main color, perfeable shouldn't be a lighter version of the primary color -->
     <color name="secondary_color">#2481eb</color>
 
     <!-- Text color, color for unpressed buttons -->
     <color name="content_color">#85b73e</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="app_color">#fff98022</color>
+    <color name="app_color_accented">#ffcf6d1a</color>
+    <color name="app_color_transparent">#20f4842d</color>
+    <color name="app_background_light">#fffafafa</color>
+    <color name="app_background_light_transparent">#e6fafafa</color>
+    <color name="app_background">#ffe5e5e5</color>
+    <color name="side_drawer_item_current_screen_color">#25000000</color>
+    <color name="side_drawer_item_pressed_color">#33999999</color>
+    <color name="settings_summary_color">#ff999999</color>
+    <color name="drawer_line_divider_color">#ffe5e5e5</color>
+    <color name="drawer_setting_text_color">#ff666666</color>
+    <color name="drawer_bg_color_primary">#ffffff</color>
+    <color name="drawer_bg_color">#fff7f7f7</color>
+
 </resources>

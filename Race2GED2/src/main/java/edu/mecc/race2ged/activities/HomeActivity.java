@@ -1,12 +1,12 @@
-package edu.mecc.race2ged;
+package edu.mecc.race2ged.activities;
 
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.helpers.ClassUpdater;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 
@@ -45,6 +47,10 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        ClassUpdater classUpdater = new ClassUpdater(this);
+
+        classUpdater.checkForNewVersion();
+
     }
 
     @Override
@@ -57,15 +63,15 @@ public class HomeActivity extends ActionBarActivity
     }
 
     public void onSectionAttached(int number) {
-          String[] titles = getResources().getStringArray(R.array.navTitles);
-            switch (number) {
-                case 1:
-                    mTitle = getString(R.string.app_name);
-                    break;
-                default:
-                    if (titles[number-1] != null) mTitle = titles[number-1];
-                    else mTitle = getString(R.string.app_name);
-            }
+        String[] titles = getResources().getStringArray(R.array.navPrimaryTitles);
+        switch (number) {
+            case 1:
+                mTitle = getString(R.string.app_name);
+                break;
+            default:
+                if (titles[number - 1] != null) mTitle = titles[number - 1];
+                else mTitle = getString(R.string.app_name);
+        }
     }
 
     public void restoreActionBar() {
@@ -128,7 +134,7 @@ public class HomeActivity extends ActionBarActivity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_home, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));

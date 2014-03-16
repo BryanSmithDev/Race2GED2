@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:textAppearance="@style/SideMenuTextWithoutIcon"
+        android:gravity="center_vertical"
+        android:id="@id/text"
+        android:background="@drawable/home_drawer_list_selector_without_icon"
+        android:paddingLeft="16.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/side_panel_menu_item_min_height" />
+</LinearLayout>
