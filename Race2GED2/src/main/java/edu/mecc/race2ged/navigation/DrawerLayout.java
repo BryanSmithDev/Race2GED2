@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package edu.mecc.race2ged.navigation;
 
 import android.content.Context;
