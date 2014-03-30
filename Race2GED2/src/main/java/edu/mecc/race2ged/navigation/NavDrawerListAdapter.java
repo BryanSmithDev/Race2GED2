@@ -23,54 +23,109 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.helpers.Utils;
 
-
+/**
+ * NavDrawerListAdapter is a list adapter than manages the layout of the Navigation Drawer list.
+ * @see android.widget.BaseAdapter
+ * @see android.widget.ListAdapter
+ *
+ * @author Bryan Smith
+ */
 public class NavDrawerListAdapter extends BaseAdapter {
 
     private ArrayList<NavDrawerListItem> items = new ArrayList<NavDrawerListItem>();
     private Context context;
 
-
+    /**
+     * Constructs the NavDrawerListAdapter
+     * @param context The context of the activity.
+     */
     public NavDrawerListAdapter(Context context) {
         setContext(context);
     }
 
+    /**
+     * Returns the Navigation Drawers currently stored context.
+     * @return The Navigation Drawers currently stored context.
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Sets the navigation drawer's stored context
+     * @param context The context to store.
+     */
     public void setContext(Context context) {
         this.context = context;
     }
 
+    /**
+     * Returns the number of navigation drawer items.
+     * @return The number of navigation drawer items.
+     */
     @Override
     public int getCount() {
         return getItems().size();
     }
 
+    /**
+     * Returns the number of navigation drawer items.
+     * @return The number of navigation drawer items.
+     */
     public ArrayList<NavDrawerListItem> getItems() {
         return items;
     }
 
+    /**
+     * Sets the Navigation Drawer's array list of items to the values stored in another array list.
+     * @param items The item array list to set the navigation drawer's item array list to.
+     */
     public void setItems(ArrayList<NavDrawerListItem> items) {
         this.items = items;
     }
 
+    /**
+     * Returns a Navigation Drawer list item at the specified position.
+     * @param position The position of the item to retrieve.
+     * @return The NavDrawerListItem at the specified position.
+     */
     @Override
     public NavDrawerListItem getItem(int position) {
         return getItems().get(position);
     }
 
+    /**
+     * NOT CURRENTLY USED BUT REQUIRED DUE TO BASE CLASS
+     * @param position NOT USED
+     * @return -1
+     */
     @Override
     public long getItemId(int position) {
         return -1;
     }
 
+    /**
+     * Get a View that displays the data at the specified position in the data set. You can either
+     * create a View manually or inflate it from an XML layout file. When the View is inflated, the
+     * parent View (GridView, ListView...) will apply default layout parameters unless you use
+     * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
+     * to specify a root view and to prevent attachment to the root.
+     *
+     * @param position The position of the item within the adapter's data set of the item whose view
+     *        we want.
+     * @param convertView The old view to reuse, if possible. Note: You should check that this view
+     *        is non-null and of an appropriate type before using. If it is not possible to convert
+     *        this view to display the correct data, this method can create a new view.
+     *        Heterogeneous lists can specify their number of view types, so that this View is
+     *        always of the right type (see {@link #getViewTypeCount()} and
+     *        {@link #getItemViewType(int)}).
+     * @param parent The parent that this view will eventually be attached to
+     * @return A View corresponding to the data at the specified position.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         NavDrawerListItem listItem = getItem(position);
@@ -92,11 +147,25 @@ public class NavDrawerListAdapter extends BaseAdapter {
         return rowView;
     }
 
+    /**
+     * Adds a Navigation item to the navigation drawers list.
+     * @param item A NavDrawerListItem to add to the list.
+     */
     public void push(NavDrawerListItem item) {
         items.add(item);
     }
 
-    public void populate(int textViewID, String[] primaryItems, int iconViewID, String[] secondaryItems, TypedArray secondaryIcons) {
+    /**
+     * Populates the navigation drawer with items read from arrays. Primary items are large and do not
+     * have an icon. Secondary items are smaller and have a icon.
+     * @param textViewID The ID of the text view that will have its text value replaced.
+     * @param primaryItems An array of strings that contains the text data that will be stored in the
+     *                     corresponding primary items text view.
+     * @param secondaryItems An array of strings that contains the text data that will be stored in the
+     *                     corresponding secondary items text view.
+     * @param secondaryIcons A typed array of that contains the icons used for each item to display.
+     */
+    public void populate(int textViewID, String[] primaryItems, String[] secondaryItems, TypedArray secondaryIcons) {
         for (String s : primaryItems) {
             push(new NavDrawerListItemNoIcon(textViewID, s));
         }

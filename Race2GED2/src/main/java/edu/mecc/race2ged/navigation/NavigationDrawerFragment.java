@@ -78,8 +78,7 @@ public class NavigationDrawerFragment extends Fragment {
 
 
 
-    public NavigationDrawerFragment() {
-    }
+    public NavigationDrawerFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,7 +125,7 @@ public class NavigationDrawerFragment extends Fragment {
         String[] mSecondaryNavItems = getResources().getStringArray(R.array.navSecondaryTitles);
         TypedArray mNavIcons = getResources().obtainTypedArray(R.array.navSecondaryTitlesIcons);
 
-        adapter.populate(R.id.text, mPrimaryNavItems, R.id.icon, mSecondaryNavItems, mNavIcons);
+        adapter.populate(R.id.text, mPrimaryNavItems, mSecondaryNavItems, mNavIcons);
 
         mNavIcons.recycle();
 

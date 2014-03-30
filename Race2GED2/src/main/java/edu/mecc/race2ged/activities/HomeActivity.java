@@ -28,12 +28,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.helpers.ClassUpdater;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 
+/**
+ * HomeActivity is the primary activity of the Race2GED app and acts as the launcher. Most content
+ * is displayed here using fragments.
+ *
+ * @author Bryan Smith
+ */
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -47,6 +52,7 @@ public class HomeActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +83,10 @@ public class HomeActivity extends ActionBarActivity
                 .commit();
     }
 
+    /**
+     * When a fragment is replaced, what will happen?
+     * @param number The position of the list item that invoked the fragment transaction.
+     */
     public void onSectionAttached(int number) {
         String[] titles = getResources().getStringArray(R.array.navPrimaryTitles);
         switch (number) {

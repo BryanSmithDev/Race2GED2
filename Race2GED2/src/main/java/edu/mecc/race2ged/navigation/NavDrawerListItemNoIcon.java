@@ -18,7 +18,21 @@ package edu.mecc.race2ged.navigation;
 
 import edu.mecc.race2ged.R;
 
+/**
+ * NavDrawerListItemNoIcon represents a list item in the Navigation Drawer that does not use an icon
+ * . This class is primarily used for the primary navigation drawer items. Uses a predefined View
+ * ID.
+ *
+ * @see edu.mecc.race2ged.navigation.NavDrawerListItem
+ *
+ * @author Bryan Smith
+ */
 public class NavDrawerListItemNoIcon extends NavDrawerListItem {
+    /**
+     * Constructs the NavDrawerListItemNoIcon
+     * @param textViewID The ID of the Text View that will have a value inserted.
+     * @param text  The text value to insert into the text view.
+     */
     public NavDrawerListItemNoIcon(int textViewID, String text) {
         super(R.layout.side_menu_list_item_without_icon, textViewID, text, -1);
     }

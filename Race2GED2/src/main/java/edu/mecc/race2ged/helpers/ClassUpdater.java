@@ -21,18 +21,27 @@ import android.content.Context;
 import edu.mecc.race2ged.R;
 
 /**
- * Created by Bryan on 3/13/14.
+ * ClassUpdater provides methods for retrieving, storing, and managing Class Schedule data retrieved
+ * from www.race2ged.org
+ *
+ * @author Bryan Smith
  */
 public class ClassUpdater {
     private SettingsHelper settings;
     private Context context;
 
-
-    public ClassUpdater(Context cont) {
-        context = cont;
+    /**
+     * Constructs the ClassUpdater
+     * @param context The context of the activity.
+     */
+    public ClassUpdater(Context context) {
+        this.context = context;
         settings = new SettingsHelper(context);
     }
 
+    /**
+     * Checks for a new version of the Class Schedule.
+     */
     public void checkForNewVersion() {
         if (settings.getCheckForUpdates()) {
             Utils.showToastOnUiThread(context, R.string.checking_for_class_updates);
@@ -41,16 +50,16 @@ public class ClassUpdater {
                 if (settings.getCheckOnWifiOnly()) {
                     if (connection == Utils.WIFI) {
                         //TODO: Retrieve JSON file
-                        Utils.showToastOnUiThread(context, "Retrieved via WIFI");
+                        Utils.showToastOnUiThread(context, "Retrieved via WIFI"); //DEBUG
                     } else {
-                        Utils.showToastOnUiThread(context, R.string.error_no_wifi);
+                        Utils.showToastOnUiThread(context, R.string.error_no_wifi); //DEBUG
                     }
                 } else {
                     //TODO: Retrieve JSON file
                     if (connection == Utils.WIFI)
-                        Utils.showToastOnUiThread(context, "Retrieved via WIFI-2");
+                        Utils.showToastOnUiThread(context, "Retrieved via WIFI-2"); //DEBUG
                     if (connection == Utils.MOBILE_DATA)
-                        Utils.showToastOnUiThread(context, "Retrieved via Mobile Data");
+                        Utils.showToastOnUiThread(context, "Retrieved via Mobile Data"); //DEBUG
                 }
             } else {
                 Utils.showToastOnUiThread(context, R.string.error_no_connection);

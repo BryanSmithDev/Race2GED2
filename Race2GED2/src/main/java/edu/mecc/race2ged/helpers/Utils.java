@@ -24,35 +24,53 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Utils class includes commonly used methods often relating to system information such
+ * as network states or date and time.
+ *
+ * @author Bryan Smith
+ */
 public class Utils {
+
+    /**
+     * Network States
+     */
     public static int NO_CONNECTION = 0;
     public static int WIFI = 1;
     public static int MOBILE_DATA = 2;
 
     private static Typeface sRobotoThin;
 
+    /**
+     * Returns the current system date.
+     */
     public static String getDateAndTime() {
         return new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss").format(new Date(System
                 .currentTimeMillis()));
     }
 
+    /**
+     * Are we connected to WiFi, Mobile Data, or nothing?
+     * @return The devices current network state.
+     */
     public static int getNetworkStatus(Context context) {
         final ConnectivityManager connMgr = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if (wifi.isAvailable()) {
-            return WIFI;
-        } else if (mobile.isAvailable()) {
-            return MOBILE_DATA;
-        }
+        if (wifi != null && wifi.isAvailable()) return WIFI;
+        else if (mobile != null && mobile.isAvailable()) return MOBILE_DATA;
         return NO_CONNECTION;
     }
 
+    /**
+     * Displays a Toast Message on the UI Thread
+     * @param context The context of the activity.
+     * @param resourceId The resource ID of the text to display in the message.
+     */
     public static void showToastOnUiThread(final Context context, final int resourceId) {
         ((Activity) context).runOnUiThread(new Runnable() {
 
@@ -62,15 +80,24 @@ public class Utils {
         });
     }
 
+    /**
+     * Displays a Toast Message on the UI Thread
+     * @param context The context of the activity.
+     * @param string The string to display in the message.
+     */
     public static void showToastOnUiThread(final Context context, final String string) {
         ((Activity) context).runOnUiThread(new Runnable() {
-
             public void run() {
                 Toast.makeText(context, string, Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    /**
+     * Sets the font of a view to Roboto-Light
+     * @param context The context of the activity.
+     * @param view The view that will use Roboto-Light
+     */
     public static void setRobotoThin(Context context, View view) {
         if (sRobotoThin == null) {
             sRobotoThin = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
@@ -78,6 +105,11 @@ public class Utils {
         setFont(view, sRobotoThin);
     }
 
+    /**
+     * Sets the font of a view.
+     * @param view The view that will use defined Typeface
+     * @param robotoTypeFace The font typeface to use.
+     */
     private static void setFont(View view, Typeface robotoTypeFace) {
         if (view instanceof ViewGroup) {
             int count = ((ViewGroup) view).getChildCount();
