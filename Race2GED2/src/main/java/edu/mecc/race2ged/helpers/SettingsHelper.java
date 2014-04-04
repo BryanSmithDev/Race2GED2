@@ -33,6 +33,7 @@ public class SettingsHelper {
     public static String CLASS_DATA_VERSION = "class_data_version";
     public static String CHECK_CLASS_DATA_ONLY_ON_WIFI = "class_data_wifi";
     public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS = "class_data_checking";
+    public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP = "class_data_checking_at_startup";
 
     private SharedPreferences settings;
 
@@ -71,11 +72,20 @@ public class SettingsHelper {
     }
 
     /**
+     * Check for updates at startup?
+     * @return saved value indicating whether or not to check for updates. Or True if it does not
+     * exist.
+     */
+    public boolean getCheckForUpdatesAtStartup() {
+        return (getCheckForUpdates() && settings.getBoolean(CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP, true));
+    }
+
+    /**
      * Saves a String preference and the accompanying value.
      * @param preference The name of the preference.
      * @param value The string value stored in the preference.
      */
-    private void savePreference(String preference, String value) {
+    public void savePreference(String preference, String value) {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(preference, value);
         editor.commit();
@@ -85,7 +95,7 @@ public class SettingsHelper {
      * Removes a saved preference.
      * @param preference The name of the preference to remove.
      */
-    private void removePreference(String preference) {
+    public void removePreference(String preference) {
         SharedPreferences.Editor editor = settings.edit();
         editor.remove(preference);
         editor.commit();

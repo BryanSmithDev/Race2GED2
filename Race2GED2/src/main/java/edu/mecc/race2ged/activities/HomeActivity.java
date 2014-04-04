@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.helpers.ClassUpdater;
+import edu.mecc.race2ged.helpers.SettingsHelper;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 
@@ -68,9 +69,14 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        ClassUpdater classUpdater = new ClassUpdater(this);
-
-        classUpdater.checkForNewVersion();
+        //Check for updates at start if applicable.
+        if (savedInstanceState == null) {
+            SettingsHelper settings = new SettingsHelper(this);
+            if (settings.getCheckForUpdatesAtStartup()) {
+                ClassUpdater classUpdater = new ClassUpdater(this);
+                classUpdater.execute(0);
+            }
+        }
 
     }
 
