@@ -61,8 +61,8 @@ public class Utils {
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
         final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if (wifi != null && wifi.isAvailable()) return WIFI;
-        else if (mobile != null && mobile.isAvailable()) return MOBILE_DATA;
+        if (wifi != null && wifi.isAvailable() && wifi.isConnected()) return WIFI;
+        else if (mobile != null && mobile.isAvailable() && mobile.isConnected()) return MOBILE_DATA;
         return NO_CONNECTION;
     }
 

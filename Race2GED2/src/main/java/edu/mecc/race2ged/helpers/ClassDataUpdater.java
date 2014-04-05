@@ -80,8 +80,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
     }
 
     /**
-     * <p>Runs on the UI thread after {@link #doInBackground}. Sets the stored class data version
-     * to the new version that was just downloaded. </p>
+     * <p>Sets the stored class data version to the new version that was just downloaded. </p>
      * <p>This method won't be invoked if the task was cancelled.</p>
      *
      * @param aBoolean The result of the operation computed by {@link #doInBackground}.
@@ -110,7 +109,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
             FileOutputStream output = null;
 
             try {
-                String outputName = "ClassSchedule.json";
+                String outputName = context.getString(R.string.class_data_file_name);
                 input = url.openConnection().getInputStream();
                 output = context.openFileOutput(outputName, Context.MODE_PRIVATE);
 
@@ -165,12 +164,12 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
     public Boolean canUpdate() {
         settings = new SettingsHelper(context);
         if (settings.getCheckForUpdates()) {
-            Utils.showToastOnUiThread(context, R.string.checking_for_class_updates);
+            Log.d(this.getClass().getSimpleName(),context.getString(R.string.checking_for_class_updates));
             int connection = Utils.getNetworkStatus(context);
             if (connection != Utils.NO_CONNECTION) {
                 if (settings.getCheckOnWifiOnly()) {
                     if (connection == Utils.WIFI) {
-                        Log.d(this.getClass().getSimpleName(),"Retrieved via WIFI-Only");
+                        Log.d(this.getClass().getSimpleName(),"Retrieving via WIFI-Only");
                         return true;
                     } else {
                         Log.d(this.getClass().getSimpleName(), context.getString(R.string.error_no_wifi));
@@ -178,10 +177,10 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
                     }
                 } else {
                     if (connection == Utils.WIFI){
-                        Log.d(this.getClass().getSimpleName(), "Retrieved via WIFI");
+                        Log.d(this.getClass().getSimpleName(), "Retrieving via WIFI");
                     }
                     if (connection == Utils.MOBILE_DATA) {
-                        Log.d(this.getClass().getSimpleName(), "Retrieved via Mobile Data");
+                        Log.d(this.getClass().getSimpleName(), "Retrieving via Mobile Data");
                     }
                     return true;
                 }

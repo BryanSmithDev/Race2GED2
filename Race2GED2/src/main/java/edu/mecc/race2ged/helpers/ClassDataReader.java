@@ -20,14 +20,25 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.File;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
+import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
 
-/**
- * Created by Bryan on 4/4/2014.
+/** ClassDataReader loads JSON Class data and parses it to the associated objects to be easily used.
+ *
+ * @author Bryan Smith
  */
-public class ClassDataReader extends AsyncTask<Integer, Void, Boolean> {
+public class ClassDataReader extends AsyncTask<Integer, Void, Region> {
     private Context context;
 
     /**
@@ -38,22 +49,10 @@ public class ClassDataReader extends AsyncTask<Integer, Void, Boolean> {
         this.context = context;
     }
 
-    /**
-     * TODO
-     * <p>Runs on the UI thread after {@link #doInBackground}. The
-     * specified result is the value returned by {@link #doInBackground}.</p>
-     * <p/>
-     * <p>This method won't be invoked if the task was cancelled.</p>
-     *
-     * @param aBoolean The result of the operation computed by {@link #doInBackground}.
-     * @see #onPreExecute
-     * @see #doInBackground
-     * @see #onCancelled(Object)
-     */
+    //DEBUG
     @Override
-    protected void onPostExecute(Boolean aBoolean) {
-        super.onPostExecute(aBoolean);
-        //TODO
+    protected void onPostExecute(Region region) {
+        Log.d(this.getClass().getSimpleName(),region.toString());
     }
 
     /**
@@ -64,24 +63,92 @@ public class ClassDataReader extends AsyncTask<Integer, Void, Boolean> {
      * This method can call {@link #publishProgress} to publish updates
      * on the UI thread.
      *
-     * @param params TODO
-     * @return TODO
+     * @param params The region number to retrieve.
+     * @return Region object for the specified region.
      * @see #onPreExecute()
      * @see #onPostExecute
      * @see #publishProgress
      */
     @Override
-    protected Boolean doInBackground(Integer... params) {
+    protected Region doInBackground(Integer... params) {
         String filePath = context.getFilesDir().getAbsolutePath()+
                 "/"+context.getString(R.string.class_data_file_name);
         File file = new File(filePath);
         if(file.exists()) {
             Log.d(this.getClass().getSimpleName(),filePath+" => Exists. Parsing it.");
-            //TODO: Parse JSON from internally saved file.
+            try {
+                return loadJsonFromInternal(params[0]);
+            } catch (IOException e) {
+                Log.e(this.getClass().getSimpleName(),"Error loading JSON from internal storage.\n"+e.toString());
+            }
         } else {
             Log.d(this.getClass().getSimpleName(),filePath+" => Does not exist. Parsing built in data.");
-            //TODO: Parse JSON from pre-packaged file.
+            try {
+                return loadJsonFromPrePackaged(params[0]);
+            } catch (IOException e) {
+                Log.e(this.getClass().getSimpleName(),"Error loading JSON from pre-packaged file.\n"+e.toString());
+            }
         }
-        return true;
+        return null;
     }
+
+    /**
+     * Creates objects from a JSON file that has been saved to internal storage.
+     * @param regionNumb The region number to retrieve.
+     * @return Region object for the specified region.
+     * @throws IOException
+     */
+    protected Region loadJsonFromInternal(int regionNumb) throws IOException{
+        FileInputStream iS = null;
+        Reader reader = null;
+        Region region =  null;
+        try{
+            iS = context.openFileInput(context.getString(R.string.class_data_file_name));
+            reader = new InputStreamReader(iS, "UTF-8");
+            Gson gson = new GsonBuilder().create();
+            State state = gson.fromJson(reader, State.class);
+            if (state != null) region = state.getRegion().get(regionNumb);
+            else throw new NullPointerException();
+        } catch (Exception e) {
+            Log.e(this.getClass().getSimpleName(),"GSON Error constructing objects from JSON.\n"+e.toString());
+        } finally {
+            if (iS != null)
+                iS.close();
+            if (reader != null)
+                reader.close();
+        }
+        Log.d(this.getClass().getSimpleName(),"Done Parsing");
+        return region;
+    }
+
+    /**
+     * Creates objects from a JSON file that is pre-packaged with the App. (RAW)
+     * @param regionNumb The region number to retrieve.
+     * @return Region object for the specified region.
+     * @throws IOException
+     */
+    protected Region loadJsonFromPrePackaged(int regionNumb) throws IOException{
+        InputStream iS = null;
+        Reader reader = null;
+        Region region =  null;
+        try{
+            iS = context.getResources().openRawResource(R.raw.classschedule);
+            reader = new InputStreamReader(iS, "UTF-8");
+            Gson gson = new GsonBuilder().create();
+            State state = gson.fromJson(reader, State.class);
+            if (state != null) region = state.getRegion().get(regionNumb);
+            else throw new NullPointerException();
+        } catch (Exception e) {
+            Log.e(this.getClass().getSimpleName(),"GSON Error constructing objects from JSON.\n"+e.toString());
+        } finally {
+            if (iS != null)
+                iS.close();
+            if (reader != null)
+                reader.close();
+        }
+        Log.d(this.getClass().getSimpleName(),"Done Parsing");
+        return region;
+    }
+
+
 }

@@ -76,12 +76,9 @@ public class HomeActivity extends ActionBarActivity
             if (settings.getCheckForUpdatesAtStartup()) {
                 ClassDataUpdater classDataUpdater = new ClassDataUpdater(this);
                 classDataUpdater.execute(0);
-                
-                ClassDataReader reader = new ClassDataReader(this); //DEBUG
-                reader.execute(0); //DEBUG
             }
-        }
 
+        }
     }
 
     @Override
