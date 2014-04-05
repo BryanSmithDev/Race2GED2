@@ -18,6 +18,7 @@ package edu.mecc.race2ged.helpers;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -33,12 +34,12 @@ import java.net.URL;
 import edu.mecc.race2ged.R;
 
 /**
- * ClassUpdater provides methods for retrieving, storing, and managing Class Schedule data retrieved
+ * ClassDataUpdater provides methods for retrieving, storing, and managing Class Schedule data retrieved
  * from www.race2ged.org
  *
  * @author Bryan Smith
  */
-public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
+public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
     private SettingsHelper settings;
     private Context context;
     private String version;
@@ -46,21 +47,22 @@ public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
     /**
      * Creates a new asynchronous task. This constructor must be invoked on the UI thread.
      */
-    public ClassUpdater(Context context) {
+    public ClassDataUpdater(Context context) {
         super();
         this.context = context;
     }
 
     /**
-     * Override this method to perform a computation on a background thread. The
-     * specified parameters are the parameters passed to {@link #execute}
-     * by the caller of this task.
+     * Checks settings to determine if updates will be checked. If so, retrieve
+     * the version number from the server, and if newer than the local version,
+     * download the updated class schedule. The specified parameters are the parameters
+     * passed to {@link #execute} by the caller of this task.
      * <p/>
      * This method can call {@link #publishProgress} to publish updates
      * on the UI thread.
      *
      * @param params The parameters of the task.
-     * @return A result, defined by the subclass of this task.
+     * @return Returns true if updates were downloaded. False otherwise.
      * @see #onPreExecute()
      * @see #onPostExecute
      * @see #publishProgress
@@ -69,7 +71,8 @@ public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
     protected Boolean doInBackground(Integer... params) {
         if (canUpdate()) {
             if (retrieveRemoteVersion(params[0]) > settings.getClassDataVersion()) {
-                Utils.showToastOnUiThread(context, "Remote Class Info Is Newer, Downloading."); //DEBUG
+                Log.d(this.getClass().getSimpleName(),
+                        "Remote Class Schedule Data is newer. Downloading...");
                 try { return updateClassData(); } catch (IOException e) {e.printStackTrace();}
             }
         }
@@ -77,9 +80,8 @@ public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
     }
 
     /**
-     * <p>Runs on the UI thread after {@link #doInBackground}. The
-     * specified result is the value returned by {@link #doInBackground}.</p>
-     * <p/>
+     * <p>Runs on the UI thread after {@link #doInBackground}. Sets the stored class data version
+     * to the new version that was just downloaded. </p>
      * <p>This method won't be invoked if the task was cancelled.</p>
      *
      * @param aBoolean The result of the operation computed by {@link #doInBackground}.
@@ -92,7 +94,8 @@ public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
         super.onPostExecute(aBoolean);
         if (aBoolean) {
             settings.savePreference(SettingsHelper.CLASS_DATA_VERSION, version);
-            Utils.showToastOnUiThread(context, "File downloaded."); //DEBUG
+            Log.d(this.getClass().getSimpleName(),
+                    "File Downloaded. Local Class Schedule Data Version is now: " + version);
         }
     }
 
@@ -133,7 +136,9 @@ public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
      */
     private int retrieveRemoteVersion(int region) {
         DefaultHttpClient client = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet("http://race2ged.org/wp-content/themes/adulted/getClassScheduleVersion.php?region="+region);
+        HttpGet httpGet = new HttpGet(
+                "http://race2ged.org/wp-content/themes/adulted/getClassScheduleVersion.php?region="+
+                        region);
         try {
             HttpResponse execute = client.execute(httpGet);
             InputStream content = execute.getEntity().getContent();
@@ -143,8 +148,9 @@ public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
             while ((s = buffer.readLine()) != null) {
                 response += s;
             }
-            Utils.showToastOnUiThread(context,response);
             version = response.trim();
+            Log.d(this.getClass().getSimpleName(),"Remote Class Schedule Version for Region: "+
+                    region+" is: "+version);
             return Integer.parseInt(response.trim());
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,26 +170,23 @@ public class ClassUpdater extends AsyncTask<Integer, Void, Boolean> {
             if (connection != Utils.NO_CONNECTION) {
                 if (settings.getCheckOnWifiOnly()) {
                     if (connection == Utils.WIFI) {
-                        //TODO: Retrieve JSON file
-                        Utils.showToastOnUiThread(context, "Retrieved via WIFI"); //DEBUG
+                        Log.d(this.getClass().getSimpleName(),"Retrieved via WIFI-Only");
                         return true;
                     } else {
-                        Utils.showToastOnUiThread(context, R.string.error_no_wifi); //DEBUG
+                        Log.d(this.getClass().getSimpleName(), context.getString(R.string.error_no_wifi));
                         return false;
                     }
                 } else {
-                    //TODO: Retrieve JSON file
                     if (connection == Utils.WIFI){
-                        Utils.showToastOnUiThread(context, "Retrieved via WIFI-2"); //DEBUG
-                        return true;
+                        Log.d(this.getClass().getSimpleName(), "Retrieved via WIFI");
                     }
                     if (connection == Utils.MOBILE_DATA) {
-                        Utils.showToastOnUiThread(context, "Retrieved via Mobile Data"); //DEBUG
-                        return true;
+                        Log.d(this.getClass().getSimpleName(), "Retrieved via Mobile Data");
                     }
+                    return true;
                 }
             } else {
-                Utils.showToastOnUiThread(context, R.string.error_no_connection); //DEBUG
+                Log.d(this.getClass().getSimpleName(),context.getString(R.string.error_no_connection));
                 return false;
             }
         }

@@ -29,7 +29,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.mecc.race2ged.R;
-import edu.mecc.race2ged.helpers.ClassUpdater;
+import edu.mecc.race2ged.helpers.ClassDataReader;
+import edu.mecc.race2ged.helpers.ClassDataUpdater;
 import edu.mecc.race2ged.helpers.SettingsHelper;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
@@ -73,8 +74,11 @@ public class HomeActivity extends ActionBarActivity
         if (savedInstanceState == null) {
             SettingsHelper settings = new SettingsHelper(this);
             if (settings.getCheckForUpdatesAtStartup()) {
-                ClassUpdater classUpdater = new ClassUpdater(this);
-                classUpdater.execute(0);
+                ClassDataUpdater classDataUpdater = new ClassDataUpdater(this);
+                classDataUpdater.execute(0);
+                
+                ClassDataReader reader = new ClassDataReader(this); //DEBUG
+                reader.execute(0); //DEBUG
             }
         }
 

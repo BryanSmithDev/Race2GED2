@@ -2,8 +2,9 @@
 <resources>
 
     <string name="app_name">Race2GED</string>
+    <string name="class_data_file_name">ClassSchedule.json</string>
     <array name="navPrimaryTitles">
-    <item>Home</item>
+        <item>Home</item>
         <item>The GED</item>
         <item>Classes</item>
         <item>Study</item>
