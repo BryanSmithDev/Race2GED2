@@ -17,6 +17,7 @@
 package edu.mecc.race2ged.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -29,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.SettingsActivity;
 import edu.mecc.race2ged.helpers.ClassDataReader;
 import edu.mecc.race2ged.helpers.ClassDataUpdater;
 import edu.mecc.race2ged.helpers.SettingsHelper;
@@ -45,7 +47,7 @@ public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
+     * Fragment managing the behaviors, interactions and preentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
@@ -83,11 +85,16 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+        if (position+1 == 7) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+        } else {
+            // update the main content by replacing fragments
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                    .commit();
+        }
     }
 
     /**

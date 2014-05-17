@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import edu.mecc.race2ged.R;
+
 /**
  * SettingsHelper provides methods for saving and retrieving preferences and other saved data.
  *
@@ -30,10 +32,11 @@ public class SettingsHelper {
     /**
      * Preference Names
      */
-    public static String CLASS_DATA_VERSION = "class_data_version";
-    public static String CHECK_CLASS_DATA_ONLY_ON_WIFI = "class_data_wifi";
-    public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS = "class_data_checking";
-    public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP = "class_data_checking_at_startup";
+    public static String CLASS_DATA_VERSION;
+    public static String CHECK_CLASS_DATA_ONLY_ON_WIFI;
+    public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS;
+    public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP;
+    public static String BASE_FONT_SIZE;
 
     private SharedPreferences settings;
 
@@ -43,6 +46,11 @@ public class SettingsHelper {
      */
     public SettingsHelper(Context context) {
         settings = PreferenceManager.getDefaultSharedPreferences(context);
+        CLASS_DATA_VERSION = context.getResources().getString(R.string.pref_class_data_version);
+        CHECK_CLASS_DATA_ONLY_ON_WIFI = context.getResources().getString(R.string.pref_check_class_data_only_on_wifi);
+        CHECK_CLASS_DATA_FOR_NEW_VERSIONS = context.getResources().getString(R.string.pref_check_class_data_for_new_versions);
+        CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP = context.getResources().getString(R.string.pref_check_class_data_for_new_versions_at_startup);
+        BASE_FONT_SIZE = context.getResources().getString(R.string.pref_base_font_size);
     }
 
     /**

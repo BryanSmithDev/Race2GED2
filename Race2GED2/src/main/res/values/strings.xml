@@ -44,4 +44,37 @@
     <string name="error_no_connection">Cannot check for updates. No WiFi or mobile data connection available.</string>
     <string name="error_no_wifi">Cannot check for updates. No WiFi connection available.</string>
 
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings and preferences -->
+    <!-- Prefs -->
+    <string name="pref_class_data_version">class_data_version</string>
+    <string name="pref_check_class_data_only_on_wifi">class_data_wifi</string>
+    <string name="pref_check_class_data_for_new_versions">class_data_checking</string>
+    <string name="pref_check_class_data_for_new_versions_at_startup">class_data_checking_at_startup</string>
+    <string name="pref_base_font_size">base_font_size</string>
+
+    <!-- Settings -->
+    <string name="pref_header_general">General</string>
+    <string name="pref_base_font_size_title">Base Font Size</string>
+    <string-array name="pref_base_font_items">
+        <item>Default</item>
+        <item>Medium</item>
+        <item>Big</item>
+        <item>Bigger</item>
+    </string-array>
+    <string-array name="pref_base_font_values">
+        <item>12</item>
+        <item>14</item>
+        <item>16</item>
+        <item>18</item>
+    </string-array>
+
+    <string name="pref_header_updates">Updates</string>
+    <string name="PREF_CHECK_CLASS_DATA_FOR_NEW_VERSIONS_TITLE">Check for class schedule updates?</string>
+    <string name="PREF_CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP_TITLE">Class schedule updates on startup?</string>
+    <string name="PREF_CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP_SUB">Look for updates on app startup?</string>
+    <string name="PREF_CHECK_CLASS_DATA_ONLY_ON_WIFI_TITLE">Wifi Only?</string>
+    <string name="PREF_CHECK_CLASS_DATA_ONLY_ON_WIFI_SUB">Only use WiFi for updates. Saves mobile data.</string>
+
 </resources>
