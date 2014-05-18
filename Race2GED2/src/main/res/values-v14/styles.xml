@@ -106,6 +106,10 @@
         </item>
     </style>
 
+    <style name="Spinnerrace2ged.DropDown">
+        <item name="android:spinnerMode">dropdown</item>
+    </style>
+
     <style name="SeekBarrace2ged" parent="android:Widget.Holo.Light.SeekBar">
         <item name="android:progressDrawable">@drawable/scrubber_progress_horizontal_holo_light
         </item>

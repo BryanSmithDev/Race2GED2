@@ -166,7 +166,7 @@
     </style>
 
     <style name="Spinnerrace2ged.DropDown">
-        <item name="android:spinnerMode">dropdown</item>
+        <item name="spinnerMode">dropdown</item>
     </style>
 
     <style name="SpinnerDropDownItemrace2ged" parent="android:Widget.DropDownItem.Spinner">
