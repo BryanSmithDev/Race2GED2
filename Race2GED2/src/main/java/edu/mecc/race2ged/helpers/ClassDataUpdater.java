@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.R;
 
 /**
@@ -162,7 +163,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
      * @return
      */
     public Boolean canUpdate() {
-        settings = new SettingsHelper(context);
+        settings = GEDApplication.settingsHelper;
         if (settings.getCheckForUpdates()) {
             Log.d(this.getClass().getSimpleName(),context.getString(R.string.checking_for_class_updates));
             int connection = Utils.getNetworkStatus(context);

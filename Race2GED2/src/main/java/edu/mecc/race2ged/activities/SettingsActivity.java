@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package edu.mecc.race2ged;
+package edu.mecc.race2ged.activities;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -29,7 +29,8 @@ import android.preference.PreferenceManager;
 
 import java.util.List;
 
-import edu.mecc.race2ged.helpers.SettingsHelper;
+import edu.mecc.race2ged.GEDApplication;
+import edu.mecc.race2ged.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -50,13 +51,11 @@ public class SettingsActivity extends PreferenceActivity {
      * shown on tablets.
      */
     private static final boolean ALWAYS_SIMPLE_PREFS = false;
-    private static SettingsHelper settingsHelper;
 
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        settingsHelper = new SettingsHelper(getApplicationContext());
         setupSimplePreferencesScreen();
     }
 
@@ -94,7 +93,7 @@ public class SettingsActivity extends PreferenceActivity {
      * @param pref Preference to check.
      */
     private static void checkForDisabledItems(Preference pref) {
-        boolean isEnabled = settingsHelper.getCheckForUpdates();
+        boolean isEnabled = GEDApplication.settingsHelper.getCheckForUpdates();
         pref.setEnabled(isEnabled);
     }
 

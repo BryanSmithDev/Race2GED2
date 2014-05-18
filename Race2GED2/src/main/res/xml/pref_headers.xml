@@ -19,11 +19,11 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="edu.mecc.race2ged.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="edu.mecc.race2ged.activities.SettingsActivity$GeneralPreferenceFragment"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="edu.mecc.race2ged.SettingsActivity$UpdatesPreferenceFragment"
+        android:fragment="edu.mecc.race2ged.activities.SettingsActivity$UpdatesPreferenceFragment"
         android:title="@string/pref_header_updates" />
 
 </preference-headers>

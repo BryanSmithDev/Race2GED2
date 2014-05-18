@@ -29,11 +29,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.R;
-import edu.mecc.race2ged.SettingsActivity;
-import edu.mecc.race2ged.helpers.ClassDataReader;
 import edu.mecc.race2ged.helpers.ClassDataUpdater;
-import edu.mecc.race2ged.helpers.SettingsHelper;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 
@@ -47,7 +46,7 @@ public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
-     * Fragment managing the behaviors, interactions and preentation of the navigation drawer.
+     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
@@ -74,12 +73,10 @@ public class HomeActivity extends ActionBarActivity
 
         //Check for updates at start if applicable.
         if (savedInstanceState == null) {
-            SettingsHelper settings = new SettingsHelper(this);
-            if (settings.getCheckForUpdatesAtStartup()) {
+            if (GEDApplication.settingsHelper.getCheckForUpdatesAtStartup()) {
                 ClassDataUpdater classDataUpdater = new ClassDataUpdater(this);
                 classDataUpdater.execute(0);
             }
-
         }
     }
 
