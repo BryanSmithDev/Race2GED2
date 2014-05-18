@@ -29,6 +29,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.mecc.race2ged.GEDApplication;
@@ -71,10 +75,18 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
     @Override
     protected Boolean doInBackground(Integer... params) {
         if (canUpdate()) {
-            if (retrieveRemoteVersion(params[0]) > settings.getClassDataVersion()) {
-                Log.d(this.getClass().getSimpleName(),
-                        "Remote Class Schedule Data is newer. Downloading...");
-                try { return updateClassData(); } catch (IOException e) {e.printStackTrace();}
+            try {
+                int value = retrieveRemoteVersion(params[0]);
+                if (value > settings.getClassDataVersion()) {
+                    Log.d(this.getClass().getSimpleName(),
+                            "Remote Class Schedule Data is newer. Checking for remote file.");
+                    try { return updateClassData(); } catch (IOException e) {e.printStackTrace();}
+                } else if (value != -1) {
+                    Log.d(this.getClass().getSimpleName(),
+                            "Remote Class Schedule Data is not newer. No need to download.");
+                }
+            } catch (IOException e) {
+                Log.e(this.getClass().getSimpleName(), "Error retrieving class data version from server. | " + e.getMessage());
             }
         }
         return false;
@@ -104,14 +116,23 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
      * @throws IOException
      */
     private boolean updateClassData() throws IOException{
-            URL url = new URL("http://race2ged.org/wp-content/themes/adulted/ClassSchedule.json");
-            boolean value = false;
-            InputStream input = null;
-            FileOutputStream output = null;
-
+        URL url = new URL("http://race2ged.org/wp-content/themes/adulted/ClassSchedule.json");
+        boolean value = false;
+        InputStream input = null;
+        FileOutputStream output = null;
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(10000 /* milliseconds */);
+        conn.setConnectTimeout(15000 /* milliseconds */);
+        conn.setRequestMethod("GET");
+        conn.setDoInput(true);
+        // Starts the query
+        conn.connect();
+        int responseCode = conn.getResponseCode();
+        if (responseCode==200) {
+            Log.d(this.getClass().getSimpleName(), "Data file found on server. Proceeding with download.");
             try {
                 String outputName = context.getString(R.string.class_data_file_name);
-                input = url.openConnection().getInputStream();
+                input = conn.getInputStream();
                 output = context.openFileOutput(outputName, Context.MODE_PRIVATE);
 
                 int read;
@@ -119,14 +140,17 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
                 while ((read = input.read(data)) != -1)
                     output.write(data, 0, read);
 
-                value=true;
+                value = true;
             } finally {
                 if (output != null)
                     output.close();
                 if (input != null)
                     input.close();
             }
-        return value;
+            return value;
+        }
+        Log.d(this.getClass().getSimpleName(), "Data file could not be found on server. Server may be down?");
+        return false;
     }
 
     /**
@@ -134,27 +158,37 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
      * @param region The number for the region to get the version of.
      * @return
      */
-    private int retrieveRemoteVersion(int region) {
-        DefaultHttpClient client = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(
-                "http://race2ged.org/wp-content/themes/adulted/getClassScheduleVersion.php?region="+
-                        region);
-        try {
-            HttpResponse execute = client.execute(httpGet);
-            InputStream content = execute.getEntity().getContent();
-
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-            String s; String response = "";
-            while ((s = buffer.readLine()) != null) {
-                response += s;
+    private int retrieveRemoteVersion(int region) throws IOException {
+        URL url = new URL("http://race2ged.org/wp-content/themes/adulted/getClassScheduleVersion.php?region="+region);
+        InputStream input = null;
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(10000 /* milliseconds */);
+        conn.setConnectTimeout(15000 /* milliseconds */);
+        conn.setRequestMethod("GET");
+        conn.setDoInput(true);
+        // Starts the query
+        conn.connect();
+        int responseCode = conn.getResponseCode();
+        if (responseCode==200) {
+            try {
+                Log.d(this.getClass().getSimpleName(), "Server contacted successfully.");
+                input = conn.getInputStream();
+                BufferedReader buffer = new BufferedReader(new InputStreamReader(input));
+                String s;
+                String response = "";
+                while ((s = buffer.readLine()) != null) {
+                    response += s;
+                }
+                version = response.trim();
+                Log.d(this.getClass().getSimpleName(), "Remote Class Schedule Version for Region: " +
+                        region + " is: " + version + " (Local is: " + GEDApplication.settingsHelper.getClassDataVersion() + " )");
+                return Integer.parseInt(response.trim());
+            } finally {
+                if (input != null)
+                    input.close();
             }
-            version = response.trim();
-            Log.d(this.getClass().getSimpleName(),"Remote Class Schedule Version for Region: "+
-                    region+" is: "+version);
-            return Integer.parseInt(response.trim());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        Log.d(this.getClass().getSimpleName(), "Server could not be contacted.");
         return -1;
     }
 
