@@ -65,7 +65,7 @@
 
         <item name="android:spinnerStyle">@style/Spinnerrace2ged</item>
 
-        <item name="android:dropDownSpinnerStyle">@style/Spinnerrace2ged.DropDown</item>
+
 
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemrace2ged</item>
 

@@ -93,7 +93,7 @@ public class SettingsActivity extends PreferenceActivity {
      * @param pref Preference to check.
      */
     private static void checkForDisabledItems(Preference pref) {
-        boolean isEnabled = GEDApplication.settingsHelper.getCheckForUpdates();
+        boolean isEnabled = GEDApplication.getSettingsHelper().getCheckForUpdates();
         pref.setEnabled(isEnabled);
     }
 

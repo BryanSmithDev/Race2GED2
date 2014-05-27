@@ -29,12 +29,10 @@
     <color name="content_color">#85b73e</color>
 
     <color name="transparent">#00000000</color>
-    <color name="app_color">#fff98022</color>
-    <color name="app_color_accented">#ffcf6d1a</color>
-    <color name="app_color_transparent">#20f4842d</color>
     <color name="app_background_light">#fffafafa</color>
     <color name="app_background_light_transparent">#e6fafafa</color>
     <color name="app_background">#ffe5e5e5</color>
+    <color name="app_background_dark">#ffd1d1d1</color>
     <color name="side_drawer_item_current_screen_color">#25000000</color>
     <color name="side_drawer_item_pressed_color">#33999999</color>
     <color name="settings_summary_color">#ff999999</color>
@@ -42,5 +40,8 @@
     <color name="drawer_setting_text_color">#ff666666</color>
     <color name="drawer_bg_color_primary">#ffffff</color>
     <color name="drawer_bg_color">#fff7f7f7</color>
+
+    <!-- Color used by footers and copyright statments. Generally should stay a very light grey at #9c9c9c -->
+    <color name="copyright_footer">#9c9c9c</color>
 
 </resources>

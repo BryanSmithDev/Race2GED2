@@ -18,17 +18,31 @@ package edu.mecc.race2ged;
 
 import android.app.Application;
 
+import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.helpers.SettingsHelper;
 
 /**
  * Created by Bryan on 5/18/2014.
  */
 public class GEDApplication extends Application {
-    public static SettingsHelper settingsHelper;
+    private static SettingsHelper settingsHelper;
+    private static Region regionData;
 
     @Override
     public void onCreate() {
         super.onCreate();
         settingsHelper = new SettingsHelper(getApplicationContext());
+    }
+
+    public static SettingsHelper getSettingsHelper() {
+        return settingsHelper;
+    }
+
+    public static Region getRegionData() {
+        return regionData;
+    }
+
+    public static void setRegionData(Region regionDataT) {
+        regionData = regionDataT;
     }
 }

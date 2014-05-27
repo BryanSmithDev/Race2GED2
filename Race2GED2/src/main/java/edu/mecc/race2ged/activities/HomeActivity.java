@@ -18,6 +18,7 @@ package edu.mecc.race2ged.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,7 +33,8 @@ import android.widget.TextView;
 
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.R;
-import edu.mecc.race2ged.helpers.ClassDataUpdater;
+import edu.mecc.race2ged.fragments.ClassPageFragment;
+import edu.mecc.race2ged.fragments.ClassesFragment;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 
@@ -43,7 +45,7 @@ import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
  * @author Bryan Smith
  */
 public class HomeActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ClassesFragment.OnFragmentInteractionListener, ClassPageFragment.OnFragmentInteractionListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -71,26 +73,31 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        //Check for updates at start if applicable.
         if (savedInstanceState == null) {
-            if (GEDApplication.settingsHelper.getCheckForUpdatesAtStartup()) {
-                ClassDataUpdater classDataUpdater = new ClassDataUpdater(this);
-                classDataUpdater.execute(0);
-            }
         }
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        if (position+1 == 7) {
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            startActivity(settingsIntent);
-        } else {
-            // update the main content by replacing fragments
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                    .commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int numb = position+1;
+        switch (numb) {
+            case 2:
+                // update the main content by replacing fragments
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, ClassesFragment.newInstance(GEDApplication.getRegionData()))
+                        .commit();
+                onSectionAttached(numb);
+                break;
+            case 6:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
+                break;
+            default:
+                // update the main content by replacing fragments
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                        .commit();
         }
     }
 
@@ -141,6 +148,17 @@ public class HomeActivity extends ActionBarActivity
                 return true;
         }*/
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onClassPagerFragmentInteraction(Uri uri) {
+
     }
 
     /**

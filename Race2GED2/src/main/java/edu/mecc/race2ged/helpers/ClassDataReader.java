@@ -16,16 +16,15 @@
 
 package edu.mecc.race2ged.helpers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
-
+import android.view.View;
+import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,20 +38,42 @@ import edu.mecc.race2ged.R;
  * @author Bryan Smith
  */
 public class ClassDataReader extends AsyncTask<Integer, Void, Region> {
-    private Context context;
+
+    public static String dataRead = "Class Data Loaded.";
+    public static String dataError = "Error Loading Class Data";
+    public static String dataParse = "Loading Class Data.";
+
+    private Activity activity = null;
+    private Integer progressViewID = null;
+    private View progressView = null;
+    private Context context = null;
 
     /**
      * Creates a new asynchronous task. This constructor must be invoked on the UI thread.
      */
-    public ClassDataReader(Context context) {
+    public ClassDataReader(Activity activity,Integer progressViewId) {
         super();
-        this.context = context;
+        if (activity != null) {
+            this.activity = activity;
+            this.progressViewID = progressViewId;
+            if (activity.findViewById(progressViewID) != null)
+                progressView = activity.findViewById(progressViewID);
+            this.context = activity.getApplicationContext();
+        }
     }
 
-    //DEBUG
+    /**
+     * Runs on the UI thread before {@link #doInBackground}.
+     *
+     * @see #onPostExecute
+     * @see #doInBackground
+     */
     @Override
-    protected void onPostExecute(Region region) {
-        Log.d(this.getClass().getSimpleName(),region.toString());
+    protected void onPreExecute() {
+        Log.d(this.getClass().getSimpleName(),"Begin Parsing Class Data.");
+        if (progressView != null && progressView instanceof TextView){
+            ((TextView)progressView).setText(dataParse);
+        }
     }
 
     /**
@@ -90,6 +111,24 @@ public class ClassDataReader extends AsyncTask<Integer, Void, Region> {
             }
         }
         return null;
+    }
+
+    /**
+     * <p>Displays if the data was read successfully. </p>
+     * <p>This method won't be invoked if the task was cancelled.</p>
+     *
+     * @param region The result of the operation computed by {@link #doInBackground}.
+     * @see #onPreExecute
+     * @see #doInBackground
+     * @see #onCancelled(Object)
+     */
+    @Override
+    protected void onPostExecute(Region region) {
+        Log.d(this.getClass().getSimpleName(),region.toString());
+        if (progressView != null && progressView instanceof TextView){
+            if (region != null) ((TextView)progressView).setText(dataRead);
+            else ((TextView)progressView).setText(dataError);
+        }
     }
 
     /**

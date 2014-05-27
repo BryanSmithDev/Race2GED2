@@ -16,23 +16,18 @@
 
 package edu.mecc.race2ged.helpers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
+import android.view.View;
+import android.widget.TextView;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.mecc.race2ged.GEDApplication;
@@ -44,17 +39,45 @@ import edu.mecc.race2ged.R;
  *
  * @author Bryan Smith
  */
-public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
-    private SettingsHelper settings;
-    private Context context;
-    private String version;
+public class ClassDataUpdater extends AsyncTask<Integer, Integer, Boolean> {
+
+    public static String dataRead = "Done updating...";
+    public static String dataGet = "Downloading Updates: ";
+    public static String dataError = "Error checking for updates!";
+    public static String dataParse = "Checking for updates...";
+
+    private String version = "0";
+    private Activity activity = null;
+    private Integer progressViewID = null;
+    private View progressView = null;
+    private Context context = null;
 
     /**
      * Creates a new asynchronous task. This constructor must be invoked on the UI thread.
      */
-    public ClassDataUpdater(Context context) {
+    public ClassDataUpdater(Activity activity,Integer progressViewId) {
         super();
-        this.context = context;
+        if (activity != null) {
+            this.activity = activity;
+            this.progressViewID = progressViewId;
+            if (activity.findViewById(progressViewID) != null)
+                progressView = activity.findViewById(progressViewID);
+            this.context = activity.getApplicationContext();
+        }
+    }
+
+    /**
+     * Runs on the UI thread before {@link #doInBackground}.
+     *
+     * @see #onPostExecute
+     * @see #doInBackground
+     */
+    @Override
+    protected void onPreExecute() {
+        Log.d(this.getClass().getSimpleName(), "Begin checking for updates.");
+        if (progressView != null && progressView instanceof TextView){
+            ((TextView)progressView).setText(dataParse);
+        }
     }
 
     /**
@@ -77,7 +100,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
         if (canUpdate()) {
             try {
                 int value = retrieveRemoteVersion(params[0]);
-                if (value > settings.getClassDataVersion()) {
+                if (value > GEDApplication.getSettingsHelper().getClassDataVersion()) {
                     Log.d(this.getClass().getSimpleName(),
                             "Remote Class Schedule Data is newer. Checking for remote file.");
                     try { return updateClassData(); } catch (IOException e) {e.printStackTrace();}
@@ -105,9 +128,31 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         if (aBoolean) {
-            settings.savePreference(SettingsHelper.CLASS_DATA_VERSION, version);
+            GEDApplication.getSettingsHelper().savePreference(SettingsHelper.CLASS_DATA_VERSION, version);
             Log.d(this.getClass().getSimpleName(),
                     "File Downloaded. Local Class Schedule Data Version is now: " + version);
+            if (progressView != null && progressView instanceof TextView){
+                ((TextView)progressView).setText(dataRead);
+            }
+        } else {
+            if (progressView != null && progressView instanceof TextView){
+                ((TextView)progressView).setText(dataError);
+            }
+        }
+    }
+
+    /**
+     * Runs on the UI thread after {@link #publishProgress} is invoked.
+     * The specified values are the values passed to {@link #publishProgress}.
+     *
+     * @param values The values indicating progress.
+     * @see #publishProgress
+     * @see #doInBackground
+     */
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        if (progressView != null && progressView instanceof TextView){
+            ((TextView)progressView).setText(dataGet+values[0]+"%");
         }
     }
 
@@ -135,10 +180,18 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
                 input = conn.getInputStream();
                 output = context.openFileOutput(outputName, Context.MODE_PRIVATE);
 
+                int total_size = conn.getContentLength();
+
                 int read;
                 byte[] data = new byte[1024];
-                while ((read = input.read(data)) != -1)
+                int curSize = 1024;
+                int perc=0;
+                while ((read = input.read(data)) != -1) {
                     output.write(data, 0, read);
+                    perc=((curSize / total_size) * 100);
+                    publishProgress((perc)>100?100:perc);
+                    curSize+=1024;
+                }
 
                 value = true;
             } finally {
@@ -181,7 +234,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
                 }
                 version = response.trim();
                 Log.d(this.getClass().getSimpleName(), "Remote Class Schedule Version for Region: " +
-                        region + " is: " + version + " (Local is: " + GEDApplication.settingsHelper.getClassDataVersion() + " )");
+                        region + " is: " + version + " (Local is: " + GEDApplication.getSettingsHelper().getClassDataVersion() + " )");
                 return Integer.parseInt(response.trim());
             } finally {
                 if (input != null)
@@ -197,12 +250,11 @@ public class ClassDataUpdater extends AsyncTask<Integer, Void, Boolean> {
      * @return
      */
     public Boolean canUpdate() {
-        settings = GEDApplication.settingsHelper;
-        if (settings.getCheckForUpdates()) {
+        if ( GEDApplication.getSettingsHelper().getCheckForUpdates()) {
             Log.d(this.getClass().getSimpleName(),context.getString(R.string.checking_for_class_updates));
             int connection = Utils.getNetworkStatus(context);
             if (connection != Utils.NO_CONNECTION) {
-                if (settings.getCheckOnWifiOnly()) {
+                if ( GEDApplication.getSettingsHelper().getCheckOnWifiOnly()) {
                     if (connection == Utils.WIFI) {
                         Log.d(this.getClass().getSimpleName(),"Retrieving via WIFI-Only");
                         return true;

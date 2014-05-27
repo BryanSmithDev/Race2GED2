@@ -15,18 +15,11 @@
   ~    limitations under the License.
   -->
 
-<edu.mecc.race2ged.navigation.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/side_panel_frame"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ListView
-        android:id="@+id/side_panel_list_view"
-        android:background="@color/drawer_bg_color"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:listSelector="@android:color/transparent"
-        android:divider="@null"
-        android:dividerHeight="0.0px" />
-
-</edu.mecc.race2ged.navigation.DrawerLayout>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="65000%"
+        android:endColor="@color/primary_color"
+        android:startColor="@color/secondary_color"/>
+    <corners android:radius="5dp" />
+</shape>
