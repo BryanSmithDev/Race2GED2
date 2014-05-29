@@ -22,7 +22,7 @@
     <!-- Main color, used for splash screen background and top banner background -->
     <color name="primary_color">#135182</color>
 
-    <!-- Used sparingly for contrast with the main color, perfeable shouldn't be a lighter version of the primary color -->
+    <!-- Used sparingly for contrast with the main color, preferably shouldn't be a lighter version of the primary color -->
     <color name="secondary_color">#2481eb</color>
 
     <!-- Text color, color for unpressed buttons -->

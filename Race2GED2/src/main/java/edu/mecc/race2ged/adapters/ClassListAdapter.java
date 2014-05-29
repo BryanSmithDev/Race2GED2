@@ -99,17 +99,60 @@ public class ClassListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Class mClass = getItem(position);
+
+        View row = convertView;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.card, parent, false);
-        ViewStub stub = (ViewStub) rowView.findViewById(R.id.cardStub);
-        stub.setLayoutResource(R.layout.class_card);
-        View inflatedStub = stub.inflate();
+        if(row==null) {
+            row = inflater.inflate(R.layout.card, parent, false);
 
-        TextView location = (TextView)inflatedStub.findViewById(R.id.location);
-        location.setText(mClass.getLocation());
 
-        return rowView;
+            ViewStub stub = (ViewStub) row.findViewById(R.id.cardStub);
+            stub.setLayoutResource(R.layout.class_card);
+            View inflatedStub = stub.inflate();
+
+            TextView location = (TextView) inflatedStub.findViewById(R.id.location);
+            location.setText(mClass.getLocation());
+
+            TextView locality = (TextView) inflatedStub.findViewById(R.id.locality);
+            locality.setText(mClass.getName());
+
+            TextView address = (TextView) inflatedStub.findViewById(R.id.address);
+            address.setText(mClass.getAddress());
+
+            TextView times = (TextView) inflatedStub.findViewById(R.id.times);
+            String display = "";
+            try {
+                ArrayList<String> days = (ArrayList<String>) mClass.getDays();
+                ArrayList<String> time = (ArrayList<String>) mClass.getTimes();
+                final int count = days.size();
+                for (int i = 0; i < count; i++) {
+                    if (i!=0) display=display+"\n";
+                    display = display + days.get(i) + ":   " + time.get(i);
+                }
+            } catch (Exception e){
+                Log.e(this.getClass().getSimpleName(),"Error displaying time for class schedule. - "+e.getMessage());
+            }
+            times.setText(display);
+
+            TextView instructors = (TextView) inflatedStub.findViewById(R.id.instructors);
+            display = "";
+            try {
+                ArrayList<Instructor> ins = (ArrayList<Instructor>) mClass.getInstructors();
+                final int count = ins.size();
+                for (int i = 0; i < count; i++) {
+                    if (i!=0) display=display+"\n";
+                    display = display + ins.get(i).getName();
+                }
+            } catch (Exception e){
+                Log.e(this.getClass().getSimpleName(),"Error displaying instructors for class schedule. - "+e.getMessage());
+            }
+            instructors.setText(display);
+
+
+        }
+
+        return row;
     }
 
     public ArrayList<Class> getItems() {

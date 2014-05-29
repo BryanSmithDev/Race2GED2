@@ -18,7 +18,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
         android:type="radial"
-        android:gradientRadius="65000%"
+        android:gradientRadius="95000%"
         android:endColor="@color/primary_color"
         android:startColor="@color/secondary_color"/>
     <corners android:radius="5dp" />

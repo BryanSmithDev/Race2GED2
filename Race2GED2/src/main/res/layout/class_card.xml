@@ -16,16 +16,186 @@
   ~    limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/loading"
+        android:text="Regional Adult Education Center"
         android:id="@+id/location"
-        android:textColor="@android:color/black"/>
-</LinearLayout>
+        android:textColor="@android:color/black"
+        android:shadowColor="@color/secondary_color"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="13sp"
+        android:text="1490 Bristol Hwy Gate City, VA 24251"
+        android:textColor="#e1727272"
+        android:id="@+id/address"
+        android:layout_below="@+id/location"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp"
+        android:text="Gate City"
+        android:textColor="#e1727272"
+        android:id="@+id/locality"
+        android:layout_toRightOf="@+id/location"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignBaseline="@+id/location"
+        android:gravity="right"
+        android:textStyle="italic" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/address"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:background="@color/content_color"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/frameLayout"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Schedule:"
+        android:textColor="@android:color/black"
+        android:id="@+id/scheduleLabel"
+        android:layout_below="@+id/frameLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/secondary_text_light"
+        android:text="M &amp; W:  9:00 am – 1:00 pm\nT &amp; Th:  5:00 pm – 8:00 pm"
+        android:id="@+id/times"
+        android:layout_below="@+id/scheduleLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Instructors:"
+        android:id="@+id/instructorsLabel"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/times"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/secondary_text_light"
+        android:text="Jan Stallard\nTony Gardner\nBill Vermillion\nJames Wood"
+        android:id="@+id/instructors"
+        android:layout_below="@+id/instructorsLabel"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/instructors"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:background="@color/content_color"
+        android:id="@+id/frameLayout2"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frameLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" >
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:text="Maps"
+            android:textColor="#ff474747"
+            android:shadowColor="@color/app_background_dark"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:textSize="14sp"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/ic_gear"
+            android:id="@+id/directions"/>
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/content_color"
+            android:id="@+id/frameLayout3"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:text="Email"
+            android:textColor="#ff474747"
+            android:shadowColor="@color/app_background_dark"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:textSize="14sp"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:drawableLeft="@drawable/ic_email"
+            android:id="@+id/email"/>
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/content_color"
+            android:id="@+id/frameLayout4"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".33"
+            android:text="Call"
+            android:textColor="#ff474747"
+            android:shadowColor="@color/app_background_dark"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:textSize="14sp"
+            android:background="@color/transparent"
+            android:padding="5dp"
+            android:drawableLeft="@drawable/ic_phone"
+            android:id="@+id/call"/>
+    </LinearLayout>
+</RelativeLayout>
