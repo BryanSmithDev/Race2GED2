@@ -38,7 +38,13 @@ android {
         minSdkVersion 7
         targetSdkVersion 19
     }
-
+    productFlavors {
+    }
+    buildTypes {
+        release {
+            runProguard true
+        }
+    }
 }
 
 dependencies {
