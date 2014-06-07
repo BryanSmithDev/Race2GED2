@@ -54,10 +54,15 @@
                 android:layout_gravity="center"/>
 
             <ProgressBar
-                android:layout_width="wrap_content"
+                style="@style/ProgressBar.Race2ged"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/progressBar2"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:progress="100"
+                android:indeterminate="true"
+                android:indeterminateDrawable="@drawable/progress_indeterminate_horizontal_holo_light"
+                android:indeterminateOnly="true" />
         </LinearLayout>
     </FrameLayout>
     <LinearLayout
