@@ -17,7 +17,7 @@
 package edu.mecc.race2ged.navigation;
 
 /**
- * NavDrawerListItem represents, and is the base class for, a list item in the Navigation Drawer.
+ * <code>NavDrawerListItem</code> represents, and is the base class for, a list item in the Navigation Drawer.
  *
  * @author Bryan Smith
  */
@@ -29,7 +29,7 @@ public class NavDrawerListItem {
     private int viewResourceID;
 
     /**
-     * Constructs the NavDrawerListItem
+     * Constructs the <code>NavDrawerListItem</code>
      * @param viewResourceID The view's ID that will represent the list item.
      * @param textViewID The ID of the Text View that will have a value inserted.
      * @param text  The text value to insert into the text view.

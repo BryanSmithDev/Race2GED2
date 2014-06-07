@@ -19,7 +19,7 @@ package edu.mecc.race2ged.navigation;
 import edu.mecc.race2ged.R;
 
 /**
- * NavDrawerListItemNoIcon represents a list item in the Navigation Drawer that does not use an icon
+ * <code>NavDrawerListItemNoIcon</code> represents a list item in the Navigation Drawer that does not use an icon
  * . This class is primarily used for the primary navigation drawer items. Uses a predefined View
  * ID.
  *
@@ -29,7 +29,7 @@ import edu.mecc.race2ged.R;
  */
 public class NavDrawerListItemNoIcon extends NavDrawerListItem {
     /**
-     * Constructs the NavDrawerListItemNoIcon
+     * Constructs the <code>NavDrawerListItemNoIcon</code>
      * @param textViewID The ID of the Text View that will have a value inserted.
      * @param text  The text value to insert into the text view.
      */

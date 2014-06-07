@@ -23,22 +23,32 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 /**
- * The <code>ClassPagerAdapter</code> serves the fragments when paging.
+ * The <code>ClassPagerAdapter</code> serves the <code>ClassesFragment</code> per county when paging.
+ *
+ * @see edu.mecc.race2ged.fragments.ClassesFragment
+ *
  * @author Bryan Smith
  */
 public class ClassPagerAdapter extends FragmentPagerAdapter {
 
     private List<String> titles;
     private List<Fragment> fragments;
+
     /**
-     * @param fm
-     * @param fragments
+     * Constructs the <code>ClassPagerAdapter</code>
+     *
+     * @param fm FragmentManager to manage each <code>ClassesFragment</code>
+     * @param titles List of titles for each of the fragments.
+     * @param fragments List of the fragments to use.
+     *
+     * @return A new instance of fragment ClassesFragment.
      */
     public ClassPagerAdapter(FragmentManager fm,List<String> titles, List<Fragment> fragments) {
         super(fm);
         setFragments(fragments);
         setTitles(titles);
     }
+
     /* (non-Javadoc)
      * @see android.support.v4.app.FragmentPagerAdapter#getItem(int)
      */
@@ -69,18 +79,34 @@ public class ClassPagerAdapter extends FragmentPagerAdapter {
         return this.fragments.size();
     }
 
+    /**
+     * Get the list of current fragment titles.
+     * @return List of current fragment titles.
+     */
     public List<String> getTitles() {
         return titles;
     }
 
+    /**
+     * Import the list of titles from another variable.
+     * @param titles The list of titles to import.
+     */
     public void setTitles(List<String> titles) {
         this.titles = titles;
     }
 
+    /**
+     * Get the list of fragments being used.
+     * @return List of fragments.
+     */
     public List<Fragment> getFragments() {
         return fragments;
     }
 
+    /**
+     * Import the list of fragments from another variable.
+     * @param fragments The list of fragments to import.
+     */
     public void setFragments(List<Fragment> fragments) {
         this.fragments = fragments;
     }

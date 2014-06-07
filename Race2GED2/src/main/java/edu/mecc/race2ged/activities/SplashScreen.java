@@ -26,18 +26,25 @@ import edu.mecc.race2ged.helpers.ClassDataReader;
 import edu.mecc.race2ged.helpers.ClassDataUpdater;
 
 /**
- * Created by Bryan on 5/24/2014.
+ * SplashScreen is shown on launch of the app and depending on settings, checks for updates of the
+ * class schedule, downloads and installs them.
+ *
+ * @author Bryan Smith
  */
 public class SplashScreen extends Activity {
 
-    // Splash screen timer
+    // Splash screen timer (milliseconds)
     private static int SPLASH_TIME_OUT = 2000;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        //If user wants to check for updates then check.
         if (GEDApplication.getSettingsHelper().getCheckForUpdatesAtStartup()) {
             ClassDataUpdater classDataUpdater = new ClassDataUpdater(this,0);
             try {
@@ -46,6 +53,8 @@ public class SplashScreen extends Activity {
                 e.printStackTrace();
             }
         }
+
+        //Load the class data
         ClassDataReader classDataReader = new ClassDataReader(this,0);
         try {
             GEDApplication.setRegionData(classDataReader.execute(0).get());
@@ -53,15 +62,12 @@ public class SplashScreen extends Activity {
             e.printStackTrace();
         }
 
+        //Delayed time period to show logos
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
                 Intent i = new Intent(SplashScreen.this, HomeActivity.class);
                 startActivity(i);
-
-                // close this activity
                 finish();
             }
         }, SPLASH_TIME_OUT);

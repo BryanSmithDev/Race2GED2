@@ -29,7 +29,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.R;
 

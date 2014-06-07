@@ -21,29 +21,23 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.viewpagerindicator.TitlePageIndicator;
-
 import java.util.ArrayList;
-
 import edu.mecc.race2ged.JSON.County;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.adapters.ClassPagerAdapter;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ClassesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ClassesFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * <code>ClassesFragment</code> shows all counties via a ViewPager. Each page has that counties
+ * class information.
  *
+ * @author Bryan Smith
+ * @date 5/26/2014.
  */
 public class ClassesFragment extends Fragment {
 
@@ -55,9 +49,11 @@ public class ClassesFragment extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
+     * @param reg The region object that stores the class data used.
+     *
      * @return A new instance of fragment ClassesFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ClassesFragment newInstance(Region reg) {
         ClassesFragment fragment = new ClassesFragment();
         fragment.setRegion(reg);
@@ -74,14 +70,26 @@ public class ClassesFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Construct a <code>ClassesFragment</code>
+     */
     public ClassesFragment() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>
+     *     Inflates and populates all of the counties fragments
+     * </p>
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -111,6 +119,9 @@ public class ClassesFragment extends Fragment {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -122,6 +133,9 @@ public class ClassesFragment extends Fragment {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -143,26 +157,51 @@ public class ClassesFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Get the currently stored region data for the fragment.
+     * @return The region data object currently stored.
+     */
+    //TODO: Possibly load from GEDApplication instead of storing in more than one place.
     public Region getRegion() {
         return reg;
     }
 
+    /**
+     * Sets the current region data object
+     * @param reg The region object that stores the class data used.
+     */
     public void setRegion(Region reg) {
         this.reg = reg;
     }
 
+    /**
+     * Get the list of titles currently stored.
+     * @return List of titles currently stored.
+     */
     public ArrayList<String> getTitles() {
         return titles;
     }
 
+    /**
+     * Sets the lists of titles to use.
+     * @param titles Lists of titles to use.
+     */
     public void setTitles(ArrayList<String> titles) {
         this.titles = titles;
     }
 
+    /**
+     * Get the list of fragments currently stored.
+     * @return List of fragments currently stored.
+     */
     public ArrayList<Fragment> getFrags() {
         return frags;
     }
 
+    /**
+     * Sets the lists of fragments to use.
+     * @param frags Lists of fragments to use.
+     */
     public void setFrags(ArrayList<Fragment> frags) {
         this.frags = frags;
     }

@@ -19,7 +19,7 @@ package edu.mecc.race2ged.navigation;
 import edu.mecc.race2ged.R;
 
 /**
- * NavDrawerListItemWithIcon represents a list item in the Navigation Drawer that uses an icon.
+ * <code>NavDrawerListItemWithIcon</code> represents a list item in the Navigation Drawer that uses an icon.
  * This class is primarily used for the secondary navigation drawer items. Uses a predefined View
  * ID.
  *
@@ -29,7 +29,7 @@ import edu.mecc.race2ged.R;
  */
 public class NavDrawerListItemWithIcon extends NavDrawerListItem {
     /**
-     * Construct the NavDrawerListItemWithIcon
+     * Construct the <code>NavDrawerListItemWithIcon</code>
      * @param textViewID The ID of the Text View that will have a value inserted.
      * @param text  The text value to insert into the text view.
      * @param iconResourceID The resource ID of the icon to display, if any.

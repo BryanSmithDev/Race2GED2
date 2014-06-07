@@ -29,11 +29,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-
 import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
 
-/** ClassDataReader loads JSON Class data and parses it to the associated objects to be easily used.
+/**
+ * ClassDataReader loads JSON Class data and parses it to the associated objects to be easily used.
  *
  * @author Bryan Smith
  */

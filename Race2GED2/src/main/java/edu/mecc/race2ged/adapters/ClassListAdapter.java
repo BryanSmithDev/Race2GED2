@@ -29,21 +29,27 @@ import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.JSON.Class;
 import edu.mecc.race2ged.R;
 
+/**
+ * The <code>ClassPagerAdapter</code> serves the class fragments per county when paging.
+ *
+ * @author Bryan Smith
+ */
 public class ClassListAdapter extends BaseAdapter {
 
     private ArrayList<Class> items = new ArrayList<Class>();
     private Context context;
 
     /**
-     * Constructs the NavDrawerListAdapter
+     * Constructs the <code>ClassListAdapter</code>
+     *
      * @param context The context of the activity.
+     * @param county The county data object to load classes from.
      */
     public ClassListAdapter(Context context, County county) {
         setContext(context);
         if (county != null)
             if (county.getClasses() != null)
                 setItems((ArrayList<Class>)county.getClasses());
-                Log.d("TEST",""+getCount());
     }
 
     /**
@@ -79,22 +85,10 @@ public class ClassListAdapter extends BaseAdapter {
     }
 
     /**
-     * Get a View that displays the data at the specified position in the data set. You can either
-     * create a View manually or inflate it from an XML layout file. When the View is inflated, the
-     * parent View (GridView, ListView...) will apply default layout parameters unless you use
-     * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
-     * to specify a root view and to prevent attachment to the root.
-     *
-     * @param position    The position of the item within the adapter's data set of the item whose view
-     *                    we want.
-     * @param convertView The old view to reuse, if possible. Note: You should check that this view
-     *                    is non-null and of an appropriate type before using. If it is not possible to convert
-     *                    this view to display the correct data, this method can create a new view.
-     *                    Heterogeneous lists can specify their number of view types, so that this View is
-     *                    always of the right type (see {@link #getViewTypeCount()} and
-     *                    {@link #getItemViewType(int)}).
-     * @param parent      The parent that this view will eventually be attached to
-     * @return A View corresponding to the data at the specified position.
+     * {@inheritDoc}
+     * <p>
+     *     Inflates and populates the class card view
+     * </p>
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -106,20 +100,24 @@ public class ClassListAdapter extends BaseAdapter {
         if(row==null) {
             row = inflater.inflate(R.layout.card, parent, false);
 
-
+            //Find the card
             ViewStub stub = (ViewStub) row.findViewById(R.id.cardStub);
             stub.setLayoutResource(R.layout.class_card);
             View inflatedStub = stub.inflate();
 
+            //Setup location info
             TextView location = (TextView) inflatedStub.findViewById(R.id.location);
             location.setText(mClass.getLocation());
 
+            //Setup locality info
             TextView locality = (TextView) inflatedStub.findViewById(R.id.locality);
             locality.setText(mClass.getName());
 
+            //Setup address info
             TextView address = (TextView) inflatedStub.findViewById(R.id.address);
             address.setText(mClass.getAddress());
 
+            //Setup time info
             TextView times = (TextView) inflatedStub.findViewById(R.id.times);
             String display = "";
             try {
@@ -135,6 +133,7 @@ public class ClassListAdapter extends BaseAdapter {
             }
             times.setText(display);
 
+            //Setup instructors info
             TextView instructors = (TextView) inflatedStub.findViewById(R.id.instructors);
             display = "";
             try {
@@ -155,18 +154,35 @@ public class ClassListAdapter extends BaseAdapter {
         return row;
     }
 
+
+    /**
+     * Returns the array list of classes
+     * @return Array list of classes
+     */
     public ArrayList<Class> getItems() {
         return items;
     }
 
+    /**
+     * Set the ArrayList of classes to the desired ArrayList
+     * @param items The ArrayList to use.
+     */
     public void setItems(ArrayList<Class> items) {
         this.items = items;
     }
 
+    /**
+     * Get the currently stored context.
+     * @return Currently stored context.
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Set the current app context.
+     * @param context Context to use.
+     */
     public void setContext(Context context) {
         this.context = context;
     }

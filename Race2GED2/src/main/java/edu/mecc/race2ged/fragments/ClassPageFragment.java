@@ -20,48 +20,57 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-
 import edu.mecc.race2ged.JSON.*;
-import edu.mecc.race2ged.JSON.Class;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.adapters.ClassListAdapter;
 
 /**
- * Created by Bryan on 5/26/2014.
+ * <code>ClassPageFragment</code> shows a scrollable list of all the class cards in the county.
+ *
+ * @author Bryan Smith
+ * @date 5/26/2014.
  */
 public class ClassPageFragment extends Fragment {
 
     private County county = null;
-    private ArrayList<Class> classes = new ArrayList<Class>();
     private OnFragmentInteractionListener mListener;
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment using the provided parameters. This fragment
+     * shows a scrollable list of all the class cards in the county.
+     *
+     * @param county County data object for this fragment.
+     *
      * @return A new instance of fragment ClassesFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ClassPageFragment newInstance(County county) {
         ClassPageFragment fragment = new ClassPageFragment();
         fragment.setCounty(county);
         return fragment;
     }
 
+    /**
+     * Construct a <code>ClassPageFragment</code>
+     */
     public ClassPageFragment() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,6 +90,9 @@ public class ClassPageFragment extends Fragment {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -92,6 +104,9 @@ public class ClassPageFragment extends Fragment {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onDetach() {
         super.onDetach();
@@ -113,10 +128,18 @@ public class ClassPageFragment extends Fragment {
         public void onClassPagerFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Get the county data object of this fragment.
+     * @return County data object
+     */
     public County getCounty() {
         return county;
     }
 
+    /**
+     * Set the county for this fragment.
+     * @param county County data object to use.
+     */
     public void setCounty(County county) {
         this.county = county;
     }

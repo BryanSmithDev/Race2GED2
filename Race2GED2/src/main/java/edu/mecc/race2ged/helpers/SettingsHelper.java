@@ -19,8 +19,6 @@ package edu.mecc.race2ged.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
-import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.R;
 
 /**

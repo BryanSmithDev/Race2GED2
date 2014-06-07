@@ -28,7 +28,7 @@ import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.helpers.Utils;
 
 /**
- * NavDrawerListAdapter is a list adapter than manages the layout of the Navigation Drawer list.
+ * <code>NavDrawerListAdapter</code> is a list adapter than manages the layout of the Navigation Drawer list.
  * @see android.widget.BaseAdapter
  * @see android.widget.ListAdapter
  *
@@ -40,7 +40,7 @@ public class NavDrawerListAdapter extends BaseAdapter {
     private Context context;
 
     /**
-     * Constructs the NavDrawerListAdapter
+     * Constructs the <code>NavDrawerListAdapter</code>
      * @param context The context of the activity.
      */
     public NavDrawerListAdapter(Context context) {
