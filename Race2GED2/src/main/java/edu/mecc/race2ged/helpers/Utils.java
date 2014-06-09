@@ -18,6 +18,7 @@ package edu.mecc.race2ged.helpers;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.view.View;
@@ -64,6 +65,21 @@ public class Utils {
         if (wifi != null && wifi.isAvailable() && wifi.isConnected()) return WIFI;
         else if (mobile != null && mobile.isAvailable() && mobile.isConnected()) return MOBILE_DATA;
         return NO_CONNECTION;
+    }
+
+    /**
+     * Send an email with supplied address, subject, and content.
+     * @param emailAddress To: Email Address
+     * @param emailSubject Email Subject
+     * @param emailBody Email Body Content
+     */
+    public void sendEmail(Context context,String emailAddress, String emailSubject, String emailBody) {
+        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("plain/html");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {emailAddress});
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, emailSubject);
+        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailBody);
+        context.startActivity(Intent.createChooser(emailIntent, "Sending email..."));
     }
 
     /**
