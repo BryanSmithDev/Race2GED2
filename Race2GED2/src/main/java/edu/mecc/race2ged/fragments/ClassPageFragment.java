@@ -24,6 +24,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.nhaarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
+
 import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.adapters.ClassListAdapter;
@@ -75,10 +79,17 @@ public class ClassPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class_page, container, false);
         ListView mListView = (ListView)view.findViewById(R.id.list);
-        mListView.setAdapter(new ClassListAdapter(getActivity().getApplicationContext(),getCounty()));
+
+        //Setup list animations
+        ClassListAdapter classListAdapter = new ClassListAdapter(getActivity().getApplicationContext(),getCounty());
+        SwingBottomInAnimationAdapter animationAdapter = new SwingBottomInAnimationAdapter(classListAdapter);
+        animationAdapter.setAbsListView(mListView);
+
+        mListView.setAdapter(animationAdapter);
 
         return view;
     }
