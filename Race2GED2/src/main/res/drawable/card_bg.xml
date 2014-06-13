@@ -21,18 +21,18 @@
         <shape android:shape="rectangle"
             android:dither="true">
 
-            <corners android:radius="2dp"/>
+            <corners android:radius="@dimen/card_corner_radius"/>
 
-            <solid android:color="#ccc" />
+            <solid android:color="@color/card_shadow_color" />
 
         </shape>
     </item>
 
-    <item android:bottom="2dp">
+    <item android:bottom="@dimen/card_shadow_size">
         <shape android:shape="rectangle"
             android:dither="true">
 
-            <corners android:radius="2dp" />
+            <corners android:radius="@dimen/card_corner_radius" />
 
             <solid android:color="@android:color/white" />
 

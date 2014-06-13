@@ -31,4 +31,7 @@
     <dimen name="side_panel_negative_shadow_width">-30.0dip</dimen>
     <dimen name="side_panel_max_width">320.0dip</dimen>
     <dimen name="side_panel_menu_item_min_height">64.0dip</dimen>
+    <dimen name="class_card_side_padding">16dp</dimen>
+    <dimen name="card_corner_radius">2dp</dimen>
+    <dimen name="card_shadow_size">3dp</dimen>
 </resources>

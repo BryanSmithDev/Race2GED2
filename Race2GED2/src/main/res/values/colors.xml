@@ -43,5 +43,6 @@
 
     <!-- Color used by footers and copyright statments. Generally should stay a very light grey at #9c9c9c -->
     <color name="copyright_footer">#9c9c9c</color>
+    <color name="card_shadow_color">#ccc</color>
 
 </resources>
