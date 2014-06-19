@@ -85,7 +85,7 @@ public class ClassPageFragment extends Fragment {
         ListView mListView = (ListView)view.findViewById(R.id.list);
 
         //Setup list animations
-        ClassListAdapter classListAdapter = new ClassListAdapter(getActivity().getApplicationContext(),getCounty());
+        ClassListAdapter classListAdapter = new ClassListAdapter(getActivity().getBaseContext(),getCounty());
         SwingBottomInAnimationAdapter animationAdapter = new SwingBottomInAnimationAdapter(classListAdapter);
         animationAdapter.setAbsListView(mListView);
 

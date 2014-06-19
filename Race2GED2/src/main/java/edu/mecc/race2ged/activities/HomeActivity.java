@@ -73,6 +73,8 @@ public class HomeActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        GEDApplication.setStoredContext(this);
+
         if (savedInstanceState == null) {
         }
     }

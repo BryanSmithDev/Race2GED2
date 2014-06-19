@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -68,18 +70,15 @@ public class Utils {
     }
 
     /**
-     * Send an email with supplied address, subject, and content.
-     * @param emailAddress To: Email Address
-     * @param emailSubject Email Subject
-     * @param emailBody Email Body Content
+     * Determine if a string is empty. A space is also considered empty.
+     * @param str The string to check for emptiness.
+     * @return True if the string is empty. False otherwise.
      */
-    public void sendEmail(Context context,String emailAddress, String emailSubject, String emailBody) {
-        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-        emailIntent.setType("plain/html");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {emailAddress});
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, emailSubject);
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailBody);
-        context.startActivity(Intent.createChooser(emailIntent, "Sending email..."));
+    public static boolean isStringEmpty(String str){
+        if (TextUtils.isEmpty(str) || str.equals(" ")){
+            return true;
+        }
+        return false;
     }
 
     /**

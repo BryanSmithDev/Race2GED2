@@ -17,6 +17,8 @@
 package edu.mecc.race2ged;
 
 import android.app.Application;
+import android.content.Context;
+
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.helpers.SettingsHelper;
 
@@ -29,6 +31,7 @@ import edu.mecc.race2ged.helpers.SettingsHelper;
 public class GEDApplication extends Application {
     private static SettingsHelper settingsHelper;
     private static Region regionData;
+    private static Context storedContext = null;
 
     /**
      * {@inheritDoc}
@@ -61,5 +64,21 @@ public class GEDApplication extends Application {
      */
     public static void setRegionData(Region regionDataT) {
         regionData = regionDataT;
+    }
+
+    /**
+     * Get the currently stored context.
+     * @return Currently stored context.
+     */
+    public static Context getStoredContext() {
+        return storedContext;
+    }
+
+    /**
+     * Set the current context.
+     * @param storedContext Context to store.
+     */
+    public static void setStoredContext(Context storedContext) {
+        GEDApplication.storedContext = storedContext;
     }
 }
