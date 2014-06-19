@@ -75,7 +75,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
-        android:background="@color/content_color"
+        android:background="@color/card_shadow_color"
         android:layout_marginBottom="5dp"
         android:id="@+id/frameLayout"/>
 
@@ -143,7 +143,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
-        android:background="@color/content_color"
+        android:background="@color/card_shadow_color"
         android:id="@+id/frameLayout2"/>
 
     <LinearLayout
@@ -155,60 +155,65 @@
 
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight=".33"
             android:text="Maps"
-            android:textColor="#ff474747"
+            android:textColor="@color/content_color"
             android:shadowColor="@color/app_background_dark"
             android:shadowDy="3"
             android:shadowRadius="1"
             android:textSize="14sp"
-            android:background="@color/transparent"
-            android:padding="5dp"
-            android:drawableLeft="@drawable/ic_gear"
-            android:id="@+id/directions"/>
+            android:background="@drawable/selectable_background_race2ged"
+            android:drawableLeft="@drawable/ic_map_marker"
+            android:id="@+id/directions"
+            android:paddingLeft="@dimen/class_card_side_padding"
+            android:paddingRight="@dimen/class_card_side_padding"
+            android:clickable="true"/>
 
         <FrameLayout
             android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="@color/content_color"
+            android:background="@color/card_shadow_color"
             android:id="@+id/frameLayout3"/>
 
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight=".33"
             android:text="Email"
-            android:textColor="#ff474747"
+            android:textColor="@color/content_color"
             android:shadowColor="@color/app_background_dark"
             android:shadowDy="3"
             android:shadowRadius="1"
             android:textSize="14sp"
-            android:background="@color/transparent"
-            android:padding="5dp"
-            android:layout_marginLeft="5dp"
-            android:drawableLeft="@drawable/ic_email"
-            android:id="@+id/email"/>
+            android:background="@drawable/selectable_background_race2ged"
+            android:paddingLeft="@dimen/class_card_side_padding"
+            android:paddingRight="@dimen/class_card_side_padding"
+            android:drawableLeft="@drawable/ic_email_green"
+            android:id="@+id/email"
+            android:clickable="true"/>
 
         <FrameLayout
             android:layout_width="1dp"
             android:layout_height="fill_parent"
-            android:background="@color/content_color"
+            android:background="@color/card_shadow_color"
             android:id="@+id/frameLayout4"/>
 
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight=".33"
             android:text="Call"
-            android:textColor="#ff474747"
+            android:textColor="@color/content_color"
             android:shadowColor="@color/app_background_dark"
             android:shadowDy="3"
             android:shadowRadius="1"
             android:textSize="14sp"
-            android:background="@color/transparent"
-            android:padding="5dp"
+            android:background="@drawable/selectable_background_race2ged"
             android:drawableLeft="@drawable/ic_phone"
-            android:id="@+id/call"/>
+            android:id="@+id/call"
+            android:paddingLeft="@dimen/class_card_side_padding"
+            android:paddingRight="@dimen/class_card_side_padding"
+            android:clickable="true"/>
     </LinearLayout>
 </RelativeLayout>
