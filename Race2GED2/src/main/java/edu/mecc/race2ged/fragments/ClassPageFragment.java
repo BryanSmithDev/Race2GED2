@@ -20,12 +20,12 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.nhaarman.listviewanimations.swinginadapters.prepared.ScaleInAnimationAdapter;
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 import edu.mecc.race2ged.JSON.*;
@@ -40,8 +40,9 @@ import edu.mecc.race2ged.adapters.ClassListAdapter;
  */
 public class ClassPageFragment extends Fragment {
 
-    private County county = null;
+    private County mCounty = null;
     private OnFragmentInteractionListener mListener;
+    private static final String ARG_COUNTY = "countyParam";
 
     /**
      * Use this factory method to create a new instance of
@@ -54,7 +55,9 @@ public class ClassPageFragment extends Fragment {
      */
     public static ClassPageFragment newInstance(County county) {
         ClassPageFragment fragment = new ClassPageFragment();
-        fragment.setCounty(county);
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_COUNTY, county);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -70,6 +73,10 @@ public class ClassPageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null){
+            mCounty = (County)getArguments().getSerializable(ARG_COUNTY);
+            Log.d("TEMP","Reuse old data args");
+        }
     }
 
     /**
@@ -78,8 +85,9 @@ public class ClassPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
+        if (savedInstanceState != null){
+            mCounty = (County)savedInstanceState.getSerializable(ARG_COUNTY);
+        }
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class_page, container, false);
         ListView mListView = (ListView)view.findViewById(R.id.list);
@@ -92,6 +100,31 @@ public class ClassPageFragment extends Fragment {
         mListView.setAdapter(animationAdapter);
 
         return view;
+    }
+
+    /**
+     * Called to ask the fragment to save its current dynamic state, so it
+     * can later be reconstructed in a new instance of its process is
+     * restarted.  If a new instance of the fragment later needs to be
+     * created, the data you place in the Bundle here will be available
+     * in the Bundle given to {@link #onCreate(android.os.Bundle)},
+     * {@link #onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)}, and
+     * {@link #onActivityCreated(android.os.Bundle)}.
+     * <p/>
+     * <p>This corresponds to {@link android.app.Activity#onSaveInstanceState(android.os.Bundle)
+     * Activity.onSaveInstanceState(Bundle)} and most of the discussion there
+     * applies here as well.  Note however: <em>this method may be called
+     * at any time before {@link #onDestroy()}</em>.  There are many situations
+     * where a fragment may be mostly torn down (such as when placed on the
+     * back stack with no UI showing), but its state will not be saved until
+     * its owning activity actually needs to save its state.
+     *
+     * @param outState Bundle in which to place your saved state.
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(ARG_COUNTY,mCounty);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -144,7 +177,7 @@ public class ClassPageFragment extends Fragment {
      * @return County data object
      */
     public County getCounty() {
-        return county;
+        return mCounty;
     }
 
     /**
@@ -152,6 +185,6 @@ public class ClassPageFragment extends Fragment {
      * @param county County data object to use.
      */
     public void setCounty(County county) {
-        this.county = county;
+        this.mCounty = county;
     }
 }

@@ -16,12 +16,14 @@
 
 package edu.mecc.race2ged.JSON;
 
+import java.io.Serializable;
+
 /**
  * Wrapper class for JSON Data. Represents an Instructor or Teacher. Used in the Class class.
  *
  * @author Bryan Smith
  */
-public class Instructor {
+public class Instructor implements Serializable {
 
     private String name;
     private String email;

@@ -30,7 +30,6 @@ import edu.mecc.race2ged.helpers.SettingsHelper;
  */
 public class GEDApplication extends Application {
     private static SettingsHelper settingsHelper;
-    private static Region regionData;
     private static Context storedContext = null;
 
     /**
@@ -48,22 +47,6 @@ public class GEDApplication extends Application {
      */
     public static SettingsHelper getSettingsHelper() {
         return settingsHelper;
-    }
-
-    /**
-     * Get the currently stored Regional class data.
-     * @return Currently stored Regional class data.
-     */
-    public static Region getRegionData() {
-        return regionData;
-    }
-
-    /**
-     * Set the current region data.
-     * @param regionDataT Region data to set to.
-     */
-    public static void setRegionData(Region regionDataT) {
-        regionData = regionDataT;
     }
 
     /**

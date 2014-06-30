@@ -16,6 +16,7 @@
 
 package edu.mecc.race2ged.JSON;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ import java.util.List;
  *
  * @author Bryan Smith
  */
-public class State {
+public class State implements Serializable {
 
     private List<Region> region;
 

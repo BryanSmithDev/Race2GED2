@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,10 +42,11 @@ import edu.mecc.race2ged.adapters.ClassPagerAdapter;
  */
 public class ClassesFragment extends Fragment {
 
-    private Region reg = null;
+    private Region mRegion = null;
     private ArrayList<String> titles = new ArrayList<String>();
     private ArrayList<Fragment> frags = new ArrayList<Fragment>();
     private OnFragmentInteractionListener mListener;
+    private static final String ARG_REGION = "regionParam";
 
     /**
      * Use this factory method to create a new instance of
@@ -56,17 +58,9 @@ public class ClassesFragment extends Fragment {
      */
     public static ClassesFragment newInstance(Region reg) {
         ClassesFragment fragment = new ClassesFragment();
-        fragment.setRegion(reg);
-        if ( fragment.getRegion() != null){
-            final int size = fragment.getRegion().getCounties().size();
-            County c;
-            for (int i = 0; i < size; i++)
-            {
-                c = fragment.getRegion().getCounties().get(i);
-                fragment.getTitles().add(c.getName());
-                fragment.getFrags().add(ClassPageFragment.newInstance(c));
-            }
-        }
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_REGION, reg);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -82,6 +76,52 @@ public class ClassesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null){
+            mRegion = (Region)getArguments().getSerializable(ARG_REGION);
+            if (mRegion != null) populateCards(mRegion);
+        }
+    }
+
+    /**
+     * Called to ask the fragment to save its current dynamic state, so it
+     * can later be reconstructed in a new instance of its process is
+     * restarted.  If a new instance of the fragment later needs to be
+     * created, the data you place in the Bundle here will be available
+     * in the Bundle given to {@link #onCreate(android.os.Bundle)},
+     * {@link #onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)}, and
+     * {@link #onActivityCreated(android.os.Bundle)}.
+     * <p/>
+     * <p>This corresponds to {@link android.app.Activity#onSaveInstanceState(android.os.Bundle)
+     * Activity.onSaveInstanceState(Bundle)} and most of the discussion there
+     * applies here as well.  Note however: <em>this method may be called
+     * at any time before {@link #onDestroy()}</em>.  There are many situations
+     * where a fragment may be mostly torn down (such as when placed on the
+     * back stack with no UI showing), but its state will not be saved until
+     * its owning activity actually needs to save its state.
+     *
+     * @param outState Bundle in which to place your saved state.
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(ARG_REGION,mRegion);
+    }
+
+    /**
+     * Get the data ready for each county from the region.
+     * @param reg The region data to use.
+     */
+    private void populateCards(Region reg){
+        if ( reg != null){
+            final int size = reg.getCounties().size();
+            County c;
+            for (int i = 0; i < size; i++)
+            {
+                c = reg.getCounties().get(i);
+                getTitles().add(c.getName());
+                getFrags().add(ClassPageFragment.newInstance(c));
+            }
+        }
     }
 
     /**
@@ -161,9 +201,8 @@ public class ClassesFragment extends Fragment {
      * Get the currently stored region data for the fragment.
      * @return The region data object currently stored.
      */
-    //TODO: Possibly load from GEDApplication instead of storing in more than one place.
     public Region getRegion() {
-        return reg;
+        return mRegion;
     }
 
     /**
@@ -171,7 +210,7 @@ public class ClassesFragment extends Fragment {
      * @param reg The region object that stores the class data used.
      */
     public void setRegion(Region reg) {
-        this.reg = reg;
+        this.mRegion = reg;
     }
 
     /**

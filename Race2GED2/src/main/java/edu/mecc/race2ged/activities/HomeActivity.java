@@ -18,10 +18,12 @@ package edu.mecc.race2ged.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import edu.mecc.race2ged.GEDApplication;
+import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.fragments.ClassPageFragment;
 import edu.mecc.race2ged.fragments.ClassesFragment;
@@ -47,16 +50,14 @@ import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, ClassesFragment.OnFragmentInteractionListener, ClassPageFragment.OnFragmentInteractionListener{
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
+
+    private static final String ARG_SELECTED = "selectedParam";
+    private static final String ARG_REGION = "regionParam";
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
+    private Region mRegion = null;
+    private int mSelectedItem = 0;
 
 
     @Override
@@ -76,6 +77,49 @@ public class HomeActivity extends ActionBarActivity
         GEDApplication.setStoredContext(this);
 
         if (savedInstanceState == null) {
+            mRegion = (Region)getIntent().getExtras().getSerializable(ARG_REGION);
+        } else {
+            mRegion = (Region)savedInstanceState.getSerializable(ARG_REGION);
+        }
+    }
+
+    /**
+     * Save all appropriate fragment state.
+     *
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mRegion != null) outState.putSerializable(ARG_REGION,mRegion);
+        outState.putInt(ARG_SELECTED,mSelectedItem);
+    }
+
+    /**
+     * This method is called after {@link #onStart} when the activity is
+     * being re-initialized from a previously saved state, given here in
+     * <var>savedInstanceState</var>.  Most implementations will simply use {@link #onCreate}
+     * to restore their state, but it is sometimes convenient to do it here
+     * after all of the initialization has been done or to allow subclasses to
+     * decide whether to use your default implementation.  The default
+     * implementation of this method performs a restore of any view state that
+     * had previously been frozen by {@link #onSaveInstanceState}.
+     * <p/>
+     * <p>This method is called between {@link #onStart} and
+     * {@link #onPostCreate}.
+     *
+     * @param savedInstanceState the data most recently supplied in {@link #onSaveInstanceState}.
+     * @see #onCreate
+     * @see #onPostCreate
+     * @see #onResume
+     * @see #onSaveInstanceState
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            mRegion = (Region) savedInstanceState.getSerializable(ARG_REGION);
+            mSelectedItem = savedInstanceState.getInt(ARG_SELECTED,0);
         }
     }
 
@@ -83,12 +127,16 @@ public class HomeActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         int numb = position+1;
+        if (mSelectedItem == numb) return;
+        mSelectedItem = numb;
         switch (numb) {
             case 2:
                 // update the main content by replacing fragments
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, ClassesFragment.newInstance(GEDApplication.getRegionData()))
-                        .commit();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.container, ClassesFragment.newInstance(mRegion));
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.addToBackStack(null);
+                ft.commit();
                 onSectionAttached(numb);
                 break;
             case 6:
@@ -97,9 +145,12 @@ public class HomeActivity extends ActionBarActivity
                 break;
             default:
                 // update the main content by replacing fragments
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                        .commit();
+                ft = fragmentManager.beginTransaction();
+                ft.replace(R.id.container, PlaceholderFragment.newInstance(position + 1));
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.addToBackStack(null);
+                ft.commit();
+                onSectionAttached(numb);
         }
     }
 
@@ -118,6 +169,8 @@ public class HomeActivity extends ActionBarActivity
                 else mTitle = getString(R.string.app_name);
         }
     }
+
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -186,6 +239,17 @@ public class HomeActivity extends ActionBarActivity
         }
 
         public PlaceholderFragment() {
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            // Set title
+            try {
+                ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(R.string.app_name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

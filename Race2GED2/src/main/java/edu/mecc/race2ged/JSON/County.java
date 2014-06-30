@@ -16,6 +16,7 @@
 
 package edu.mecc.race2ged.JSON;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ import java.util.List;
  *
  * @author Bryan Smith
  */
-public class County {
+public class County implements Serializable {
 
     private String name;
     private List<Class> classes;

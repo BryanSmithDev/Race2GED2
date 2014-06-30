@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import edu.mecc.race2ged.GEDApplication;
+import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.helpers.ClassDataReader;
 import edu.mecc.race2ged.helpers.ClassDataUpdater;
@@ -36,11 +37,14 @@ public class SplashScreen extends Activity {
     // Splash screen timer (milliseconds)
     private static int SPLASH_TIME_OUT = 2000;
 
+    private Region mRegion = null;
+    private static final String ARG_REGION = "regionParam";
+
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
@@ -57,7 +61,7 @@ public class SplashScreen extends Activity {
         //Load the class data
         ClassDataReader classDataReader = new ClassDataReader(this,0);
         try {
-            GEDApplication.setRegionData(classDataReader.execute(0).get());
+            mRegion = classDataReader.execute(0).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,6 +71,7 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 Intent i = new Intent(SplashScreen.this, HomeActivity.class);
+                i.putExtra(ARG_REGION,mRegion);
                 startActivity(i);
                 finish();
             }
