@@ -93,4 +93,37 @@
     <string name="instructor_to_email">Instructor to Email:</string>
     <string name="instructor_email_subject">(RACE2GED App) User Email</string>
 
+    <string name="how_reg">How do I register?</string>
+    <string name="talk_to_instruct">Talk to your teacher about registering for the GED® after you pass a practice test.</string>
+    <string name="when_sched">When can I schedule?</string>
+    <string name="teacher_will_know">Your teacher will know when you are ready to test and will assist you in getting registered and scheduled.</string>
+    <string name="what_is_passing">What is the passing score?</string>
+    <string name="passing_score">On the 2014 GED® test you need to earn at least 150 points on each subject to pass. Our teachers will be able to give you a practice test that can tell if you are likely to pass.</string>
+    <string name="is_there_fee">Is there a fee to take the test?</string>
+    <string name="free_with_us">If you attend our classes and pass a practice test, you will receive a scholarship covering the $120.00 cost of your GED® test.</string>
+
+    <string name="ged_reg_info">GED® Exam Registration Information</string>
+
+    <string name="lee">Lee County</string>
+    <string name="lee_testing">Lee Co. School Board Office\nLeah Herring</string>
+
+    <string name="scott">Scott County</string>
+    <string name="scott_testing">Gate City AE Center\nAmy Statzer</string>
+
+    <string name="wise">Wise County</string>
+    <string name="wise_testing">Wise Career and Technical School\nAmy Statzer</string>
+
+    <string name="ged_changed_in_2014_title">GED® Exam Changed In 2014</string>
+    <string name="ged_changed_in_2014">IMPORTANT: The GED® test changed in 2014. If you did not pass by December 31, 2013, you must start over with the new test.</string>
+
+    <string name="testing_guidelines">1) Arrive early and take a moment to relax and reduce your anxiety.\n
+2) Listen attentively to instructions given by the instructor.\n
+3) Read the directions very carefully.\n
+4) Plan how you will use the time for the test. Bring your watch and pay close attention to the passing time. Do not let the pace of others cause you to be nervous.\n
+5) Do not let difficult questions affect your attitude. Eliminate any choices that you can, then make your best guess and move on.\n
+6) Rely on your knowledge and do not watch for patterns. Noticing that the last four answers were “c” is not a good reason to change your answer. Change answers only when you are certain. The answer which comes to mind first is often correct.\n
+7) When answering the essay question, organize your thoughts before you begin to write. A short outline on your “draft paper” will improve your thinking. You should have a main idea or issue, several supporting issues and examples to illustrate the issues.\n
+8) When answering the essay, paraphrase the original question to form your introductory statement. This benefits you in two ways. First, it helps you get the question straight in your mind. Second, it helps the reader understand how you understood the question and see your perspective.\n
+9) When answering the essay, write your answer clearly, so the reader will be able to decode your writing and understand your ideas. Remember to summarize your answer briefly at the end of your writing.</string>
+
 </resources>
