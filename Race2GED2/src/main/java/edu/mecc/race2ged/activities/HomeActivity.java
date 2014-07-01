@@ -170,8 +170,6 @@ public class HomeActivity extends ActionBarActivity
         }
     }
 
-
-
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -179,32 +177,17 @@ public class HomeActivity extends ActionBarActivity
         actionBar.setTitle(mTitle);
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            //getMenuInflater().inflate(R.menu.home, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        /*switch (item.getItemId()) {
+        *//*switch (item.getItemId()) {
             case R.id.action_settings:
                 return true;
-        }*/
+        }*//*
         return super.onOptionsItemSelected(item);
-    }
-
+    }*/
 
     @Override
     public void onFragmentInteraction(Uri uri) {
