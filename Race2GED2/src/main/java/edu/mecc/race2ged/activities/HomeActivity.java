@@ -54,6 +54,8 @@ public class HomeActivity extends ActionBarActivity
     private static final String ARG_SELECTED = "selectedParam";
     private static final String ARG_REGION = "regionParam";
 
+    private static final String CLASSES_FRAG_TAG = "classesFrag";
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
     private Region mRegion = null;
@@ -133,7 +135,7 @@ public class HomeActivity extends ActionBarActivity
             case 2:
                 // update the main content by replacing fragments
                 FragmentTransaction ft = fragmentManager.beginTransaction();
-                ft.replace(R.id.container, ClassesFragment.newInstance(mRegion));
+                ft.replace(R.id.container, ClassesFragment.newInstance(mRegion) ,CLASSES_FRAG_TAG);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 ft.addToBackStack(null);
                 ft.commit();

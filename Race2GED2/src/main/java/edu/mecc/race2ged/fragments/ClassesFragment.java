@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +46,7 @@ public class ClassesFragment extends Fragment {
     private ArrayList<Fragment> frags = new ArrayList<Fragment>();
     private OnFragmentInteractionListener mListener;
     private static final String ARG_REGION = "regionParam";
+    private ClassPagerAdapter classPagerAdapter;
 
     /**
      * Use this factory method to create a new instance of
@@ -80,6 +80,7 @@ public class ClassesFragment extends Fragment {
             mRegion = (Region)getArguments().getSerializable(ARG_REGION);
             if (mRegion != null) populateCards(mRegion);
         }
+        classPagerAdapter = new ClassPagerAdapter(getFragmentManager(),titles,frags);
     }
 
     /**
@@ -139,7 +140,7 @@ public class ClassesFragment extends Fragment {
 
         //Set the pager with an adapter
         ViewPager pager = (ViewPager)view.findViewById(R.id.pager);
-        pager.setAdapter(new ClassPagerAdapter(getFragmentManager(),titles,frags));
+        pager.setAdapter(classPagerAdapter);
 
         //Bind the title indicator to the adapter
         TitlePageIndicator titleIndicator = (TitlePageIndicator)view.findViewById(R.id.titles);

@@ -30,7 +30,8 @@ import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAni
 
 import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
-import edu.mecc.race2ged.adapters.ClassListAdapter;
+import edu.mecc.race2ged.adapters.CardAdapter;
+
 
 /**
  * <code>ClassPageFragment</code> shows a scrollable list of all the class cards in the county.
@@ -43,6 +44,9 @@ public class ClassPageFragment extends Fragment {
     private County mCounty = null;
     private OnFragmentInteractionListener mListener;
     private static final String ARG_COUNTY = "countyParam";
+
+    private CardAdapter classListAdapter;
+    private SwingBottomInAnimationAdapter animationAdapter;
 
     /**
      * Use this factory method to create a new instance of
@@ -75,8 +79,9 @@ public class ClassPageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null){
             mCounty = (County)getArguments().getSerializable(ARG_COUNTY);
-            Log.d("TEMP","Reuse old data args");
         }
+        classListAdapter = new CardAdapter(getActivity().getBaseContext(),getCounty());
+        animationAdapter = new SwingBottomInAnimationAdapter(classListAdapter);
     }
 
     /**
@@ -86,15 +91,14 @@ public class ClassPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (savedInstanceState != null){
-            mCounty = (County)savedInstanceState.getSerializable(ARG_COUNTY);
+            County tmp = (County)savedInstanceState.getSerializable(ARG_COUNTY);
+            if (tmp != null) mCounty=tmp;
         }
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class_page, container, false);
         ListView mListView = (ListView)view.findViewById(R.id.list);
 
         //Setup list animations
-        ClassListAdapter classListAdapter = new ClassListAdapter(getActivity().getBaseContext(),getCounty());
-        SwingBottomInAnimationAdapter animationAdapter = new SwingBottomInAnimationAdapter(classListAdapter);
         animationAdapter.setAbsListView(mListView);
 
         mListView.setAdapter(animationAdapter);
