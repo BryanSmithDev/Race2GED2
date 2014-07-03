@@ -24,7 +24,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
@@ -49,10 +49,10 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:19.1.0'
-    // You must install or update the Support Repository through the SDK manager to use this dependency.
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.code.gson:gson:2.2.+'
     compile 'com.mcxiaoke.viewpagerindicator:library:2.4.1@aar'
     compile 'com.nhaarman.listviewanimations:library:2.6.0@jar'
     compile 'com.nineoldandroids:library:2.4.+'
+    compile 'com.intellij:annotations:+@jar'
 }
