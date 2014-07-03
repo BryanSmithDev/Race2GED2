@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -38,6 +37,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.helpers.Utils;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -113,9 +113,9 @@ public class NavigationDrawerFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mPreviouslySelectedView != null)
-                    ((TextView) mPreviouslySelectedView.findViewById(R.id.text)).setTypeface(Typeface.DEFAULT);
+                    Utils.setRobotoThin(getActivity(), ((TextView) mPreviouslySelectedView.findViewById(R.id.text)));
                 mPreviouslySelectedView = view;
-                ((TextView) view.findViewById(R.id.text)).setTypeface(Typeface.DEFAULT_BOLD);
+                Utils.setRobotoBold(getActivity(), ((TextView) view.findViewById(R.id.text)));
                 selectItem(position);
             }
         });
@@ -220,15 +220,17 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        mCurrentSelectedPosition = position;
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        }
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mFragmentContainerView);
-        }
-        if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(position);
+        if (position != mCurrentSelectedPosition) {
+            mCurrentSelectedPosition = position;
+            if (mDrawerListView != null) {
+                mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+            }
+            if (mDrawerLayout != null) {
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
+            }
+            if (mCallbacks != null) {
+                mCallbacks.onNavigationDrawerItemSelected(position);
+            }
         }
     }
 

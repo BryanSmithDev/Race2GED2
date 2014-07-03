@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class Utils {
     public static int MOBILE_DATA = 2;
 
     private static Typeface sRobotoThin;
+    private static Typeface sRobotoBold;
 
     /**
      * Returns the current system date.
@@ -121,6 +123,18 @@ public class Utils {
     }
 
     /**
+     * Sets the font of a view to Roboto-Bold
+     * @param context The context of the activity.
+     * @param view The view that will use Roboto-Bold
+     */
+    public static void setRobotoBold(Context context, View view) {
+        if (sRobotoBold == null) {
+            sRobotoBold = Typeface.createFromAsset(context.getAssets(), "Roboto-Bold.ttf");
+        }
+        setFont(view, sRobotoBold);
+    }
+
+    /**
      * Sets the font of a view.
      * @param view The view that will use defined Typeface
      * @param robotoTypeFace The font typeface to use.
@@ -135,4 +149,6 @@ public class Utils {
             ((TextView) view).setTypeface(robotoTypeFace);
         }
     }
+
+
 }

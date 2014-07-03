@@ -131,18 +131,24 @@ public class NavDrawerListAdapter extends BaseAdapter {
         NavDrawerListItem listItem = getItem(position);
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(listItem.getViewResourceID(), parent, false);
-        TextView textView = (TextView) rowView.findViewById(listItem.getTextViewID());
+        View rowView;
+        if (convertView == null) {
+            rowView = inflater.inflate(listItem.getViewResourceID(), parent, false);
 
-        Utils.setRobotoThin(context, textView);
-        if (listItem.getIconResourceID() != -1) {
-            textView.setText(listItem.getTextString().toUpperCase());
-            textView.setCompoundDrawablePadding(30);
-            textView.setCompoundDrawablesWithIntrinsicBounds(listItem.getIconResourceID(), 0, 0, 0);
-            if (position == getCount() - 1)
-                rowView.findViewById(R.id.last_item_line).setVisibility(View.VISIBLE);
+            TextView textView = (TextView) rowView.findViewById(listItem.getTextViewID());
+
+            Utils.setRobotoThin(context, textView);
+            if (listItem.getIconResourceID() != -1) {
+                textView.setText(listItem.getTextString().toUpperCase());
+                textView.setCompoundDrawablePadding(30);
+                textView.setCompoundDrawablesWithIntrinsicBounds(listItem.getIconResourceID(), 0, 0, 0);
+                if (position == getCount() - 1)
+                    rowView.findViewById(R.id.last_item_line).setVisibility(View.VISIBLE);
+            } else {
+                textView.setText(listItem.getTextString());
+            }
         } else {
-            textView.setText(listItem.getTextString());
+            rowView = convertView;
         }
         return rowView;
     }
