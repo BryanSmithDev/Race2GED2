@@ -80,8 +80,8 @@ public class ClassViewPagerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null){
             mRegion = (Region)getArguments().getSerializable(ARG_REGION);
-            if (mRegion != null) populate(mRegion);
         }
+        if (mRegion != null) populate(mRegion);
         classViewPagerAdapter = new ClassViewPagerAdapter(getFragmentManager(),titles,frags);
     }
 

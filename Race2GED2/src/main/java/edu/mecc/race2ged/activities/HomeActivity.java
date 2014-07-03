@@ -16,28 +16,21 @@
 
 package edu.mecc.race2ged.activities;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
+import org.jetbrains.annotations.NotNull;
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
-import edu.mecc.race2ged.fragments.ClassPageFragment;
-import edu.mecc.race2ged.fragments.ClassesFragment;
+import edu.mecc.race2ged.fragments.ClassCardListFragment;
+import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
+import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 
@@ -48,24 +41,36 @@ import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
  * @author Bryan Smith
  */
 public class HomeActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, ClassesFragment.OnFragmentInteractionListener, ClassPageFragment.OnFragmentInteractionListener{
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+                   ClassViewPagerFragment.OnFragmentInteractionListener,
+                   ClassCardListFragment.OnFragmentInteractionListener,
+                   CardListFragment.OnFragmentInteractionListener {
 
 
     private static final String ARG_SELECTED = "selectedParam";
     private static final String ARG_REGION = "regionParam";
 
+    private static final String HOME_FRAG_TAG = "homeFrag";
     private static final String CLASSES_FRAG_TAG = "classesFrag";
+    private static final String PRACTICE_FRAG_TAG = "practiceFrag";
+    private static final String TESTING_FRAG_TAG = "testingFrag";
+    private static final String RESOURCES_FRAG_TAG = "resourcesFrag";
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
     private Region mRegion = null;
-    private int mSelectedItem = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //For backwards compat. For some reason, the Drawer Glyph does not show up on older versions
+        //unless these lines are added manually. Even though the ActionBarDrawerToggle calls them...
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -94,7 +99,6 @@ public class HomeActivity extends ActionBarActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mRegion != null) outState.putSerializable(ARG_REGION,mRegion);
-        outState.putInt(ARG_SELECTED,mSelectedItem);
     }
 
     /**
@@ -117,42 +121,53 @@ public class HomeActivity extends ActionBarActivity
      * @see #onSaveInstanceState
      */
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NotNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null) {
+        if (mRegion == null) {
             mRegion = (Region) savedInstanceState.getSerializable(ARG_REGION);
-            mSelectedItem = savedInstanceState.getInt(ARG_SELECTED,0);
         }
+    }
+
+    private void replaceFragment(int numb,Fragment frag,String tag){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        Fragment tmp = getSupportFragmentManager().findFragmentByTag(tag);
+        ft.replace(R.id.container, (tmp != null ? tmp : frag),tag);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
+        onSectionAttached(numb);
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         int numb = position+1;
-        if (mSelectedItem == numb) return;
-        mSelectedItem = numb;
         switch (numb) {
+            case 1:
+                replaceFragment(numb,CardListFragment.newInstance(),HOME_FRAG_TAG);
+                break;
             case 2:
-                // update the main content by replacing fragments
-                FragmentTransaction ft = fragmentManager.beginTransaction();
-                ft.replace(R.id.container, ClassesFragment.newInstance(mRegion) ,CLASSES_FRAG_TAG);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.addToBackStack(null);
-                ft.commit();
-                onSectionAttached(numb);
+                replaceFragment(numb,ClassViewPagerFragment.newInstance(mRegion),CLASSES_FRAG_TAG);
+                break;
+            case 3:
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                AlertDialog dialog = dialogBuilder.create();
+                dialog.setTitle("NYI");
+                dialog.setMessage("Not yet implemented.");
+                dialog.show();
+                break;
+            case 4:
+                replaceFragment(numb,CardListFragment.newInstance(),TESTING_FRAG_TAG);
+                break;
+            case 5:
+                replaceFragment(numb,CardListFragment.newInstance(),RESOURCES_FRAG_TAG);
                 break;
             case 6:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsIntent);
                 break;
-            default:
-                // update the main content by replacing fragments
-                ft = fragmentManager.beginTransaction();
-                ft.replace(R.id.container, PlaceholderFragment.newInstance(position + 1));
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                ft.addToBackStack(null);
-                ft.commit();
-                onSectionAttached(numb);
+            case 7:
+                //TODO: About Nav Item
+                break;
         }
     }
 
@@ -201,57 +216,9 @@ public class HomeActivity extends ActionBarActivity
 
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    @Override
+    public void onFragmentInteraction(String id) {
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-            // Set title
-            try {
-                ((ActionBarActivity)getActivity()).getSupportActionBar().setTitle(R.string.app_name);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((HomeActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
     }
 
 }

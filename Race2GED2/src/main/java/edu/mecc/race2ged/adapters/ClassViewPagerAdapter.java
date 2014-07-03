@@ -20,7 +20,7 @@ import java.util.List;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
  * The <code>ClassPagerAdapter</code> serves the <code>ClassesFragment</code> per county when paging.
@@ -29,7 +29,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  *
  * @author Bryan Smith
  */
-public class ClassViewPagerAdapter extends FragmentPagerAdapter {
+public class ClassViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<String> titles;
     private List<Fragment> fragments;
