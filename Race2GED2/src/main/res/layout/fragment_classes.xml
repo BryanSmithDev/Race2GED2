@@ -20,7 +20,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.mecc.race2ged.fragments.ClassesFragment"
+    tools:context="edu.mecc.race2ged.fragments.ClassViewPagerFragment"
     android:background="@color/app_background">
 
     <com.viewpagerindicator.TitlePageIndicator

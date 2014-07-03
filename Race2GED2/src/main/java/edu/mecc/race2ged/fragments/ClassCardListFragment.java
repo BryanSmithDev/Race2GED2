@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +27,15 @@ import android.widget.ListView;
 
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
+import java.util.ArrayList;
+
+import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.adapters.CardAdapter;
+import edu.mecc.race2ged.cards.Card;
+import edu.mecc.race2ged.cards.ClassCard;
+import edu.mecc.race2ged.helpers.Utils;
 
 
 /**
@@ -39,7 +44,7 @@ import edu.mecc.race2ged.adapters.CardAdapter;
  * @author Bryan Smith
  * @date 5/26/2014.
  */
-public class ClassPageFragment extends Fragment {
+public class ClassCardListFragment extends Fragment {
 
     private County mCounty = null;
     private OnFragmentInteractionListener mListener;
@@ -47,6 +52,7 @@ public class ClassPageFragment extends Fragment {
 
     private CardAdapter classListAdapter;
     private SwingBottomInAnimationAdapter animationAdapter;
+    private ListView mListView;
 
     /**
      * Use this factory method to create a new instance of
@@ -57,8 +63,8 @@ public class ClassPageFragment extends Fragment {
      *
      * @return A new instance of fragment ClassesFragment.
      */
-    public static ClassPageFragment newInstance(County county) {
-        ClassPageFragment fragment = new ClassPageFragment();
+    public static ClassCardListFragment newInstance(County county) {
+        ClassCardListFragment fragment = new ClassCardListFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_COUNTY, county);
         fragment.setArguments(args);
@@ -68,7 +74,7 @@ public class ClassPageFragment extends Fragment {
     /**
      * Construct a <code>ClassPageFragment</code>
      */
-    public ClassPageFragment() {
+    public ClassCardListFragment() {
     }
 
     /**
@@ -80,7 +86,8 @@ public class ClassPageFragment extends Fragment {
         if (getArguments() != null){
             mCounty = (County)getArguments().getSerializable(ARG_COUNTY);
         }
-        classListAdapter = new CardAdapter(getActivity().getBaseContext(),getCounty());
+
+        classListAdapter = new CardAdapter(getActivity().getBaseContext(),populateCards());
         animationAdapter = new SwingBottomInAnimationAdapter(classListAdapter);
     }
 
@@ -96,7 +103,7 @@ public class ClassPageFragment extends Fragment {
         }
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class_page, container, false);
-        ListView mListView = (ListView)view.findViewById(R.id.list);
+        mListView = (ListView)view.findViewById(R.id.list);
 
         //Setup list animations
         animationAdapter.setAbsListView(mListView);
@@ -104,6 +111,19 @@ public class ClassPageFragment extends Fragment {
         mListView.setAdapter(animationAdapter);
 
         return view;
+    }
+
+    /**
+     * Creates the class cards from the stored county data.
+     * @return ArrayList of the class cards.
+     */
+    public ArrayList<Card> populateCards(){
+        ArrayList<Card> cards = new ArrayList<Card>();
+        for(int i=0; i<mCounty.getClasses().size();i++){
+            ClassCard classCard = new ClassCard(getActivity().getBaseContext(), mCounty.getClasses().get(i));
+            cards.add(classCard);
+        }
+        return cards;
     }
 
     /**

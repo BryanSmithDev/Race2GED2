@@ -37,12 +37,10 @@ public class CardAdapter extends BaseAdapter implements ListAdapter {
     protected ArrayList<Card> mCards = new ArrayList<Card>();
     protected Context mContext;
 
-    public CardAdapter(Context context,County county) {
-        if (county != null && context != null){
-            for(int i=0; i<county.getClasses().size();i++){
-                ClassCard classCard = new ClassCard(context, county.getClasses().get(i));
-                mCards.add(classCard);
-            }
+    public CardAdapter(Context context,ArrayList<Card> cards) {
+        if (!cards.isEmpty() && context != null){
+            mContext = context;
+            mCards = cards;
         }
     }
 

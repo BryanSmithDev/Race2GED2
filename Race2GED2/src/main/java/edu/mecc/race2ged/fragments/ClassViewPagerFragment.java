@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import edu.mecc.race2ged.JSON.County;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
-import edu.mecc.race2ged.adapters.ClassPagerAdapter;
+import edu.mecc.race2ged.adapters.ClassViewPagerAdapter;
 
 /**
  * <code>ClassesFragment</code> shows all counties via a ViewPager. Each page has that counties
@@ -39,14 +39,16 @@ import edu.mecc.race2ged.adapters.ClassPagerAdapter;
  * @author Bryan Smith
  * @date 5/26/2014.
  */
-public class ClassesFragment extends Fragment {
+public class ClassViewPagerFragment extends Fragment {
 
     private Region mRegion = null;
     private ArrayList<String> titles = new ArrayList<String>();
     private ArrayList<Fragment> frags = new ArrayList<Fragment>();
     private OnFragmentInteractionListener mListener;
     private static final String ARG_REGION = "regionParam";
-    private ClassPagerAdapter classPagerAdapter;
+    private ClassViewPagerAdapter classViewPagerAdapter;
+    private TitlePageIndicator titleIndicator;
+    private ViewPager pager;
 
     /**
      * Use this factory method to create a new instance of
@@ -56,8 +58,8 @@ public class ClassesFragment extends Fragment {
      *
      * @return A new instance of fragment ClassesFragment.
      */
-    public static ClassesFragment newInstance(Region reg) {
-        ClassesFragment fragment = new ClassesFragment();
+    public static ClassViewPagerFragment newInstance(Region reg) {
+        ClassViewPagerFragment fragment = new ClassViewPagerFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_REGION, reg);
         fragment.setArguments(args);
@@ -67,7 +69,7 @@ public class ClassesFragment extends Fragment {
     /**
      * Construct a <code>ClassesFragment</code>
      */
-    public ClassesFragment() {
+    public ClassViewPagerFragment() {
     }
 
     /**
@@ -78,9 +80,9 @@ public class ClassesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null){
             mRegion = (Region)getArguments().getSerializable(ARG_REGION);
-            if (mRegion != null) populateCards(mRegion);
+            if (mRegion != null) populate(mRegion);
         }
-        classPagerAdapter = new ClassPagerAdapter(getFragmentManager(),titles,frags);
+        classViewPagerAdapter = new ClassViewPagerAdapter(getFragmentManager(),titles,frags);
     }
 
     /**
@@ -112,7 +114,7 @@ public class ClassesFragment extends Fragment {
      * Get the data ready for each county from the region.
      * @param reg The region data to use.
      */
-    private void populateCards(Region reg){
+    private void populate(Region reg){
         if ( reg != null){
             final int size = reg.getCounties().size();
             County c;
@@ -120,7 +122,7 @@ public class ClassesFragment extends Fragment {
             {
                 c = reg.getCounties().get(i);
                 getTitles().add(c.getName());
-                getFrags().add(ClassPageFragment.newInstance(c));
+                getFrags().add(ClassCardListFragment.newInstance(c));
             }
         }
     }
@@ -139,11 +141,11 @@ public class ClassesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_classes, container, false);
 
         //Set the pager with an adapter
-        ViewPager pager = (ViewPager)view.findViewById(R.id.pager);
-        pager.setAdapter(classPagerAdapter);
+        pager = (ViewPager)view.findViewById(R.id.pager);
+        pager.setAdapter(classViewPagerAdapter);
 
         //Bind the title indicator to the adapter
-        TitlePageIndicator titleIndicator = (TitlePageIndicator)view.findViewById(R.id.titles);
+        titleIndicator = (TitlePageIndicator)view.findViewById(R.id.titles);
         titleIndicator.setSelectedColor(Color.BLACK);
         titleIndicator.setFooterColor(getResources().getColor(R.color.content_color));
         titleIndicator.setBackgroundColor(Color.WHITE);

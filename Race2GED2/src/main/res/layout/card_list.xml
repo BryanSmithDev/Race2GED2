@@ -16,9 +16,16 @@
   ~    limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <include layout="@layout/card_list" />
-</LinearLayout>
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:id="@+id/list"
+          android:padding="@dimen/activity_horizontal_margin"
+          android:stackFromBottom="false"
+          android:dividerHeight="@dimen/activity_vertical_margin"
+          android:divider="@android:color/transparent"
+          android:background="@color/app_background"
+          android:cacheColorHint="@color/app_background"
+          android:requiresFadingEdge="vertical"
+          android:fadingEdge="vertical"
+          android:fadingEdgeLength="25dp"/>

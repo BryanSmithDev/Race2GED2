@@ -25,11 +25,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 /**
  * The <code>ClassPagerAdapter</code> serves the <code>ClassesFragment</code> per county when paging.
  *
- * @see edu.mecc.race2ged.fragments.ClassesFragment
+ * @see edu.mecc.race2ged.fragments.ClassViewPagerFragment
  *
  * @author Bryan Smith
  */
-public class ClassPagerAdapter extends FragmentPagerAdapter {
+public class ClassViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<String> titles;
     private List<Fragment> fragments;
@@ -43,7 +43,7 @@ public class ClassPagerAdapter extends FragmentPagerAdapter {
      *
      * @return A new instance of fragment ClassesFragment.
      */
-    public ClassPagerAdapter(FragmentManager fm,List<String> titles, List<Fragment> fragments) {
+    public ClassViewPagerAdapter(FragmentManager fm, List<String> titles, List<Fragment> fragments) {
         super(fm);
         setFragments(fragments);
         setTitles(titles);
