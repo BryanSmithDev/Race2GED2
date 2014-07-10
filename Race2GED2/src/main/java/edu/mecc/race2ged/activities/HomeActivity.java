@@ -16,7 +16,6 @@
 
 package edu.mecc.race2ged.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,11 +27,12 @@ import org.jetbrains.annotations.NotNull;
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.fragments.ClassCardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
-import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 /**
  * HomeActivity is the primary activity of the Race2GED app and acts as the launcher. Most content
@@ -149,11 +149,8 @@ public class HomeActivity extends ActionBarActivity
                 replaceFragment(numb,ClassViewPagerFragment.newInstance(mRegion),CLASSES_FRAG_TAG);
                 break;
             case 3:
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-                AlertDialog dialog = dialogBuilder.create();
-                dialog.setTitle("NYI");
-                dialog.setMessage("Not yet implemented.");
-                dialog.show();
+                SimpleDialogFragment.createBuilder(this,
+                        getSupportFragmentManager()).setTitle("NYI").setMessage("Not Yet Implemented").show();
                 break;
             case 4:
                 replaceFragment(numb,CardListFragment.newInstance(),TESTING_FRAG_TAG);

@@ -18,6 +18,7 @@
 <resources>
     <color name="black_overlay">#66000000</color>
     <color name="pressed_race2ged">#CC70AB1B</color>
+    <color name="focused_race2ged">#cc87ab57</color>
     <color name="navListItemSelectedBG">#ffb4b4b4</color>
     <!-- Main color, used for splash screen background and top banner background -->
     <color name="primary_color">#135182</color>

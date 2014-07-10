@@ -81,7 +81,7 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
         Card card;
         for (int i=0; i<40;i++) {
             card = new Card(getActivity());
-            card.getStub().setLayoutResource(R.layout.test);
+            card.getStub().setLayoutResource(R.layout.card);
             card.inflate();
             cards.add(card);
         }

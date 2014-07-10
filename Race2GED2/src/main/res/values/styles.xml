@@ -41,6 +41,7 @@
     </style>
 
     <style name="Theme.Race2ged" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_race2ged</item>
         <item name="popupMenuStyle">@style/PopupMenu.Race2ged</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Race2ged</item>
@@ -84,6 +85,14 @@
         <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Race2ged.Widget</item>
 
+    </style>
+
+    <style name="DialogStyleLight.Custom">
+        <!-- anything can be left out: -->
+        <item name="titleTextColor">@color/content_color</item>
+        <item name="titleSeparatorColor">@color/content_color</item>
+        <item name="buttonBackgroundColorPressed">@color/pressed_race2ged</item>
+        <item name="buttonBackgroundColorFocused">@color/focused_race2ged</item>
     </style>
 
     <style name="ActionBar.Solid.Race2ged" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
