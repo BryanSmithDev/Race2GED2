@@ -17,34 +17,35 @@
 package edu.mecc.race2ged.cards;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
-import android.widget.LinearLayout;
 
-import java.io.Serializable;
-
-import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.widgets.Card;
 
 /**
  * TODO: document your custom view class.
  */
-public class Card extends LinearLayout implements Serializable {
+public class StubCard extends Card {
 
-    protected Context mContext;
-    protected View mCardLayout;
-    protected View mCardContents;
+    protected View mStubContents;
     protected ViewStub mStub;
 
 
-    public Card(Context context) {
+    public StubCard(Context context) {
         super(context);
-        mContext = context;
+        mStub = new ViewStub(mContext);
+        addContentView(mStub);
+    }
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mCardLayout = inflater.inflate(R.layout.card, this, true);
-        mStub = (ViewStub)findLayoutViewById(R.id.cardStub);
+    public StubCard(Context context,@LayoutRes int layoutId){
+        super(context);
+        mStub = new ViewStub(mContext);
+        mStub.setLayoutResource(layoutId);
+        addContentView(mStub);
+        inflate();
     }
 
     public void setContents(int id) {
@@ -52,14 +53,15 @@ public class Card extends LinearLayout implements Serializable {
     }
 
     public View inflate(){
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mCardContents = mStub.inflate();
-        return mCardContents;
-    }
-
-    protected View findLayoutViewById(int id) {
-        return mCardLayout.findViewById(id);
+        mStubContents = null;
+        try {
+            LayoutInflater inflater = (LayoutInflater) mContext
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mStubContents = mStub.inflate();
+        } catch (Exception e) {
+            Log.e(getClass().getSimpleName(),"Error inflating StubCard's stub. - "+e.getMessage());
+        }
+        return mStubContents;
     }
 
     public ViewStub getStub() {
@@ -70,19 +72,7 @@ public class Card extends LinearLayout implements Serializable {
         this.mStub = mStub;
     }
 
-    public View getCardContents() {
-        return mCardContents;
-    }
-
-    public void setCardContents(View mCardContents) {
-        this.mCardContents = mCardContents;
-    }
-
-    public View getCardLayout() {
-        return mCardLayout;
-    }
-
-    public void setCardLayout(View mCardLayout) {
-        this.mCardLayout = mCardLayout;
+    public View getStubContents() {
+        return mStubContents;
     }
 }

@@ -29,13 +29,10 @@ import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAni
 
 import java.util.ArrayList;
 
-import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.adapters.CardAdapter;
-import edu.mecc.race2ged.cards.Card;
 import edu.mecc.race2ged.cards.ClassCard;
-import edu.mecc.race2ged.helpers.Utils;
 
 
 /**
@@ -117,8 +114,8 @@ public class ClassCardListFragment extends Fragment {
      * Creates the class cards from the stored county data.
      * @return ArrayList of the class cards.
      */
-    public ArrayList<Card> populateCards(){
-        ArrayList<Card> cards = new ArrayList<Card>();
+    public ArrayList<View> populateCards(){
+        ArrayList<View> cards = new ArrayList<View>();
         for(int i=0; i<mCounty.getClasses().size();i++){
             ClassCard classCard = new ClassCard(getActivity().getBaseContext(), mCounty.getClasses().get(i));
             cards.add(classCard);

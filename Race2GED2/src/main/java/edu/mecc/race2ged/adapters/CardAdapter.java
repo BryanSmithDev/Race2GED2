@@ -21,23 +21,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
-
 import java.util.ArrayList;
 
-import edu.mecc.race2ged.JSON.County;
-import edu.mecc.race2ged.cards.Card;
-import edu.mecc.race2ged.cards.ClassCard;
-
 /**
- * @author Bryan
+ * @author Bryan Smith
  * @date 7/1/2014.
  */
 public class CardAdapter extends BaseAdapter implements ListAdapter {
 
-    protected ArrayList<Card> mCards = new ArrayList<Card>();
+    protected ArrayList<View> mCards = new ArrayList<View>();
     protected Context mContext;
 
-    public CardAdapter(Context context,ArrayList<Card> cards) {
+    public CardAdapter(Context context,ArrayList<View> cards) {
         if (!cards.isEmpty() && context != null){
             mContext = context;
             mCards = cards;
@@ -62,7 +57,7 @@ public class CardAdapter extends BaseAdapter implements ListAdapter {
      * @return The data at the specified position.
      */
     @Override
-    public Card getItem(int position) {
+    public View getItem(int position) {
         return mCards.get(position);
     }
 
@@ -97,6 +92,6 @@ public class CardAdapter extends BaseAdapter implements ListAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return (convertView != null ? convertView : getItem(position).getCardLayout());
+        return getItem(position);
     }
 }

@@ -27,12 +27,12 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.nhaarman.listviewanimations.ArrayAdapter;
+
 import java.util.ArrayList;
 
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.adapters.CardAdapter;
-import edu.mecc.race2ged.cards.Card;
-
 
 
 /**
@@ -41,11 +41,12 @@ import edu.mecc.race2ged.cards.Card;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p />
- * Activities containing this fragment MUST implement the {@link Callbacks}
+ * Activities containing this fragment MUST implement the {@link AbsListView.OnItemClickListener}
  * interface.
  */
 public class CardListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
+    private static final String CARDS_KEY = "cards_key";
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -59,9 +60,12 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
      */
     private CardAdapter mAdapter;
 
-    public static CardListFragment newInstance() {
+    private ArrayList<View> mCards = new ArrayList<View>();
+
+    public static CardListFragment newInstance(ArrayList<View> cards) {
         CardListFragment fragment = new CardListFragment();
         Bundle args = new Bundle();
+        args.putSerializable(CARDS_KEY,cards);
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,16 +80,10 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ArrayList<Card> cards = new ArrayList<Card>();
-        Card card;
-        for (int i=0; i<40;i++) {
-            card = new Card(getActivity());
-            card.getStub().setLayoutResource(R.layout.card);
-            card.inflate();
-            cards.add(card);
+        if (getArguments() != null){
+            mCards = (ArrayList<View>)(getArguments().getSerializable(CARDS_KEY));
         }
-        mAdapter = new CardAdapter(getActivity(),cards);
+        mAdapter = new CardAdapter(getActivity(),mCards);
     }
 
     @Override
@@ -95,6 +93,7 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.list);
+        mListView.setSelector(getResources().getDrawable(R.drawable.transparent));
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks

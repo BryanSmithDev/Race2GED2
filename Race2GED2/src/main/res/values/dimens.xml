@@ -34,4 +34,6 @@
     <dimen name="class_card_side_padding">10dp</dimen>
     <dimen name="card_corner_radius">2dp</dimen>
     <dimen name="card_shadow_size">3dp</dimen>
+    <dimen name="card_inside_side_padding">10dp</dimen>
+    <dimen name="headerTextSize">15sp</dimen>
 </resources>

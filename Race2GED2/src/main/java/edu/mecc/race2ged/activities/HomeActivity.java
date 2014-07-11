@@ -23,7 +23,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
@@ -32,6 +37,8 @@ import edu.mecc.race2ged.fragments.ClassCardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
+import edu.mecc.race2ged.widgets.Card;
+import edu.mecc.race2ged.widgets.Header;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 /**
@@ -56,9 +63,11 @@ public class HomeActivity extends ActionBarActivity
     private static final String TESTING_FRAG_TAG = "testingFrag";
     private static final String RESOURCES_FRAG_TAG = "resourcesFrag";
 
-    private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
     private Region mRegion = null;
+    private ArrayList<View> mHomeCards = new ArrayList<View>();
+    private ArrayList<View> mResourceCards  = new ArrayList<View>();
+    private ArrayList<View> mTestingCards  = new ArrayList<View>();
 
 
     @Override
@@ -72,7 +81,7 @@ public class HomeActivity extends ActionBarActivity
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
+        NavigationDrawerFragment mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
@@ -88,6 +97,34 @@ public class HomeActivity extends ActionBarActivity
         } else {
             mRegion = (Region)savedInstanceState.getSerializable(ARG_REGION);
         }
+        populateCards();
+    }
+
+    private void populateCards() {
+        populateHomeCards();
+        populateResourcesCards();
+        populateTestingCards();
+    }
+
+    private void populateHomeCards() {
+        mHomeCards.add(new Header(this,"Greetings"));
+        mHomeCards.add(new Card(this,"TODO: Add greeting"));
+        mHomeCards.add(new Header(this,"NEWS"));
+        mHomeCards.add(new Card(this,"TODO: Add facebook feed"));
+    }
+
+    private void populateResourcesCards() {
+        mResourceCards.add(new Header(this,"Category 1"));
+        mResourceCards.add(new Card(this,"Resource Item 1"));
+        mResourceCards.add(new Card(this,"Resource Item 2"));
+        mResourceCards.add(new Card(this,"Resource Item 3"));
+        mResourceCards.add(new Header(this,"Category 2"));
+        mResourceCards.add(new Card(this,"Resource Item 4"));
+    }
+
+    private void populateTestingCards() {
+        mTestingCards.add(new Header(this,"Testing"));
+        mTestingCards.add(new Card(this,"TODO: Add Testing info"));
     }
 
     /**
@@ -143,7 +180,7 @@ public class HomeActivity extends ActionBarActivity
         int numb = position+1;
         switch (numb) {
             case 1:
-                replaceFragment(numb,CardListFragment.newInstance(),HOME_FRAG_TAG);
+                replaceFragment(numb,CardListFragment.newInstance(mHomeCards),HOME_FRAG_TAG);
                 break;
             case 2:
                 replaceFragment(numb,ClassViewPagerFragment.newInstance(mRegion),CLASSES_FRAG_TAG);
@@ -153,10 +190,10 @@ public class HomeActivity extends ActionBarActivity
                         getSupportFragmentManager()).setTitle("NYI").setMessage("Not Yet Implemented").show();
                 break;
             case 4:
-                replaceFragment(numb,CardListFragment.newInstance(),TESTING_FRAG_TAG);
+                replaceFragment(numb,CardListFragment.newInstance(mTestingCards),TESTING_FRAG_TAG);
                 break;
             case 5:
-                replaceFragment(numb,CardListFragment.newInstance(),RESOURCES_FRAG_TAG);
+                replaceFragment(numb,CardListFragment.newInstance(mResourceCards),RESOURCES_FRAG_TAG);
                 break;
             case 6:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);

@@ -41,40 +41,36 @@ import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.helpers.Utils;
 
 /**
- * @author Bryan
+ * @author Bryan Smith
  * @date 7/1/2014.
  */
-public class ClassCard extends Card implements Serializable {
+public class ClassCard extends StubCard {
 
     private Class mClass = null;
 
     public ClassCard(Context context, Class mClass) {
-        super(context);
+        super(context,R.layout.class_card);
         this.mClass = mClass;
         initCard();
     }
 
     protected void initCard(){
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        setCardPadding(0,0,0,0);
         if (mStub != null) {
-            setContents(R.layout.class_card);
-            View inflatedStub = inflate();
-
             //Setup location info
-            TextView location = (TextView) inflatedStub.findViewById(R.id.location);
+            TextView location = (TextView) getStubContents().findViewById(R.id.location);
             location.setText(mClass.getLocation());
 
             //Setup locality info
-            TextView locality = (TextView) inflatedStub.findViewById(R.id.locality);
+            TextView locality = (TextView) getStubContents().findViewById(R.id.locality);
             locality.setText(mClass.getName());
 
             //Setup address info
-            TextView address = (TextView) inflatedStub.findViewById(R.id.address);
+            TextView address = (TextView) getStubContents().findViewById(R.id.address);
             address.setText(mClass.getAddress());
 
             //Setup time info
-            TextView times = (TextView) inflatedStub.findViewById(R.id.times);
+            TextView times = (TextView) getStubContents().findViewById(R.id.times);
             String display = "";
             try {
                 ArrayList<String> days = (ArrayList<String>) mClass.getDays();
@@ -90,7 +86,7 @@ public class ClassCard extends Card implements Serializable {
             times.setText(display);
 
             //Setup instructors info
-            TextView instructors = (TextView) inflatedStub.findViewById(R.id.instructors);
+            TextView instructors = (TextView) getStubContents().findViewById(R.id.instructors);
             display = "";
             try {
                 ArrayList<Instructor> ins = (ArrayList<Instructor>) mClass.getInstructors();
@@ -103,8 +99,7 @@ public class ClassCard extends Card implements Serializable {
                 Log.e(this.getClass().getSimpleName(), "Error displaying instructors for class schedule. - " + e.getMessage());
             }
             instructors.setText(display);
-
-            setupButtons(inflatedStub, mClass);
+            setupButtons(getStubContents(), mClass);
         }
 
     }
