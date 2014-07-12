@@ -89,7 +89,7 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_card, container, false);
+        View view = inflater.inflate(R.layout.fragment_card_list, container, false);
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.list);
