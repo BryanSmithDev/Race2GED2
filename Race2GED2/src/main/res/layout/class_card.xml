@@ -50,24 +50,6 @@
         android:paddingLeft="@dimen/class_card_side_padding"
         android:paddingRight="@dimen/class_card_side_padding"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="12sp"
-        android:text="Gate City"
-        android:textColor="#e1727272"
-        android:id="@+id/locality"
-        android:layout_toRightOf="@+id/location"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignBaseline="@+id/location"
-        android:gravity="right"
-        android:textStyle="italic"
-        android:paddingRight="5dp"/>
-
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="1dp"

@@ -61,10 +61,6 @@ public class ClassCard extends StubCard {
             TextView location = (TextView) getStubContents().findViewById(R.id.location);
             location.setText(mClass.getLocation());
 
-            //Setup locality info
-            TextView locality = (TextView) getStubContents().findViewById(R.id.locality);
-            locality.setText(mClass.getName());
-
             //Setup address info
             TextView address = (TextView) getStubContents().findViewById(R.id.address);
             address.setText(mClass.getAddress());

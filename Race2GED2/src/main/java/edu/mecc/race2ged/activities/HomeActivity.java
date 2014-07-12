@@ -97,7 +97,12 @@ public class HomeActivity extends ActionBarActivity
         } else {
             mRegion = (Region)savedInstanceState.getSerializable(ARG_REGION);
         }
+
         populateCards();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, CardListFragment.newInstance(mHomeCards)).commit();
+
     }
 
     private void populateCards() {
