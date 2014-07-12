@@ -27,8 +27,6 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.nhaarman.listviewanimations.ArrayAdapter;
-
 import java.util.ArrayList;
 
 import edu.mecc.race2ged.R;
@@ -46,7 +44,6 @@ import edu.mecc.race2ged.adapters.CardAdapter;
  */
 public class CardListFragment extends Fragment implements AbsListView.OnItemClickListener {
 
-    private static final String CARDS_KEY = "cards_key";
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -64,9 +61,7 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
 
     public static CardListFragment newInstance(ArrayList<View> cards) {
         CardListFragment fragment = new CardListFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(CARDS_KEY,cards);
-        fragment.setArguments(args);
+        fragment.mCards = cards;
         return fragment;
     }
 
@@ -80,9 +75,6 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null){
-            mCards = (ArrayList<View>)(getArguments().getSerializable(CARDS_KEY));
-        }
         mAdapter = new CardAdapter(getActivity(),mCards);
     }
 

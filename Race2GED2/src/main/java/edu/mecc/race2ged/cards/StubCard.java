@@ -36,26 +36,26 @@ public class StubCard extends Card {
 
     public StubCard(Context context) {
         super(context);
-        mStub = new ViewStub(mContext);
+        mStub = new ViewStub(context);
         addContentView(mStub);
     }
 
     public StubCard(Context context,@LayoutRes int layoutId){
         super(context);
-        mStub = new ViewStub(mContext);
+        mStub = new ViewStub(context);
         mStub.setLayoutResource(layoutId);
         addContentView(mStub);
-        inflate();
+        inflate(context);
     }
 
     public void setContents(int id) {
         mStub.setLayoutResource(id);
     }
 
-    public View inflate(){
+    public View inflate(Context context){
         mStubContents = null;
         try {
-            LayoutInflater inflater = (LayoutInflater) mContext
+            LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mStubContents = mStub.inflate();
         } catch (Exception e) {

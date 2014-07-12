@@ -32,7 +32,6 @@ import edu.mecc.race2ged.helpers.Utils;
  */
 public class Card extends LinearLayout implements Serializable {
 
-    protected Context mContext;
     protected LinearLayout mLayout;
 
     public Card(Context context){
@@ -69,8 +68,7 @@ public class Card extends LinearLayout implements Serializable {
     }
 
     private void setupCard(Context context){
-        mContext = context;
-        LayoutInflater inflater = (LayoutInflater) mContext
+        LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mLayout = (LinearLayout)inflater.inflate(R.layout.card, this, true).findViewById(R.id.card);
         int pad = getResources().getDimensionPixelSize(R.dimen.card_inside_side_padding);

@@ -19,9 +19,11 @@ package edu.mecc.race2ged.cards;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,7 +51,7 @@ public class ClassCard extends StubCard {
     private Class mClass = null;
 
     public ClassCard(Context context, Class mClass) {
-        super(context,R.layout.class_card);
+        super(context, R.layout.class_card);
         this.mClass = mClass;
         initCard();
     }
@@ -178,6 +180,7 @@ public class ClassCard extends StubCard {
      * @param mClass The Class data object to retrieve data from.
      */
     private void setupEmailButton(Button button, final Class mClass) {
+        //TODO: Better drop down list of instructors emails to pick from.
         if (button != null && mClass.getInstructors().size() > 0 && GEDApplication.getStoredContext() != null) {
 
             ListView instructors = new ListView(getContext());
@@ -189,10 +192,7 @@ public class ClassCard extends StubCard {
             instructors.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    sendEmail(GEDApplication.getStoredContext(),
-                            mClass.getInstructors().get(position).getEmail(),
-                            getContext().getResources().getString(R.string.instructor_email_subject),
-                            "");
+
                 }
             });
             instructors.setAdapter(instructorsNames);
@@ -201,10 +201,19 @@ public class ClassCard extends StubCard {
             emailDialog.setContentView(instructors);
             emailDialog.setTitle(R.string.instructor_to_email);
 
+            final String tag = this.getClass().getSimpleName();
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    emailDialog.show();
+                    //emailDialog.show();
+                    try {
+                        Utils.sendEmail(GEDApplication.getStoredContext(),
+                                mClass.getInstructors().get(0).getEmail(),
+                                getContext().getResources().getString(R.string.instructor_email_subject),
+                                "");
+                    } catch (Resources.NotFoundException e) {
+                        Log.e(tag,"Could not get instructors email address. - "+e.getMessage());
+                    }
                 }
             });
         }
@@ -232,20 +241,6 @@ public class ClassCard extends StubCard {
         }
     }
 
-    /**
-     * Send an email with supplied address, subject, and content.
-     * @param emailAddress To: Email Address
-     * @param emailSubject Email Subject
-     * @param emailBody Email Body Content
-     */
-    private static void sendEmail(Context context,String emailAddress, String emailSubject, String emailBody) {
-        final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-        emailIntent.setType("plain/html");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] {emailAddress});
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, emailSubject);
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailBody);
-        context.startActivity(Intent.createChooser(emailIntent, "Select your Email App:"));
-    }
 
     /**
      * Determine if at least one of the instructors have an email.

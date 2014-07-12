@@ -36,8 +36,6 @@ import edu.mecc.race2ged.helpers.Utils;
  */
 public class Header extends TextView implements Serializable {
 
-    protected Context mContext;
-
     public Header(Context context){
         super(context);
         setupHeader(context);
@@ -50,8 +48,7 @@ public class Header extends TextView implements Serializable {
     }
 
     private void setupHeader(Context context){
-        mContext = context;
-        Utils.setRobotoBold(mContext, this);
+        Utils.setRobotoBold(context, this);
         setTextColor(getResources().getColor(R.color.content_color));
         setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerTextSize));
         setFocusable(false);

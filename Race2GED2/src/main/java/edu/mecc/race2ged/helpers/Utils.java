@@ -151,5 +151,24 @@ public class Utils {
         }
     }
 
+    /**
+     * Send an email with supplied address, subject, and content.
+     * @param emailAddress To: Email Address
+     * @param emailSubject Email Subject
+     * @param emailBody Email Body Content
+     */
+    public static void sendEmail(Context context,String emailAddress, String emailSubject, String emailBody) {
+        try {
+            final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setType("plain/html");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {emailAddress});
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, emailSubject);
+            emailIntent.putExtra(Intent.EXTRA_TEXT, emailBody);
+            context.startActivity(Intent.createChooser(emailIntent, "Select your Email App:"));
+        } catch (Exception e) {
+            Log.e(context.getClass().getSimpleName(),"Error sending email. Email app installed? - "+e.getMessage());
+        }
+    }
+
 
 }
