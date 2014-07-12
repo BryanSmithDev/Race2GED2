@@ -18,6 +18,8 @@ package edu.mecc.race2ged.widgets;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -32,7 +34,7 @@ import edu.mecc.race2ged.helpers.Utils;
 /**
  * TODO: document your custom view class.
  */
-public class Header extends TextView {
+public class Header extends TextView implements Serializable {
 
     protected Context mContext;
 
@@ -49,9 +51,9 @@ public class Header extends TextView {
 
     private void setupHeader(Context context){
         mContext = context;
-        Utils.setRobotoBold(mContext,this);
+        Utils.setRobotoBold(mContext, this);
         setTextColor(getResources().getColor(R.color.content_color));
-        setTextSize(getResources().getDimension(R.dimen.headerTextSize));
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerTextSize));
         setFocusable(false);
         setClickable(false);
         setFocusableInTouchMode(false);
