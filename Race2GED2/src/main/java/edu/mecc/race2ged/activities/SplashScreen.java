@@ -47,6 +47,11 @@ public class SplashScreen extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 
         //If user wants to check for updates then check.
         if (GEDApplication.getSettingsHelper().getCheckForUpdatesAtStartup()) {
@@ -77,5 +82,4 @@ public class SplashScreen extends Activity {
             }
         }, SPLASH_TIME_OUT);
     }
-
 }
