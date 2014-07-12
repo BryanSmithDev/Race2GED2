@@ -171,11 +171,15 @@ public class HomeActivity extends ActionBarActivity
     }
 
     private void replaceFragment(int numb,Fragment frag,String tag){
+        replaceFragment(numb, frag, tag, true);
+    }
+
+    private void replaceFragment(int numb,Fragment frag,String tag, boolean addToBackStack){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Fragment tmp = getSupportFragmentManager().findFragmentByTag(tag);
         ft.replace(R.id.container, (tmp != null ? tmp : frag),tag);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack(null);
+        if (addToBackStack) ft.addToBackStack(null);
         ft.commit();
         onSectionAttached(numb);
     }
@@ -183,9 +187,10 @@ public class HomeActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         int numb = position+1;
+        getSupportFragmentManager().popBackStack();
         switch (numb) {
             case 1:
-                replaceFragment(numb,CardListFragment.newInstance(mHomeCards),HOME_FRAG_TAG);
+                replaceFragment(numb,CardListFragment.newInstance(mHomeCards),HOME_FRAG_TAG,false);
                 break;
             case 2:
                 replaceFragment(numb,ClassViewPagerFragment.newInstance(mRegion),CLASSES_FRAG_TAG);
