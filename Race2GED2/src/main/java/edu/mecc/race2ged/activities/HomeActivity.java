@@ -17,21 +17,26 @@
 package edu.mecc.race2ged.activities;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.cards.ExpandableCard;
 import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.fragments.ClassCardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
@@ -48,10 +53,7 @@ import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
  * @author Bryan Smith
  */
 public class HomeActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-                   ClassViewPagerFragment.OnFragmentInteractionListener,
-                   ClassCardListFragment.OnFragmentInteractionListener,
-                   CardListFragment.OnFragmentInteractionListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 
     private static final String ARG_SELECTED = "selectedParam";
@@ -63,7 +65,7 @@ public class HomeActivity extends ActionBarActivity
     private static final String TESTING_FRAG_TAG = "testingFrag";
     private static final String RESOURCES_FRAG_TAG = "resourcesFrag";
 
-    private CharSequence mTitle;
+    private ArrayList<String> navTitles = new ArrayList<String>();
     private Region mRegion = null;
     private ArrayList<View> mHomeCards = new ArrayList<View>();
     private ArrayList<View> mResourceCards  = new ArrayList<View>();
@@ -83,7 +85,7 @@ public class HomeActivity extends ActionBarActivity
 
         NavigationDrawerFragment mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -103,6 +105,12 @@ public class HomeActivity extends ActionBarActivity
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, CardListFragment.newInstance(mHomeCards)).commit();
 
+        try {
+            navTitles.addAll(Arrays.asList(getResources().getStringArray(R.array.navPrimaryTitles)));
+            navTitles.addAll(Arrays.asList(getResources().getStringArray(R.array.navSecondaryTitles)));
+        } catch (Resources.NotFoundException e) {
+            Log.e("HomeActivity","Could not add nav titles to list. - "+e.getMessage());
+        }
     }
 
     private void populateCards() {
@@ -112,9 +120,9 @@ public class HomeActivity extends ActionBarActivity
     }
 
     private void populateHomeCards() {
-        mHomeCards.add(new Header(this,"Greetings"));
-        mHomeCards.add(new Card(this,"TODO: Add greeting"));
-        mHomeCards.add(new Header(this,"NEWS"));
+        mHomeCards.add(new Header(this,getResources().getString(R.string.greeting_header)));
+        mHomeCards.add(new Card(this,getResources().getString(R.string.greeting)));
+        mHomeCards.add(new Header(this,getResources().getString(R.string.facebook_feed_header)));
         mHomeCards.add(new Card(this,"TODO: Add facebook feed"));
     }
 
@@ -128,8 +136,17 @@ public class HomeActivity extends ActionBarActivity
     }
 
     private void populateTestingCards() {
-        mTestingCards.add(new Header(this,"Testing"));
-        mTestingCards.add(new Card(this,"TODO: Add Testing info"));
+        mTestingCards.add(new Header(this, getResources().getString(R.string.testing_content_areas)));
+        mTestingCards.add(new ExpandableCard(this,getResources().getString(R.string.testing_rla),getResources().getString(R.string.testing_rla_content)));
+        mTestingCards.add(new ExpandableCard(this,getResources().getString(R.string.testing_math),getResources().getString(R.string.testing_math_content)));
+        mTestingCards.add(new ExpandableCard(this,getResources().getString(R.string.testing_social_studies),getResources().getString(R.string.testing_social_studies_content)));
+        mTestingCards.add(new ExpandableCard(this,getResources().getString(R.string.testing_science),getResources().getString(R.string.testing_science_content)));
+        mTestingCards.add(new Header(this, getResources().getString(R.string.testing_centers_title)));
+        mTestingCards.add(new Card(this,"TODO: Add testing center info. (Maybe on tabs to organize? This page will have a lot of info for one screen)"));
+        mTestingCards.add(new Header(this, getResources().getString(R.string.testing_cost_title)));
+        mTestingCards.add(new Card(this,"TODO: Add testing cost info. Again, most likely will me moved to a related tab."));
+        mTestingCards.add(new Header(this, getResources().getString(R.string.testing_passing_title)));
+        mTestingCards.add(new Card(this,"TODO: Add passing score info."));
     }
 
     /**
@@ -181,7 +198,6 @@ public class HomeActivity extends ActionBarActivity
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         if (addToBackStack) ft.addToBackStack(null);
         ft.commit();
-        onSectionAttached(numb);
     }
 
     @Override
@@ -190,7 +206,9 @@ public class HomeActivity extends ActionBarActivity
         getSupportFragmentManager().popBackStack();
         switch (numb) {
             case 1:
-                replaceFragment(numb,CardListFragment.newInstance(mHomeCards),HOME_FRAG_TAG,false);
+                CardListFragment frag = CardListFragment.newInstance(mHomeCards);
+                frag.setTitle(getResources().getString(R.string.app_name));
+                replaceFragment(numb, frag, HOME_FRAG_TAG, false);
                 break;
             case 2:
                 replaceFragment(numb,ClassViewPagerFragment.newInstance(mRegion),CLASSES_FRAG_TAG);
@@ -200,69 +218,28 @@ public class HomeActivity extends ActionBarActivity
                         getSupportFragmentManager()).setTitle("NYI").setMessage("Not Yet Implemented").show();
                 break;
             case 4:
-                replaceFragment(numb,CardListFragment.newInstance(mTestingCards),TESTING_FRAG_TAG);
+                frag = CardListFragment.newInstance(mTestingCards);
+                frag.setTitle(navTitles.get(numb-1));
+                replaceFragment(numb,frag,TESTING_FRAG_TAG);
                 break;
             case 5:
-                replaceFragment(numb,CardListFragment.newInstance(mResourceCards),RESOURCES_FRAG_TAG);
+                frag = CardListFragment.newInstance(mResourceCards);
+                frag.setTitle(navTitles.get(numb-1));
+                replaceFragment(numb,frag,RESOURCES_FRAG_TAG);
                 break;
             case 6:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivity(settingsIntent);
                 break;
             case 7:
+                //TODO: feedback Nav Item
+                break;
+            case 8:
                 //TODO: About Nav Item
                 break;
-        }
-    }
-
-    /**
-     * When a fragment is replaced, what will happen?
-     * @param number The position of the list item that invoked the fragment transaction.
-     */
-    public void onSectionAttached(int number) {
-        String[] titles = getResources().getStringArray(R.array.navPrimaryTitles);
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.app_name);
-                break;
             default:
-                if (titles[number - 1] != null) mTitle = titles[number - 1];
-                else mTitle = getString(R.string.app_name);
+                break;
         }
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
-/*    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        *//*switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
-        }*//*
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onClassPagerFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void onFragmentInteraction(String id) {
-
     }
 
 }

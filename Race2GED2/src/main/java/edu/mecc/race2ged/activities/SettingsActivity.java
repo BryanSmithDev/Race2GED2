@@ -78,11 +78,6 @@ public class SettingsActivity extends PreferenceActivity {
         // Add 'data and sync' preferences, and a corresponding header.
         addPreferencesFromResource(R.xml.pref_updates);
 
-        // Bind the summaries of EditText/List/Dialog/Ringtone preferences to
-        // their values. When their values change, their summaries are updated
-        // to reflect the new value, per the Android Design guidelines.
-        bindPreferenceSummaryToValue(findPreference(getResources().getString(R.string.pref_base_font_size)));
-
         //checkForDisabledItems(findPreference(settingsHelper.CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP));
         //checkForDisabledItems(findPreference(settingsHelper.CHECK_CLASS_DATA_ONLY_ON_WIFI));
 
@@ -196,12 +191,6 @@ public class SettingsActivity extends PreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference(getResources().getString(R.string.pref_base_font_size)));
         }
     }
 

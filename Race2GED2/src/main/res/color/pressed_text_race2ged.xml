@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
   ~ Copyright 2014 Regional Adult Education Program of Lee, Scott, Wise, and Norton Public Schools
   ~
@@ -16,9 +15,12 @@
   ~    limitations under the License.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <include layout="@layout/card_list" />
-</LinearLayout>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:color="@color/pressed_race2ged" /> <!-- pressed -->
+
+    <item android:state_selected="true"
+        android:color="@color/focused_race2ged" /> <!-- focused -->
+
+    <item android:color="#000000" /> <!-- default -->
+</selector>

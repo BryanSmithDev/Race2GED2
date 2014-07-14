@@ -115,7 +115,7 @@ public class NavigationDrawerFragment extends Fragment {
                 if (mPreviouslySelectedView != null)
                     Utils.setRobotoThin(getActivity(), ((TextView) mPreviouslySelectedView.findViewById(R.id.text)));
                 mPreviouslySelectedView = view;
-                Utils.setRobotoBold(getActivity(), ((TextView) view.findViewById(R.id.text)));
+               // Utils.setRobotoBold(getActivity(), ((TextView) view.findViewById(R.id.text)));
                 selectItem(position);
             }
         });

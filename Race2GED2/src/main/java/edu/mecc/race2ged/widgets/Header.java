@@ -22,6 +22,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -51,12 +52,11 @@ public class Header extends TextView implements Serializable {
         Utils.setRobotoBold(context, this);
         setTextColor(getResources().getColor(R.color.content_color));
         setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.headerTextSize));
+        setShadowLayer(1.0f,0.0f,getResources().getDimensionPixelSize(R.dimen.header_shadow_size),getResources().getColor(R.color.content_color_shadow));
         setFocusable(false);
         setClickable(false);
         setFocusableInTouchMode(false);
-
+        setPadding(0,0,0,getResources().getDimensionPixelSize(R.dimen.header_bottom_padding));
     }
-
-
 
 }

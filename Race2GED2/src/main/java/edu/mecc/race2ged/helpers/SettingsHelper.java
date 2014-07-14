@@ -35,7 +35,7 @@ public class SettingsHelper {
     public static String CHECK_CLASS_DATA_ONLY_ON_WIFI;
     public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS;
     public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP;
-    public static String BASE_FONT_SIZE;
+    public static String SHOW_ANIMATIONS;
 
     private SharedPreferences settings;
 
@@ -49,7 +49,7 @@ public class SettingsHelper {
         CHECK_CLASS_DATA_ONLY_ON_WIFI = context.getResources().getString(R.string.pref_check_class_data_only_on_wifi);
         CHECK_CLASS_DATA_FOR_NEW_VERSIONS = context.getResources().getString(R.string.pref_check_class_data_for_new_versions);
         CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP = context.getResources().getString(R.string.pref_check_class_data_for_new_versions_at_startup);
-        BASE_FONT_SIZE = context.getResources().getString(R.string.pref_base_font_size);
+        SHOW_ANIMATIONS = context.getResources().getString(R.string.pref_show_animations);
     }
 
     /**
@@ -85,6 +85,15 @@ public class SettingsHelper {
      */
     public boolean getCheckForUpdatesAtStartup() {
         return (getCheckForUpdates() && settings.getBoolean(CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP, true));
+    }
+
+    /**
+     * Show the card slide in animations?
+     * @return saved value indicating whether or not to show animations. Or True if it does not
+     * exist.
+     */
+    public boolean getShowAnimations() {
+        return settings.getBoolean(SHOW_ANIMATIONS,true);
     }
 
     /**

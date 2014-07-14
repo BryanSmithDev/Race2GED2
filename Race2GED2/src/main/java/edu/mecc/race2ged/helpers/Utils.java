@@ -115,12 +115,22 @@ public class Utils {
      * Sets the font of a view to Roboto-Light
      * @param context The context of the activity.
      * @param view The view that will use Roboto-Light
+     * @param style The style for the font face. i.e Typeface.BOLD
      */
-    public static void setRobotoThin(Context context, View view) {
+    public static void setRobotoThin(Context context, View view, int style) {
         if (sRobotoThin == null) {
             sRobotoThin = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
         }
-        setFont(view, sRobotoThin);
+        setFont(view, sRobotoThin, style);
+    }
+
+    /**
+     * Sets the font of a view to Roboto-Light
+     * @param context The context of the activity.
+     * @param view The view that will use Roboto-Light
+     */
+    public static void setRobotoThin(Context context, View view) {
+        setRobotoThin(context, view, Typeface.NORMAL);
     }
 
     /**
@@ -141,13 +151,23 @@ public class Utils {
      * @param robotoTypeFace The font typeface to use.
      */
     private static void setFont(View view, Typeface robotoTypeFace) {
+        setFont(view, robotoTypeFace, Typeface.NORMAL);
+    }
+
+    /**
+     * Sets the font of a view.
+     * @param view The view that will use defined Typeface
+     * @param robotoTypeFace The font typeface to use.
+     * @param style The style for the font face. i.e Typeface.BOLD
+     */
+    private static void setFont(View view, Typeface robotoTypeFace, int style) {
         if (view instanceof ViewGroup) {
             int count = ((ViewGroup) view).getChildCount();
             for (int i = 0; i < count; i++) {
                 setFont(((ViewGroup) view).getChildAt(i), robotoTypeFace);
             }
         } else if (view instanceof TextView) {
-            ((TextView) view).setTypeface(robotoTypeFace);
+            ((TextView) view).setTypeface(robotoTypeFace, style);
         }
     }
 

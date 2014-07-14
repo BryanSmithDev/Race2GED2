@@ -28,6 +28,7 @@
 
     <!-- Text color, color for unpressed buttons -->
     <color name="content_color">#85b73e</color>
+    <color name="content_color_shadow">#ff6e9733</color>
 
     <color name="transparent">#00000000</color>
     <color name="app_background_light">#fffafafa</color>
@@ -45,5 +46,6 @@
     <!-- Color used by footers and copyright statments. Generally should stay a very light grey at #9c9c9c -->
     <color name="copyright_footer">#9c9c9c</color>
     <color name="card_shadow_color">#ccc</color>
+    <color name="card_divider">@color/card_shadow_color</color>
 
 </resources>

@@ -41,10 +41,9 @@ import edu.mecc.race2ged.cards.ClassCard;
  * @author Bryan Smith
  * @date 5/26/2014.
  */
-public class ClassCardListFragment extends Fragment {
+public class ClassCardListFragment extends CardListFragment {
 
     private County mCounty = null;
-    private OnFragmentInteractionListener mListener;
     private static final String ARG_COUNTY = "countyParam";
 
     private CardAdapter classListAdapter;
@@ -99,7 +98,7 @@ public class ClassCardListFragment extends Fragment {
             if (tmp != null) mCounty=tmp;
         }
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_class_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_card_list, container, false);
         mListView = (ListView)view.findViewById(R.id.list);
 
         //Setup list animations
@@ -146,51 +145,6 @@ public class ClassCardListFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(ARG_COUNTY,mCounty);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onClassPagerFragmentInteraction(uri);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onClassPagerFragmentInteraction(Uri uri);
     }
 
     /**

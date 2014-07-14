@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import edu.mecc.race2ged.JSON.County;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.activities.HomeActivity;
 import edu.mecc.race2ged.adapters.ClassViewPagerAdapter;
 
 /**
@@ -44,7 +45,6 @@ public class ClassViewPagerFragment extends Fragment {
     private Region mRegion = null;
     private ArrayList<String> titles = new ArrayList<String>();
     private ArrayList<Fragment> frags = new ArrayList<Fragment>();
-    private OnFragmentInteractionListener mListener;
     private static final String ARG_REGION = "regionParam";
     private ClassViewPagerAdapter classViewPagerAdapter;
     private TitlePageIndicator titleIndicator;
@@ -110,6 +110,12 @@ public class ClassViewPagerFragment extends Fragment {
         outState.putSerializable(ARG_REGION,mRegion);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+            ((HomeActivity)getActivity()).getSupportActionBar().setTitle("Classes");
+    }
+
     /**
      * Get the data ready for each county from the region.
      * @param reg The region data to use.
@@ -155,50 +161,6 @@ public class ClassViewPagerFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
 
     /**
      * Get the currently stored region data for the fragment.

@@ -27,9 +27,12 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
+
 import java.util.ArrayList;
 
 import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.activities.HomeActivity;
 import edu.mecc.race2ged.adapters.CardAdapter;
 
 
@@ -42,9 +45,9 @@ import edu.mecc.race2ged.adapters.CardAdapter;
  * Activities containing this fragment MUST implement the {@link AbsListView.OnItemClickListener}
  * interface.
  */
-public class CardListFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class CardListFragment extends Fragment {
 
-    private OnFragmentInteractionListener mListener;
+    private String mTitle;
 
     /**
      * The fragment's ListView/GridView.
@@ -58,6 +61,7 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
     private CardAdapter mAdapter;
 
     private ArrayList<View> mCards = new ArrayList<View>();
+    private SwingBottomInAnimationAdapter animationAdapter;
 
     public static CardListFragment newInstance(ArrayList<View> cards) {
         CardListFragment fragment = new CardListFragment();
@@ -76,6 +80,7 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAdapter = new CardAdapter(getActivity(),mCards);
+        animationAdapter = new SwingBottomInAnimationAdapter(mAdapter);
     }
 
     @Override
@@ -86,39 +91,24 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
         // Set the adapter
         mListView = (AbsListView) view.findViewById(R.id.list);
         mListView.setSelector(getResources().getDrawable(R.drawable.transparent));
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
-
-        // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+        animationAdapter.setAbsListView(mListView);
+        ((AdapterView<ListAdapter>) mListView).setAdapter(animationAdapter);
 
         return view;
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                + " must implement OnFragmentInteractionListener");
-        }
+    public void onResume() {
+        super.onResume();
+        if (mTitle != null)
+            ((HomeActivity)getActivity()).getSupportActionBar().setTitle(mTitle);
+        else
+            mTitle = getString(R.string.app_name);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
-    }
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            //mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-        }
     }
 
     /**
@@ -134,19 +124,11 @@ public class CardListFragment extends Fragment implements AbsListView.OnItemClic
         }
     }
 
-    /**
-    * This interface must be implemented by activities that contain this
-    * fragment to allow an interaction in this fragment to be communicated
-    * to the activity and potentially other fragments contained in that
-    * activity.
-    * <p>
-    * See the Android Training lesson <a href=
-    * "http://developer.android.com/training/basics/fragments/communicating.html"
-    * >Communicating with Other Fragments</a> for more information.
-    */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
+    public String getTitle() {
+        return mTitle;
     }
 
+    public void setTitle(String mTitle) {
+        this.mTitle = mTitle;
+    }
 }

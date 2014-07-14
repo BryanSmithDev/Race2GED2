@@ -51,8 +51,8 @@ public class Card extends LinearLayout implements Serializable {
         super(context);
         setupCard(context);
         if (views.isEmpty()) return;
-        for(int i=0;i<views.size();i++) {
-            mLayout.addView(views.get(i));
+        for (View view : views) {
+            mLayout.addView(view);
         }
         Utils.setRobotoThin(context, mLayout);
     }
@@ -73,6 +73,7 @@ public class Card extends LinearLayout implements Serializable {
         mLayout = (LinearLayout)inflater.inflate(R.layout.card, this, true).findViewById(R.id.card);
         int pad = getResources().getDimensionPixelSize(R.dimen.card_inside_side_padding);
         setCardPadding(pad,pad,pad,pad);
+        setCardMargin(0,0,0,getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin));
     }
 
     protected void addContentView(View view){
@@ -81,6 +82,13 @@ public class Card extends LinearLayout implements Serializable {
 
     protected void setCardPadding(int left, int top, int right, int bottom){
         mLayout.setPadding(left, top, right, bottom);
+    }
+
+    protected void setCardMargin(int left, int top, int right, int bottom){
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(left, top, right, bottom);
+        mLayout.setLayoutParams(layoutParams);
     }
 
 }

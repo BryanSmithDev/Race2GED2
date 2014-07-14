@@ -29,11 +29,13 @@
     <array name="navSecondaryTitles">
         <item>Settings</item>
         <item>Feedback</item>
+        <item>About</item>
     </array>
 
     <string-array name="navSecondaryTitlesIcons">
         <item>@drawable/ic_gear</item>
         <item>@drawable/ic_email</item>
+        <item>@drawable/ic_help</item>
     </string-array>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -149,6 +151,9 @@ test. These parts are not timed separately.
 included on the test, but they are not timed separately. Students are expected to manage their time and
 spend about 10 minutes on each of the Short Answer questions.
     </string>
+    <string name="testing_centers_title">Testing Centers</string>
+    <string name="testing_cost_title">Cost</string>
+    <string name="testing_passing_title">Passing Scores</string>
 
 
 </resources>
