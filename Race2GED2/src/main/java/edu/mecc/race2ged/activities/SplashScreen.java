@@ -20,6 +20,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
@@ -35,7 +39,7 @@ import edu.mecc.race2ged.helpers.ClassDataUpdater;
 public class SplashScreen extends Activity {
 
     // Splash screen timer (milliseconds)
-    private static int SPLASH_TIME_OUT = 2000;
+    private static int SPLASH_TIME_OUT = 3700;
 
     private Region mRegion = null;
     private static final String ARG_REGION = "regionParam";
@@ -52,6 +56,9 @@ public class SplashScreen extends Activity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        LinearLayout group = (LinearLayout)findViewById(R.id.gedLogoGroup);
+        Animation slideUp = AnimationUtils.loadAnimation(this,R.anim.abc_slide_in_bottom);
+        group.startAnimation(slideUp);
 
         //If user wants to check for updates then check.
         if (GEDApplication.getSettingsHelper().getCheckForUpdatesAtStartup()) {

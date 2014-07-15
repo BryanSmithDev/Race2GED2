@@ -18,11 +18,9 @@ package edu.mecc.race2ged.activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,20 +29,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.cards.ExpandableCard;
 import edu.mecc.race2ged.fragments.CardListFragment;
-import edu.mecc.race2ged.fragments.ClassCardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 import edu.mecc.race2ged.widgets.Card;
 import edu.mecc.race2ged.widgets.Header;
-import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 /**
  * HomeActivity is the primary activity of the Race2GED app and acts as the launcher. Most content
@@ -64,12 +59,16 @@ public class HomeActivity extends ActionBarActivity
     private static final String PRACTICE_FRAG_TAG = "practiceFrag";
     private static final String TESTING_FRAG_TAG = "testingFrag";
     private static final String RESOURCES_FRAG_TAG = "resourcesFrag";
+    private static final String FEEDBACK_FRAG_TAG = "feedbackFrag";
+    private static final String ABOUT_FRAG_TAG = "aboutFrag";
+
 
     private ArrayList<String> navTitles = new ArrayList<String>();
     private Region mRegion = null;
     private ArrayList<View> mHomeCards = new ArrayList<View>();
     private ArrayList<View> mResourceCards  = new ArrayList<View>();
     private ArrayList<View> mTestingCards  = new ArrayList<View>();
+    private ArrayList<View> mAboutCards  = new ArrayList<View>();
 
 
     @Override
@@ -117,6 +116,7 @@ public class HomeActivity extends ActionBarActivity
         populateHomeCards();
         populateResourcesCards();
         populateTestingCards();
+        populateAboutCards();
     }
 
     private void populateHomeCards() {
@@ -147,6 +147,10 @@ public class HomeActivity extends ActionBarActivity
         mTestingCards.add(new Card(this,"TODO: Add testing cost info. Again, most likely will me moved to a related tab."));
         mTestingCards.add(new Header(this, getResources().getString(R.string.testing_passing_title)));
         mTestingCards.add(new Card(this,"TODO: Add passing score info."));
+    }
+
+    private void populateAboutCards(){
+        mAboutCards.add(new ExpandableCard(this,getResources().getString(R.string.about_contact),"TODO: Add contact and social media"));
     }
 
     /**
@@ -214,8 +218,11 @@ public class HomeActivity extends ActionBarActivity
                 replaceFragment(numb,ClassViewPagerFragment.newInstance(mRegion),CLASSES_FRAG_TAG);
                 break;
             case 3:
-                SimpleDialogFragment.createBuilder(this,
-                        getSupportFragmentManager()).setTitle("NYI").setMessage("Not Yet Implemented").show();
+                ArrayList<View> practiceCards = new ArrayList<View>();
+                practiceCards.add(new Card(this,"TODO: Practice test questions"));
+                frag = CardListFragment.newInstance(practiceCards);
+                frag.setTitle(navTitles.get(numb-1));
+                replaceFragment(numb,frag,PRACTICE_FRAG_TAG);
                 break;
             case 4:
                 frag = CardListFragment.newInstance(mTestingCards);
@@ -232,10 +239,16 @@ public class HomeActivity extends ActionBarActivity
                 startActivity(settingsIntent);
                 break;
             case 7:
-                //TODO: feedback Nav Item
+                ArrayList<View> feedbackCards = new ArrayList<View>();
+                feedbackCards.add(new Card(this,"TODO: Add feedback form."));
+                frag = CardListFragment.newInstance(feedbackCards);
+                frag.setTitle(navTitles.get(numb-1));
+                replaceFragment(numb,frag,FEEDBACK_FRAG_TAG);
                 break;
             case 8:
-                //TODO: About Nav Item
+                frag = CardListFragment.newInstance(mAboutCards);
+                frag.setTitle(navTitles.get(numb-1));
+                replaceFragment(numb,frag,ABOUT_FRAG_TAG);
                 break;
             default:
                 break;

@@ -28,5 +28,6 @@
         android:paddingLeft="16.0dip"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:minHeight="@dimen/side_panel_menu_item_min_height" />
+        android:minHeight="@dimen/side_panel_menu_item_min_height"
+        android:textColor="@color/pressed_text_race2ged"/>
 </LinearLayout>
