@@ -1,349 +1,342 @@
 {
-  "region": [
-    {
-      "name": "LSWN",
-      "version": "1",
-      "date": "1/2/2014",
-      "counties": [
+    "region": [
         {
-          "name": "Lee County",
-          "classes": [
-            {
-              "name": "Jonesville",
-              "location": "Jonesville Adult Learning Center",
-              "address": "5 Park Street, Jonesville, VA 24263 ",
-              "instructors": [
+            "name": "LSWN",
+            "version": "5",
+            "date": "6/11/2014",
+            "counties": [
                 {
-                  "name": "Debra Watson",
-                  "email": "dwatson@race2ged.org"
+                    "name": "Lee County",
+                    "classes": [
+                        {
+                            "name": "Jonesville",
+                            "location": "Jonesville Adult Learning Center",
+                            "address": "5 Park Street, Jonesville, VA 24263 ",
+                            "instructors": [
+                                {
+                                    "name": "Debra Watson",
+                                    "email": "dwatson@race2ged.org"
+                                },
+                                {
+                                    "name": "Marie Hamilton",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "346-3251",
+                            "days": [
+                                "T & Th"
+                            ],
+                            "times": [
+                                "9:00am - 12:00pm"
+                            ],
+                            "url": "http://goo.gl/maps/ldrfT",
+                            "enabled": "1"
+                        },
+                        {
+                            "name": "Pennington Gap",
+                            "location": "Lee Community Center",
+                            "address": "West Morgan Ave, Pennington Gap, VA 24277 ",
+                            "instructors": [
+                                {
+                                    "name": "Ernestine Wright",
+                                    "email": "ewright@race2ged.org"
+                                },
+                                {
+                                    "name": "Patsy Pennington",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "877-722-3243",
+                            "days": [
+                                "T & Th"
+                            ],
+                            "times": [
+                                "5:30 pm – 8:30 pm"
+                            ],
+                            "url": "https://goo.gl/maps/hdEkD",
+                            "enabled": "0"
+                        },
+                        {
+                            "name": "Rose Hill",
+                            "location": "Rose Hill Elementary",
+                            "address": "Rt1, Box 136, Rose Hill, VA 24281",
+                            "instructors": [
+                                {
+                                    "name": "Wade Wilson",
+                                    "email": "wwilson@race2ged.org"
+                                },
+                                {
+                                    "name": "Phillis Brown",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "445-4094",
+                            "days": [
+                                "T & Th"
+                            ],
+                            "times": [
+                                "5:30 pm – 8:30 pm"
+                            ],
+                            "url": "https://goo.gl/maps/IOs6D",
+                            "enabled": "0"
+                        }
+                    ]
                 },
                 {
-                  "name": "Marie Hamilton",
-                  "email": ""
+                    "name": "Scott County",
+                    "classes": [
+                        {
+                            "name": "Duffield",
+                            "location": "Pioneer Center",
+                            "address": "225 Boone Trl Rd, Duffield, VA 24244",
+                            "instructors": [
+                                {
+                                    "name": "Jane Bowlin",
+                                    "email": "jbowlin@race2ged.org"
+                                },
+                                {
+                                    "name": "Marie Hamilton",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "431-7226",
+                            "days": [
+                                "T & Th"
+                            ],
+                            "times": [
+                                "12:30 pm – 3:30 pm"
+                            ],
+                            "url": "https://goo.gl/maps/H9rVC",
+                            "enabled": "0"
+                        },
+                        {
+                            "name": "Gate City",
+                            "location": "Regional Adult Education Center",
+                            "address": "1490 Bristol Hwy, Gate City, VA 24251",
+                            "instructors": [
+                                {
+                                    "name": "Bill Vermillion",
+                                    "email": "bvermillion@race2ged.org"
+                                },
+                                {
+                                    "name": "James Wood",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "386-2433",
+                            "days": [
+                                "T & Th"
+                            ],
+                            "times": [
+                                "5:00 pm – 8:00 pm"
+                            ],
+                            "url": "http://goo.gl/maps/Tm4fq",
+                            "enabled": "1"
+                        }
+                    ]
+                },
+                {
+                    "name": "Wise County",
+                    "classes": [
+                        {
+                            "name": "Big Stone Gap",
+                            "location": "MECC-Holton Hall Cyber Café",
+                            "address": "3441 Mountain Empire Road, Big Stone Gap, VA 24219",
+                            "instructors": [
+                                {
+                                    "name": "Judy Samples",
+                                    "email": "jsamples@race2ged.org"
+                                },
+                                {
+                                    "name": "Dorothy Ricord",
+                                    "email": ""
+                                },
+                                {
+                                    "name": "Chris Evans",
+                                    "email": "cevans@race2ged.org"
+                                }
+                            ],
+                            "contact": "877-722-3243",
+                            "days": [
+                                "M & W",
+                                "T & Th"
+                            ],
+                            "times": [
+                                "5:30 pm – 8:30 pm",
+                                "2:00 pm – 5:00 pm"
+                            ],
+                            "url": "https://goo.gl/maps/0VDLn",
+                            "enabled": "0"
+                        },
+                        {
+                            "name": "Coeburn",
+                            "location": "John Vandiver Community Center",
+                            "address": "815 Laurel Ave, Coeburn, VA 24230",
+                            "instructors": [
+                                {
+                                    "name": "Glenna McReynolds",
+                                    "email": "gmcreynolds@race2ged.org"
+                                }
+                            ],
+                            "contact": "395-6104",
+                            "days": [
+                                "M & W"
+                            ],
+                            "times": [
+                                "5:30 pm – 8:30 pm"
+                            ],
+                            "url": "https://goo.gl/maps/ZCKmM",
+                            "enabled": "0"
+                        },
+                        {
+                            "name": "Pound",
+                            "location": "Pound Town Hall",
+                            "address": "8422 North River Road, Pound, VA 24279",
+                            "instructors": [
+                                {
+                                    "name": "Glenna McReynolds",
+                                    "email": "gmcreynolds@race2ged.org"
+                                }
+                            ],
+                            "contact": "796-5188",
+                            "days": [
+                                "M & W"
+                            ],
+                            "times": [
+                                "5:00 pm – 8:00 pm"
+                            ],
+                            "url": "https://goo.gl/maps/SsZ4L",
+                            "enabled": "0"
+                        },
+                        {
+                            "name": "St. Paul",
+                            "location": "Oxbow Center",
+                            "address": "16620 E Riverside Dr, Saint Paul, VA 24283",
+                            "instructors": [
+                                {
+                                    "name": "Glenna McReynolds",
+                                    "email": "gmcreynolds@race2ged.org"
+                                }
+                            ],
+                            "contact": "877-722-3243",
+                            "days": [
+                                "M & W"
+                            ],
+                            "times": [
+                                "9:00 am – 12:00 pm"
+                            ],
+                            "url": "https://goo.gl/maps/QQiMl",
+                            "enabled": "0"
+                        },
+                        {
+                            "name": "Wise",
+                            "location": "Wise Adult Learning Center",
+                            "address": "515 Hurricane Road, Bldg J, PO Box 1217, Wise, VA 24293",
+                            "instructors": [
+                                {
+                                    "name": "Robbie Collins",
+                                    "email": "rdcollins@race2ged.org"
+                                },
+                                {
+                                    "name": "Glenna McReynolds",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "328-7149",
+                            "days": [
+                                "T & Th"
+                            ],
+                            "times": [
+                                "5:30 pm – 8:30 pm"
+                            ],
+                            "url": "https://goo.gl/maps/e9Rjx",
+                            "enabled": "1"
+                        }
+                    ]
+                },
+                {
+                    "name": "Norton",
+                    "classes": [
+                        {
+                            "name": "Norton",
+                            "location": "J I Burton High School",
+                            "address": "109 Eleventh St., SW Norton, VA 24273",
+                            "instructors": [
+                                {
+                                    "name": "Judy Samples",
+                                    "email": "gmcreynolds@race2ged.org"
+                                },
+                                {
+                                    "name": "Imelda Collins",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "877-722-3243",
+                            "days": [
+                                "T & Th"
+                            ],
+                            "times": [
+                                "1:00 pm – 4:00 pm"
+                            ],
+                            "url": "https://goo.gl/maps/5mtyX",
+                            "enabled": "0"
+                        }
+                    ]
+                },
+                {
+                    "name": "Distance Learning",
+                    "classes": [
+                        {
+                            "name": "L, S, W & N",
+                            "location": "GED Online",
+                            "address": "Online",
+                            "instructors": [
+                                {
+                                    "name": "Jan Stallard",
+                                    "email": "jstallard@race2ged.org"
+                                },
+                                {
+                                    "name": "Liz Wood",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "877-722-3243 or 386-2433",
+                            "days": [
+                                "M – F"
+                            ],
+                            "times": [
+                                "9:00 am – 3:30 pm"
+                            ],
+                            "url": " ",
+                            "enabled": "1"
+                        },
+                        {
+                            "name": "L, S, W & N",
+                            "location": "GED In the Mail",
+                            "address": "Online",
+                            "instructors": [
+                                {
+                                    "name": "Jan Stallard",
+                                    "email": "jstallard@race2ged.org"
+                                },
+                                {
+                                    "name": "Liz Wood",
+                                    "email": ""
+                                }
+                            ],
+                            "contact": "877-722-3243 or 386-2433",
+                            "days": [
+                                "M – F"
+                            ],
+                            "times": [
+                                "9:00 am – 3:30 pm"
+                            ],
+                            "url": " ",
+                            "enabled": "1"
+                        }
+                    ]
                 }
-              ],
-              "contact": "346-3251",
-              "days": [
-                "T & Th"
-              ],
-              "times": [
-                "9:00am - 12:00pm"
-              ],
-              "url": "http://goo.gl/maps/ldrfT"
-            },
-            {
-              "name": "Pennington Gap",
-              "location": "Lee Community Center",
-              "address": "West Morgan Ave, Pennington Gap, VA 24277 ",
-              "instructors": [
-                {
-                  "name": "Ernestine Wright",
-                  "email": "ewright@race2ged.org"
-                },
-                {
-                  "name": "Patsy Pennington",
-                  "email": ""
-                }
-              ],
-              "contact": "877-722-3243",
-              "days": [
-                "T & Th"
-              ],
-              "times": [
-                "5:30 pm – 8:30 pm"
-              ],
-              "url": "https://goo.gl/maps/hdEkD"
-            },
-            {
-              "name": "Rose Hill",
-              "location": "Rose Hill Elementary",
-              "address": "Rt1, Box 136, Rose Hill, VA 24281",
-              "instructors": [
-                {
-                  "name": "Wade Wilson",
-                  "email": "wwilson@race2ged.org"
-                },
-                {
-                  "name": "Phillis Brown",
-                  "email": ""
-                }
-              ],
-              "contact": "445-4094",
-              "days": [
-                "T & Th"
-              ],
-              "times": [
-                "5:30 pm – 8:30 pm"
-              ],
-              "url": "https://goo.gl/maps/HHN1h"
-            }
-          ]
-        },
-        {
-          "name": "Scott County",
-          "classes": [
-            {
-              "name": "Duffield",
-              "location": "Pioneer Center",
-              "address": "225 Boone Trl Rd, Duffield, VA 24244",
-              "instructors": [
-                {
-                  "name": "Jane Bowlin",
-                  "email": "jbowlin@race2ged.org"
-                },
-                {
-                  "name": "Marie Hamilton",
-                  "email": ""
-                }
-              ],
-              "contact": "431-7226",
-              "days": [
-                "T & Th"
-              ],
-              "times": [
-                "12:30 pm – 3:30 pm"
-              ],
-              "url": "https://goo.gl/maps/H9rVC"
-            },
-            {
-              "name": "Gate City",
-              "location": "Regional Adult Education Center",
-              "address": "1490 Bristol Hwy, Gate City, VA 24251",
-              "instructors": [
-                {
-                  "name": "Jan Stallard",
-                  "email": "jstallard@race2ged.org"
-                },
-                {
-                  "name": "Tony Gardner",
-                  "email": ""
-                },
-                {
-                  "name": "Bill Vermillion",
-                  "email": "bvermillion@race2ged.org"
-                },
-                {
-                  "name": "James Wood",
-                  "email": ""
-                }
-              ],
-              "contact": "386-2433",
-              "days": [
-                "M & W",
-                "T & Th"
-              ],
-              "times": [
-                "9:00 am – 1:00 pm",
-                "5:00 pm – 8:00 pm"
-              ],
-              "url": "http://goo.gl/maps/Tm4fq"
-            }
-          ]
-        },
-        {
-          "name": "Wise County",
-          "classes": [
-            {
-              "name": "Big Stone Gap",
-              "location": "MECC-Holton Hall Cyber Café",
-              "address": "3441 Mountain Empire Road, Big Stone Gap, VA 24219",
-              "instructors": [
-                {
-                  "name": "Judy Samples",
-                  "email": "jsamples@race2ged.org"
-                },
-                {
-                  "name": "Dorothy Ricord",
-                  "email": ""
-                },
-                {
-                  "name": "Chris Evans",
-                  "email": "cevans@race2ged.org"
-                }
-              ],
-              "contact": "877-722-3243",
-              "days": [
-                "M & W",
-                "T & Th"
-              ],
-              "times": [
-                "5:30 pm – 8:30 pm",
-                "2:00 pm – 5:00 pm"
-              ],
-              "url": "https://goo.gl/maps/0VDLn"
-            },
-            {
-              "name": "Coeburn",
-              "location": "John Vandiver Community Center",
-              "address": "815 Laurel Ave, Coeburn, VA 24230",
-              "instructors": [
-                {
-                  "name": "Glenna McReynolds",
-                  "email": "gmcreynolds@race2ged.org"
-                }
-              ],
-              "contact": "395-6104",
-              "days": [
-                "M & W"
-              ],
-              "times": [
-                "5:30 pm – 8:30 pm"
-              ],
-              "url": "https://goo.gl/maps/ZCKmM"
-            },
-            {
-              "name": "Pound",
-              "location": "Pound Town Hall",
-              "address": "8422 North River Road, Pound, VA 24279",
-              "instructors": [
-                {
-                  "name": "Glenna McReynolds",
-                  "email": "gmcreynolds@race2ged.org"
-                }
-              ],
-              "contact": "796-5188",
-              "days": [
-                "M & W"
-              ],
-              "times": [
-                "5:00 pm – 8:00 pm"
-              ],
-              "url": "https://goo.gl/maps/SsZ4L"
-            },
-            {
-              "name": "St. Paul",
-              "location": "Oxbow Center",
-              "address": "16620 E Riverside Dr, Saint Paul, VA 24283",
-              "instructors": [
-                {
-                  "name": "Glenna McReynolds",
-                  "email": "gmcreynolds@race2ged.org"
-                }
-              ],
-              "contact": "877-722-3243",
-              "days": [
-                "M & W"
-              ],
-              "times": [
-                "9:00 am – 12:00 pm"
-              ],
-              "url": "https://goo.gl/maps/QQiMl"
-            },
-            {
-              "name": "Wise",
-              "location": "Wise Adult Learning Center",
-              "address": "515 Hurricane Road, Bldg J, PO Box 1217, Wise, VA 24293",
-              "instructors": [
-                {
-                  "name": "Judy Samples",
-                  "email": "jsamples@race2ged.org"
-                },
-                {
-                  "name": "Imelda Collins",
-                  "email": ""
-                },
-                {
-                  "name": "Robbie Collins",
-                  "email": "rdcollins@race2ged.org"
-                },
-                {
-                  "name": "Glenna McReynolds",
-                  "email": ""
-                }
-              ],
-              "contact": "328-7149",
-              "days": [
-                "T & Th",
-                "T & Th"
-              ],
-              "times": [
-                "9:00 am – 12:00 pm",
-                "5:30 pm – 8:30 pm"
-              ],
-              "url": "https://goo.gl/maps/e9Rjx"
-            }
-          ]
-        },
-        {
-          "name": "Norton",
-          "classes": [
-            {
-              "name": "Norton",
-              "location": "J I Burton High School",
-              "address": "109 Eleventh St., SW Norton, VA 24273",
-              "instructors": [
-                {
-                  "name": "Judy Samples",
-                  "email": "gmcreynolds@race2ged.org"
-                },
-                {
-                  "name": "Imelda Collins",
-                  "email": ""
-                }
-              ],
-              "contact": "877-722-3243",
-              "days": [
-                "T & Th"
-              ],
-              "times": [
-                "1:00 pm – 4:00 pm"
-              ],
-              "url": "https://goo.gl/maps/5mtyX"
-            }
-          ]
-        },
-        {
-          "name": "Distance Learning",
-          "classes": [
-            {
-              "name": "L, S, W & N",
-              "location": "GED Online",
-              "address": "Online",
-              "instructors": [
-                {
-                  "name": "Jan Stallard",
-                  "email": "jstallard@race2ged.org"
-                },
-                {
-                  "name": "Liz Wood",
-                  "email": ""
-                }
-              ],
-              "contact": "877-722-3243 or 386-2433",
-              "days": [
-                "M – F"
-              ],
-              "times": [
-                "9:00 am – 3:30 pm"
-              ],
-              "url": " "
-            },
-            {
-              "name": "L, S, W & N",
-              "location": "GED In the Mail",
-              "address": "Online",
-              "instructors": [
-                {
-                  "name": "Jan Stallard",
-                  "email": "jstallard@race2ged.org"
-                },
-                {
-                  "name": "Liz Wood",
-                  "email": ""
-                }
-              ],
-              "contact": "877-722-3243 or 386-2433",
-              "days": [
-                "M – F"
-              ],
-              "times": [
-                "9:00 am – 3:30 pm"
-              ],
-              "url": " "
-            }
-          ]
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
