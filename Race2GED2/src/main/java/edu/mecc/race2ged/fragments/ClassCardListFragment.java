@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
@@ -33,6 +34,7 @@ import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.adapters.CardAdapter;
 import edu.mecc.race2ged.cards.ClassCard;
+import edu.mecc.race2ged.helpers.Utils;
 
 
 /**
@@ -105,7 +107,11 @@ public class ClassCardListFragment extends CardListFragment {
         animationAdapter.setAbsListView(mListView);
 
         mListView.setAdapter(animationAdapter);
-
+        if (mListView.getCount() == 0) {
+            TextView text = ((TextView)view.findViewById(R.id.empty));
+            text.setText(R.string.class_empty_list_text);
+            Utils.setRobotoBold(getActivity().getBaseContext(),text);
+        }
         return view;
     }
 
@@ -116,8 +122,10 @@ public class ClassCardListFragment extends CardListFragment {
     public ArrayList<View> populateCards(){
         ArrayList<View> cards = new ArrayList<View>();
         for(int i=0; i<mCounty.getClasses().size();i++){
-            ClassCard classCard = new ClassCard(getActivity().getBaseContext(), mCounty.getClasses().get(i));
-            cards.add(classCard);
+            if (mCounty.getClasses().get(i).isEnabled()) {
+                ClassCard classCard = new ClassCard(getActivity().getBaseContext(), mCounty.getClasses().get(i));
+                cards.add(classCard);
+            }
         }
         return cards;
     }

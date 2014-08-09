@@ -17,4 +17,5 @@
 
 <resources>
     <integer name="class_region">0</integer>
+    <integer name="class_empty_list_text_size">32</integer>
 </resources>

@@ -34,6 +34,7 @@ public class Class implements Serializable {
     private List<String> days;
     private List<String> times;
     private String url;
+    private String enabled;
 
     /**
      * Gets the name of the class.
@@ -164,6 +165,30 @@ public class Class implements Serializable {
     }
 
     /**
+     * Get if the class is enabled.
+     * @return 1 as enabled, 0 for disabled. Returns as string, not int or bool. See isEnabled()
+     */
+    public String getEnabled() {
+        return enabled;
+    }
+
+    /**
+     * Set if the class is enabled.
+     * @param enabled Use 1 as enabled, 0 for disabled.
+     */
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
+     * Get if the class is enabled.
+     * @return True for enabled, false for disabled.
+     */
+    public boolean isEnabled(){
+        return getEnabled().equals("1");
+    }
+
+    /**
      * Human Readable version of the Class object.
      * @return Human readable string of the Class object.
      */
@@ -178,6 +203,7 @@ public class Class implements Serializable {
                 ", days=" + days +
                 ", times=" + times +
                 ", url='" + url + '\'' +
+                ", enabled='" + enabled + '\'' +
                 '}';
     }
 }
