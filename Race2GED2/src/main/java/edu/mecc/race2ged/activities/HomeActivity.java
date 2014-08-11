@@ -36,6 +36,7 @@ import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.cards.ExpandableCard;
 import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
+import edu.mecc.race2ged.helpers.Utils;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
 import edu.mecc.race2ged.widgets.Card;
@@ -100,6 +101,10 @@ public class HomeActivity extends ActionBarActivity
         }
 
         populateCards();
+
+        //DEBUG: Temp enable alarm boot receiver
+        Utils.enableAlarmReceiver(this);
+        Utils.createClassNotification(this,"Class is about to start!","Class starts at 5:30pm. Hope to see you!");
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, CardListFragment.newInstance(mHomeCards)).commit();

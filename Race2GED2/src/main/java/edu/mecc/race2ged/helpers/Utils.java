@@ -17,12 +17,18 @@
 package edu.mecc.race2ged.helpers;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +38,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.alarm.AlarmBootReceiver;
 
 /**
@@ -216,6 +223,56 @@ public class Utils {
         pm.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
+    }
+
+    /**
+     * Create a notification and display it.
+     * @param context The context for the notification.
+     * @param iconID The ID of the icon drawable for the notification
+     * @param contentTitle The notification title.
+     * @param contentText The body of the notification.
+     */
+    public static void createNotification(Context context,int iconID,String contentTitle, String contentText){
+
+        final Intent emptyIntent = new Intent();
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(iconID)
+                        .setContentTitle(contentTitle)
+                        .setContentText(contentText)
+                        .setContentIntent(pendingIntent)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, mBuilder.build());
+    }
+
+    /**
+     * Create a notification to remind that class is about to start and display it.
+     * @param context The context for the notification.
+     * @param contentTitle The notification title.
+     * @param contentText The body of the notification.
+     */
+    public static void createClassNotification(Context context,String contentTitle, String contentText){
+
+        final Intent emptyIntent = new Intent();
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, emptyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.ic_noti_mortarboard)
+                        .setContentTitle(contentTitle)
+                        .setContentText(contentText)
+                        .setContentIntent(pendingIntent)
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                        .addAction(R.drawable.ic_stat_map_marker,"Maps",pendingIntent) //TODO: Add intents here for button actions
+                        .addAction(R.drawable.ic_stat_email,"Email",pendingIntent)
+                        .addAction(R.drawable.ic_stat_phone,"Call",pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(0, mBuilder.build());
     }
 
 }

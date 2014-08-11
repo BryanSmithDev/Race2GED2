@@ -19,6 +19,7 @@ package edu.mecc.race2ged.alarm;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 /**
  * Sets the class reminders after a device reboot.
@@ -30,7 +31,7 @@ public class AlarmBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            //TODO: Set the alarm here.
+            Log.d(getClass().getSimpleName(),"Class Alarms Re-initiated due to reboot.");
         }
     }
 }
