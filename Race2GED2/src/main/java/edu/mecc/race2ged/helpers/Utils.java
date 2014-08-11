@@ -17,12 +17,12 @@
 package edu.mecc.race2ged.helpers;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
-import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +31,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import edu.mecc.race2ged.alarm.AlarmBootReceiver;
 
 /**
  * Utils class includes commonly used methods often relating to system information such
@@ -190,5 +192,30 @@ public class Utils {
         }
     }
 
+    /**
+     * Enables the alarm boot receiver.
+     * @param context The context of the activity.
+     */
+    public void enableAlarmReceiver(Context context){
+        ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
+        PackageManager pm = context.getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
+    }
+
+    /**
+     * Disables the alarm boot receiver.
+     * @param context The context of the activity.
+     */
+    public void disableAlarmReceiver(Context context){
+        ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
+        PackageManager pm = context.getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP);
+    }
 
 }
