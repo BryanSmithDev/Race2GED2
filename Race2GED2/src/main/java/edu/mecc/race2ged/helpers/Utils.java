@@ -196,7 +196,7 @@ public class Utils {
      * Enables the alarm boot receiver.
      * @param context The context of the activity.
      */
-    public void enableAlarmReceiver(Context context){
+    public static void enableAlarmReceiver(Context context){
         ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
         PackageManager pm = context.getPackageManager();
 
@@ -209,7 +209,7 @@ public class Utils {
      * Disables the alarm boot receiver.
      * @param context The context of the activity.
      */
-    public void disableAlarmReceiver(Context context){
+    public static void disableAlarmReceiver(Context context){
         ComponentName receiver = new ComponentName(context, AlarmBootReceiver.class);
         PackageManager pm = context.getPackageManager();
 
