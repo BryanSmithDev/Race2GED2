@@ -19,7 +19,20 @@ package edu.mecc.race2ged.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Set;
+
+import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.R;
+import edu.mecc.race2ged.alarm.Alarm;
+import edu.mecc.race2ged.alarm.AlarmSet;
 
 /**
  * SettingsHelper provides methods for saving and retrieving preferences and other saved data.
@@ -36,6 +49,7 @@ public class SettingsHelper {
     public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS;
     public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP;
     public static String SHOW_ANIMATIONS;
+    public static String ALARMS;
 
     private SharedPreferences settings;
 
@@ -50,6 +64,7 @@ public class SettingsHelper {
         CHECK_CLASS_DATA_FOR_NEW_VERSIONS = context.getResources().getString(R.string.pref_check_class_data_for_new_versions);
         CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP = context.getResources().getString(R.string.pref_check_class_data_for_new_versions_at_startup);
         SHOW_ANIMATIONS = context.getResources().getString(R.string.pref_show_animations);
+        SHOW_ANIMATIONS = context.getResources().getString(R.string.pref_alarms);
     }
 
     /**
@@ -115,5 +130,49 @@ public class SettingsHelper {
         SharedPreferences.Editor editor = settings.edit();
         editor.remove(preference);
         editor.commit();
+    }
+
+    /**
+     * Retrieve saved alarm JSON and parse it to an AlarmSet
+     * @return The AlarmSet object that contains the Alarms
+     */
+    public AlarmSet getAlarms(){
+        String alarmsString = settings.getString(ALARMS,"");
+        Log.d(getClass().getSimpleName(),"Retrieving saved alarms.");
+        if (!Utils.isStringEmpty(alarmsString)) {
+            try {
+                Gson gson = new GsonBuilder().setDateFormat("EEE hh:mm a").create();
+                AlarmSet alarms =  gson.fromJson(alarmsString, AlarmSet.class);
+                if (alarms != null){
+                    Log.d(getClass().getSimpleName(),"Alarms retrieved and parsed.");
+                    Log.d(getClass().getSimpleName(),alarms.toString());
+                }
+                return  alarms;
+            } catch (Exception e){
+                Log.e(getClass().getSimpleName(),"Error: Could not retrieve saved alarms from JSON string. - "+e.getMessage());
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Add an alarm
+     * @param alarm Alarm to add to the set.
+     */
+    public void addAlarm(Alarm alarm){
+        AlarmSet alarms = getAlarms();
+        alarms.addAlarm(alarm);
+        saveAlarms(alarms);
+    }
+
+    /**
+     * Save alarms JSON to shared preferences
+     * @param alarms Alarms to save
+     */
+    private void saveAlarms(AlarmSet alarms) {
+        Gson gson = new GsonBuilder().setDateFormat("EEE hh:mm a").create();
+        String alarmsString = gson.toJson(alarms);
+        if (Utils.isStringEmpty(alarmsString)) savePreference(ALARMS,alarmsString);
     }
 }

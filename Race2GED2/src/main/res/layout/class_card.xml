@@ -129,6 +129,7 @@
         android:id="@+id/buttonSep"/>
 
     <LinearLayout
+        android:id="@+id/topButtons"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonSep"
@@ -197,5 +198,34 @@
             android:paddingLeft="@dimen/class_card_side_padding"
             android:paddingRight="@dimen/class_card_side_padding"
             android:clickable="true"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomButtons"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/topButtons"
+        android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/card_shadow_color"
+        android:id="@+id/alarmSep"/>
+    <CheckBox
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/class_card_alarm_checkbox"
+        android:id="@+id/alarmCheckBox"
+        android:textColor="@color/content_color"
+        android:shadowColor="@color/app_background_dark"
+        android:shadowDy="3"
+        android:shadowRadius="1"
+        android:textSize="14sp"
+        android:padding="@dimen/class_card_side_padding"
+        android:layout_marginBottom="@dimen/card_shadow_size"
+        android:background="@drawable/selectable_background_race2ged" />
     </LinearLayout>
 </RelativeLayout>

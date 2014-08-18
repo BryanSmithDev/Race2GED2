@@ -143,7 +143,7 @@ public class ClassDataReader extends AsyncTask<Integer, Void, Region> {
         Region region =  null;
         try{
             reader = new InputStreamReader(iS, "UTF-8");
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new GsonBuilder().setDateFormat("EEE hh:mm a").create();
             State state = gson.fromJson(reader, State.class);
             if (state != null) region = state.getRegion().get(regionNumb);
             else throw new NullPointerException();

@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -117,6 +118,8 @@ public class ClassCard extends StubCard {
                 FrameLayout mapsSep = (FrameLayout) container.findViewById(R.id.mapsSep);
                 FrameLayout emailSep = (FrameLayout) container.findViewById(R.id.emailSep);
                 FrameLayout buttonSep = (FrameLayout) container.findViewById(R.id.buttonSep);
+                FrameLayout alarmSep = (FrameLayout) container.findViewById(R.id.alarmSep);
+                CheckBox alarmCheckBox = (CheckBox)container.findViewById(R.id.alarmCheckBox);
                 Boolean maps = true, email = true, call = true;
 
 
@@ -146,6 +149,11 @@ public class ClassCard extends StubCard {
                 }
 
                 if (!maps && !email && !call) buttonSep.setVisibility(View.GONE);
+
+                if (!mClass.areAlarmsEnabled()) {
+                    alarmSep.setVisibility(View.GONE);
+                    alarmCheckBox.setVisibility(View.GONE);
+                }
 
             } catch (NullPointerException ex) {
                 Log.e(this.getClass().getSimpleName(), "Error finding card buttons. - " + ex.getMessage());

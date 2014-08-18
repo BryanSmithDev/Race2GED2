@@ -17,6 +17,7 @@
 package edu.mecc.race2ged.JSON;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +35,9 @@ public class Class implements Serializable {
     private List<String> days;
     private List<String> times;
     private String url;
-    private String enabled;
+    private boolean enabled;
+    private boolean alarmsEnabled;
+    private List<Date> alarms;
 
     /**
      * Gets the name of the class.
@@ -166,26 +169,46 @@ public class Class implements Serializable {
 
     /**
      * Get if the class is enabled.
-     * @return 1 as enabled, 0 for disabled. Returns as string, not int or bool. See isEnabled()
+     * @return True for enabled, false for disabled.
      */
-    public String getEnabled() {
+    public boolean isEnabled() {
         return enabled;
     }
 
     /**
      * Set if the class is enabled.
-     * @param enabled Use 1 as enabled, 0 for disabled.
+     * @param enabled True for enabled, false for disabled.
      */
-    public void setEnabled(String enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
     /**
-     * Get if the class is enabled.
+     * Get if the class alarmTime is enabled.
      * @return True for enabled, false for disabled.
      */
-    public boolean isEnabled(){
-        return getEnabled().equals("1");
+    public boolean areAlarmsEnabled() {
+        return alarmsEnabled;
+    }
+
+    /**
+     * Set if the class alarmTime is enabled.
+     * @param alarmEnabled True for enabled, false for disabled.
+     */
+    public void setAlarmsEnabled(boolean alarmEnabled) {
+        this.alarmsEnabled = alarmsEnabled;
+    }
+
+    /**
+     * Get the date object for when the alarmTime will go off.
+     * @return Date object
+     */
+    public List<Date> getAlarms() {
+        return alarms;
+    }
+
+    public void setAlarms(List<Date> alarms) {
+        this.alarms = alarms;
     }
 
     /**
@@ -203,7 +226,9 @@ public class Class implements Serializable {
                 ", days=" + days +
                 ", times=" + times +
                 ", url='" + url + '\'' +
-                ", enabled='" + enabled + '\'' +
+                ", enabled=" + enabled +
+                ", alarmEnabled=" + alarmsEnabled +
+                ", alarms=" + alarms +
                 '}';
     }
 }

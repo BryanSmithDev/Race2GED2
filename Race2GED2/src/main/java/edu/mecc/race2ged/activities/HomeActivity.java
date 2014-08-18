@@ -106,6 +106,7 @@ public class HomeActivity extends ActionBarActivity
         Utils.enableAlarmReceiver(this);
         Utils.createClassNotification(this,"Class is about to start!","Class starts at 5:30pm. Hope to see you!");
 
+
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, CardListFragment.newInstance(mHomeCards)).commit();
 
@@ -115,6 +116,9 @@ public class HomeActivity extends ActionBarActivity
         } catch (Resources.NotFoundException e) {
             Log.e("HomeActivity","Could not add nav titles to list. - "+e.getMessage());
         }
+
+        Utils.createClassAlarm(this,mRegion.getCounties().get(0).getClasses().get(0));
+        Log.d("Home", mRegion.getCounties().get(0).getClasses().get(0).toString());
     }
 
     private void populateCards() {
