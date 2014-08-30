@@ -227,21 +227,21 @@ public class HomeActivity extends ActionBarActivity
                 replaceFragment(numb,ClassViewPagerFragment.newInstance(mRegion),CLASSES_FRAG_TAG);
                 break;
             case 3:
-                ArrayList<View> practiceCards = new ArrayList<View>();
-                practiceCards.add(new Card(this,"TODO: Practice test questions"));
-                frag = CardListFragment.newInstance(practiceCards);
-                frag.setTitle(navTitles.get(numb-1));
-                replaceFragment(numb,frag,PRACTICE_FRAG_TAG);
-                break;
-            case 4:
-                frag = CardListFragment.newInstance(mTestingCards);
-                frag.setTitle(navTitles.get(numb-1));
-                replaceFragment(numb,frag,TESTING_FRAG_TAG);
-                break;
-            case 5:
                 frag = CardListFragment.newInstance(mResourceCards);
                 frag.setTitle(navTitles.get(numb-1));
-                replaceFragment(numb,frag,RESOURCES_FRAG_TAG);
+                replaceFragment(numb, frag, RESOURCES_FRAG_TAG);
+                break;
+            case 4:
+                ArrayList<View> practiceCards = new ArrayList<View>();
+                practiceCards.add(new Card(this, "TODO: Practice test questions"));
+                frag = CardListFragment.newInstance(practiceCards);
+                frag.setTitle(navTitles.get(numb-1));
+                replaceFragment(numb, frag, PRACTICE_FRAG_TAG);
+                break;
+            case 5:
+                frag = CardListFragment.newInstance(mTestingCards);
+                frag.setTitle(navTitles.get(numb-1));
+                replaceFragment(numb, frag, TESTING_FRAG_TAG);
                 break;
             case 6:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);

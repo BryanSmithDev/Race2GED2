@@ -22,9 +22,9 @@
     <array name="navPrimaryTitles">
         <item>Home</item>
         <item>Classes</item>
+        <item>Resources</item>
         <item>Practice</item>
         <item>Testing</item>
-        <item>Resources</item>
     </array>
     <array name="navSecondaryTitles">
         <item>Settings</item>
