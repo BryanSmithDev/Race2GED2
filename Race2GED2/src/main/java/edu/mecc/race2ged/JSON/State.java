@@ -16,8 +16,13 @@
 
 package edu.mecc.race2ged.JSON;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.Serializable;
 import java.util.List;
+
+import edu.mecc.race2ged.helpers.Utils;
 
 /**
  * Wrapper class for JSON Data. Represents all of the Class Data for all Regions in the state.
@@ -53,5 +58,14 @@ public class State implements Serializable {
         return "State{" +
                 "region=" + region +
                 '}';
+    }
+
+    /**
+     * Convert the State object to JSON string
+     * @return The JSON string of the State object.
+     */
+    public String toJSON(){
+        Gson gson = Utils.getGSONBuilder();
+        return gson.toJson(this, State.class);
     }
 }

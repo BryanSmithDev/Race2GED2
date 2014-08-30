@@ -34,6 +34,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -305,4 +312,33 @@ public class Utils {
         }
     }
 
+    /**
+     * Convert an InputStream to a string.
+     * @param is The InputStream to convert
+     * @return The string that resulted from the conversion.
+     * @throws Exception
+     */
+    public static String convertStreamToString(InputStream is) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line = null;
+
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        is.close();
+
+        return sb.toString();
+    }
+
+
+    /**
+     * Use an App Global GSON Builder for consistency.
+     * @return The GSON builder to use through out the app.
+     */
+    public static Gson getGSONBuilder() {
+        GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("EEE hh:mm a");
+        return gsonBuilder.create();
+    }
 }

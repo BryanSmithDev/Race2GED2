@@ -16,8 +16,13 @@
 
 package edu.mecc.race2ged.JSON;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.Serializable;
 import java.util.List;
+
+import edu.mecc.race2ged.helpers.Utils;
 
 /**
  * Wrapper class for JSON Data. Represents a Region object. This will store class information for
@@ -108,5 +113,14 @@ public class Region implements Serializable {
                 ", date='" + date + '\'' +
                 ", counties=" + counties +
                 '}';
+    }
+
+    /**
+     * Convert the Region object to JSON string
+     * @return The JSON string of the Region object.
+     */
+    public String toJSON(){
+        Gson gson = Utils.getGSONBuilder();
+        return gson.toJson(this, Region.class);
     }
 }

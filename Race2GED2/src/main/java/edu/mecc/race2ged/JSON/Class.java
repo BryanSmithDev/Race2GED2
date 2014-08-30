@@ -16,9 +16,14 @@
 
 package edu.mecc.race2ged.JSON;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import edu.mecc.race2ged.helpers.Utils;
 
 /**
  * Wrapper class for JSON Data. Represents a Class Room. Used in the County Class
@@ -230,5 +235,14 @@ public class Class implements Serializable {
                 ", alarmEnabled=" + alarmsEnabled +
                 ", alarms=" + alarms +
                 '}';
+    }
+
+    /**
+     * Convert the Class object to JSON string
+     * @return The JSON string of the Class object.
+     */
+    public String toJSON(){
+        Gson gson = Utils.getGSONBuilder();
+        return gson.toJson(this, Class.class);
     }
 }

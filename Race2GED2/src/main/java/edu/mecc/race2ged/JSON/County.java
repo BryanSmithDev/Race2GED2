@@ -16,8 +16,13 @@
 
 package edu.mecc.race2ged.JSON;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.Serializable;
 import java.util.List;
+
+import edu.mecc.race2ged.helpers.Utils;
 
 /**
  * Wrapper class for JSON Data. Represents a County in a state. Used by Region class.
@@ -71,5 +76,14 @@ public class County implements Serializable {
                 "name='" + name + '\'' +
                 ", classes=" + classes +
                 '}';
+    }
+
+    /**
+     * Convert the County object to JSON string
+     * @return The JSON string of the County object.
+     */
+    public String toJSON(){
+        Gson gson = Utils.getGSONBuilder();
+        return gson.toJson(this, County.class);
     }
 }

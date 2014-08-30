@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+
+import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.*;
 import edu.mecc.race2ged.R;
 
@@ -92,20 +94,17 @@ public class ClassDataReader extends AsyncTask<Integer, Void, Region> {
      */
     @Override
     protected Region doInBackground(Integer... params) {
-        String filePath = context.getFilesDir().getAbsolutePath()+
-                "/"+context.getString(R.string.class_data_file_name);
-        File file = new File(filePath);
-        if(file.exists()) {
-            Log.d(this.getClass().getSimpleName(),filePath+" => Exists. Parsing it.");
-            try {
-                return loadJson(params[0],context.openFileInput(context.getString(R.string.class_data_file_name)));
-            } catch (IOException e) {
-                Log.e(this.getClass().getSimpleName(),"Error loading JSON from internal storage.\n"+e.toString());
-            }
+        Region classData = GEDApplication.getSettingsHelper().getSavedClassData();
+        if(classData != null) {
+            Log.d(this.getClass().getSimpleName(),"SharedPreferences Class Data Exists. Using it.");
+            return classData;
         } else {
-            Log.d(this.getClass().getSimpleName(),filePath+" => Does not exist. Parsing built in data.");
+            Log.d(this.getClass().getSimpleName(),"SharedPreferences Class Data does not exist. Using built in data.");
             try {
-                return loadJson(params[0],context.getResources().openRawResource(R.raw.classschedule));
+                classData = loadJson(params[0],context.getResources().openRawResource(R.raw.classschedule));
+                if (classData != null) GEDApplication.getSettingsHelper().saveClassData(classData);
+                else throw new NullPointerException();
+                return classData;
             } catch (IOException e) {
                 Log.e(this.getClass().getSimpleName(),"Error loading JSON from pre-packaged file.\n"+e.toString());
             }
@@ -143,7 +142,7 @@ public class ClassDataReader extends AsyncTask<Integer, Void, Region> {
         Region region =  null;
         try{
             reader = new InputStreamReader(iS, "UTF-8");
-            Gson gson = new GsonBuilder().setDateFormat("EEE hh:mm a").create();
+            Gson gson = Utils.getGSONBuilder();
             State state = gson.fromJson(reader, State.class);
             if (state != null) region = state.getRegion().get(regionNumb);
             else throw new NullPointerException();
@@ -155,7 +154,7 @@ public class ClassDataReader extends AsyncTask<Integer, Void, Region> {
             if (reader != null)
                 reader.close();
         }
-        Log.d(this.getClass().getSimpleName(),"Done Parsing");
+        Log.d(this.getClass().getSimpleName(),"Done loading class data.");
         return region;
     }
 }

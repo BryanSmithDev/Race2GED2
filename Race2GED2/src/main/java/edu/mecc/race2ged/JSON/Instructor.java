@@ -16,7 +16,12 @@
 
 package edu.mecc.race2ged.JSON;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.Serializable;
+
+import edu.mecc.race2ged.helpers.Utils;
 
 /**
  * Wrapper class for JSON Data. Represents an Instructor or Teacher. Used in the Class class.
@@ -70,5 +75,14 @@ public class Instructor implements Serializable {
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    /**
+     * Convert the Instructor object to JSON string
+     * @return The JSON string of the Instructor object.
+     */
+    public String toJSON(){
+        Gson gson = Utils.getGSONBuilder();
+        return gson.toJson(this, Instructor.class);
     }
 }

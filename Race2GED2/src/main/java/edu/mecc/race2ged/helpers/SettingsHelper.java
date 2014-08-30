@@ -24,12 +24,15 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Set;
 
 import edu.mecc.race2ged.GEDApplication;
+import edu.mecc.race2ged.JSON.Region;
+import edu.mecc.race2ged.JSON.State;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.alarm.Alarm;
 import edu.mecc.race2ged.alarm.AlarmSet;
@@ -44,6 +47,7 @@ public class SettingsHelper {
     /**
      * Preference Names
      */
+    public static String CLASS_DATA;
     public static String CLASS_DATA_VERSION;
     public static String CHECK_CLASS_DATA_ONLY_ON_WIFI;
     public static String CHECK_CLASS_DATA_FOR_NEW_VERSIONS;
@@ -52,6 +56,7 @@ public class SettingsHelper {
     public static String ALARMS;
 
     private SharedPreferences settings;
+    private Region savedClassData = null;
 
     /**
      * Constructs the SettingsHelper
@@ -59,19 +64,61 @@ public class SettingsHelper {
      */
     public SettingsHelper(Context context) {
         settings = PreferenceManager.getDefaultSharedPreferences(context);
+        CLASS_DATA=context.getResources().getString(R.string.pref_class_data);
         CLASS_DATA_VERSION = context.getResources().getString(R.string.pref_class_data_version);
         CHECK_CLASS_DATA_ONLY_ON_WIFI = context.getResources().getString(R.string.pref_check_class_data_only_on_wifi);
         CHECK_CLASS_DATA_FOR_NEW_VERSIONS = context.getResources().getString(R.string.pref_check_class_data_for_new_versions);
         CHECK_CLASS_DATA_FOR_NEW_VERSIONS_AT_STARTUP = context.getResources().getString(R.string.pref_check_class_data_for_new_versions_at_startup);
         SHOW_ANIMATIONS = context.getResources().getString(R.string.pref_show_animations);
-        SHOW_ANIMATIONS = context.getResources().getString(R.string.pref_alarms);
+        ALARMS = context.getResources().getString(R.string.pref_alarms);
+    }
+
+    /**
+     * Get the class data that is saved locally.
+     * @return Region class data object that is saved to the device in JSON.
+     */
+    public Region getSavedClassData() {
+        Region region = null;
+        if (savedClassData == null) {
+            try{
+                String savedClassJSON = settings.getString(CLASS_DATA,null);
+                if (savedClassJSON == null) throw new NullPointerException();
+                Gson gson = Utils.getGSONBuilder();
+                region = gson.fromJson(savedClassJSON, Region.class);
+            } catch (Exception e) {
+                Log.e(this.getClass().getSimpleName(),"GSON Error constructing objects from JSON.\n"+e.toString());
+            }
+            Log.d(this.getClass().getSimpleName(),"Class data retrieved from saved JSON.");
+        } else {
+            region = savedClassData;
+        }
+        return region;
+    }
+
+    /**
+     * Save the Region data as JSON to the preferences.
+     * @param region The Region object to save as JSON to preferences
+     */
+    public void saveClassData(Region region){
+        if (region == null) {
+            savePreference(CLASS_DATA,null);
+            Log.d(this.getClass().getSimpleName(),"Deleting saved class data since null region was passed.");
+            return;
+        }
+        try {
+            String json = region.toJSON();
+            savePreference(CLASS_DATA_VERSION,region.getVersion()+"");
+            savePreference(CLASS_DATA, json);
+        } catch (Exception e){
+            Log.e(this.getClass().getSimpleName(),"Error saving region data JSON.\n"+e.toString());
+        }
     }
 
     /**
      * What version of class data are we at?
      * @return Saved Class Data Version number. Or 1 if it does not exist.
      */
-    public int getClassDataVersion() {
+    public int getSavedClassDataVersion() {
         return Integer.parseInt(settings.getString(CLASS_DATA_VERSION, "1"));
     }
 
@@ -141,7 +188,7 @@ public class SettingsHelper {
         Log.d(getClass().getSimpleName(),"Retrieving saved alarms.");
         if (!Utils.isStringEmpty(alarmsString)) {
             try {
-                Gson gson = new GsonBuilder().setDateFormat("EEE hh:mm a").create();
+                Gson gson = Utils.getGSONBuilder();
                 AlarmSet alarms =  gson.fromJson(alarmsString, AlarmSet.class);
                 if (alarms != null){
                     Log.d(getClass().getSimpleName(),"Alarms retrieved and parsed.");
@@ -171,7 +218,7 @@ public class SettingsHelper {
      * @param alarms Alarms to save
      */
     private void saveAlarms(AlarmSet alarms) {
-        Gson gson = new GsonBuilder().setDateFormat("EEE hh:mm a").create();
+        Gson gson = Utils.getGSONBuilder();
         String alarmsString = gson.toJson(alarms);
         if (Utils.isStringEmpty(alarmsString)) savePreference(ALARMS,alarmsString);
     }

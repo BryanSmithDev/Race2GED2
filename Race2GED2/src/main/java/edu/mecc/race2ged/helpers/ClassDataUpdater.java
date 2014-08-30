@@ -22,6 +22,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,6 +35,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import edu.mecc.race2ged.GEDApplication;
+import edu.mecc.race2ged.JSON.Region;
+import edu.mecc.race2ged.JSON.State;
 import edu.mecc.race2ged.R;
 
 /**
@@ -99,10 +106,10 @@ public class ClassDataUpdater extends AsyncTask<Integer, Integer, Boolean> {
         if (canUpdate()) {
             try {
                 int value = retrieveRemoteVersion(params[0]);
-                if (value > GEDApplication.getSettingsHelper().getClassDataVersion()) {
+                if (value > GEDApplication.getSettingsHelper().getSavedClassDataVersion()) {
                     Log.d(this.getClass().getSimpleName(),
                             "Remote Class Schedule Data is newer. Checking for remote file.");
-                    try { return updateClassData(); } catch (IOException e) {e.printStackTrace();}
+                    try { return updateClassData(params[0]); } catch (IOException e) {e.printStackTrace();}
                 } else if (value != -1) {
                     Log.d(this.getClass().getSimpleName(),
                             "Remote Class Schedule Data is not newer. No need to download.");
@@ -159,11 +166,10 @@ public class ClassDataUpdater extends AsyncTask<Integer, Integer, Boolean> {
      * Retrieves the JSON Class data from the web server.
      * @throws IOException
      */
-    private boolean updateClassData() throws IOException{
+    private boolean updateClassData(int regionNumb) throws IOException{
         URL url = new URL("http://race2ged.org/wp-content/themes/adulted/ClassSchedule.json");
         boolean value = false;
         InputStream input = null;
-        FileOutputStream output = null;
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(10000 /* milliseconds */);
         conn.setConnectTimeout(15000 /* milliseconds */);
@@ -175,27 +181,18 @@ public class ClassDataUpdater extends AsyncTask<Integer, Integer, Boolean> {
         if (responseCode==200) {
             Log.d(this.getClass().getSimpleName(), "Data file found on server. Proceeding with download.");
             try {
-                String outputName = context.getString(R.string.class_data_file_name);
                 input = conn.getInputStream();
-                output = context.openFileOutput(outputName, Context.MODE_PRIVATE);
-
-                int total_size = conn.getContentLength();
-
-                int read;
-                byte[] data = new byte[1024];
-                int curSize = 1024;
-                int perc=0;
-                while ((read = input.read(data)) != -1) {
-                    output.write(data, 0, read);
-                    perc=((curSize / total_size) * 100);
-                    publishProgress((perc)>100?100:perc);
-                    curSize+=1024;
+                String json = Utils.convertStreamToString(input);
+                if (!Utils.isStringEmpty(json)) {
+                    Gson gson = Utils.getGSONBuilder();
+                    State state = gson.fromJson(json, State.class);
+                    Region region = state.getRegion().get(regionNumb);
+                    GEDApplication.getSettingsHelper().saveClassData(region);
+                    value = true;
                 }
-
-                value = true;
+            } catch (Exception e) {
+                Log.e(this.getClass().getSimpleName(),"Error converting Region InputStream to String.\n"+e.toString());
             } finally {
-                if (output != null)
-                    output.close();
                 if (input != null)
                     input.close();
             }
@@ -233,7 +230,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Integer, Boolean> {
                 }
                 version = response.trim();
                 Log.d(this.getClass().getSimpleName(), "Remote Class Schedule Version for Region: " +
-                        region + " is: " + version + " (Local is: " + GEDApplication.getSettingsHelper().getClassDataVersion() + " )");
+                        region + " is: " + version + " (Local is: " + GEDApplication.getSettingsHelper().getSavedClassDataVersion() + " )");
                 return Integer.parseInt(response.trim());
             } finally {
                 if (input != null)
