@@ -17,6 +17,7 @@
 package edu.mecc.race2ged.widgets;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -30,45 +31,18 @@ import edu.mecc.race2ged.helpers.Utils;
 /**
  * TODO: document your custom view class.
  */
-public class Card extends LinearLayout implements Serializable {
+public abstract class Card extends LinearLayout implements Serializable {
 
     protected LinearLayout mLayout;
 
     public Card(Context context){
         super(context);
-        setupCard(context);
+        setupCard();
         Utils.setRobotoThin(context, mLayout);
     }
 
-    public Card(Context context, View view) {
-        super(context);
-        setupCard(context);
-        mLayout.addView(view);
-        Utils.setRobotoThin(context, mLayout);
-    }
-
-    public Card(Context context, ArrayList<View> views) {
-        super(context);
-        setupCard(context);
-        if (views.isEmpty()) return;
-        for (View view : views) {
-            mLayout.addView(view);
-        }
-        Utils.setRobotoThin(context, mLayout);
-    }
-
-    public Card(Context context, String message){
-        super(context);
-        setupCard(context);
-        TextView textView = new TextView(context);
-        if (Utils.isStringEmpty(message)) message = "TODO";
-        textView.setText(message);
-        mLayout.addView(textView);
-        Utils.setRobotoThin(context, mLayout);
-    }
-
-    private void setupCard(Context context){
-        LayoutInflater inflater = (LayoutInflater) context
+    private void setupCard(){
+        LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mLayout = (LinearLayout)inflater.inflate(R.layout.card, this, true).findViewById(R.id.card);
         int pad = getResources().getDimensionPixelSize(R.dimen.card_inside_side_padding);

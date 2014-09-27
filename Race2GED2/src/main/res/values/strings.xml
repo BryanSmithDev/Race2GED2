@@ -21,10 +21,10 @@
 
     <array name="navPrimaryTitles">
         <item>Home</item>
-        <item>Classes</item>
-        <item>Resources</item>
+        <item>Class Info</item>
+        <item>Study</item>
         <item>Practice</item>
-        <item>Testing</item>
+        <item>Test</item>
     </array>
     <array name="navSecondaryTitles">
         <item>Settings</item>
@@ -119,7 +119,7 @@
 
 
     <string name="greeting_header">Welcome!</string>
-    <string name="greeting">Welcome to the journey toward your GED® credential! It is an achievement that will change your life.\n\nTap the icon in the top left corner or slide from the left of the screen to open the navigation drawer to get started. May you have good success.\n\nAlthough this app is free for everyone, the services of the Regional Adult Education Program are
+    <string name="greeting">Welcome to the journey toward your GED® credential! It is an achievement that will change your life.\n\nTap the icon in the top left corner or slide from the left of the screen to open the navigation drawer to get started. \n\nAlthough this app is free for everyone, the services of the Regional Adult Education Program are
         available to residents of the Virginia counties of Scott, Lee, and Wise and the city of Norton.
     </string>
 
@@ -161,4 +161,6 @@ spend about 10 minutes on each of the Short Answer questions.
     <string name="empty_list_text">Loading…</string>
     <string name="class_empty_list_text">There are no classes currently held here.</string>
     <string name="class_card_alarm_checkbox">Remind me to go to class.</string>
+
+    <string name="not_found_exception">Aww. There was an error loading this content. :(</string>
 </resources>

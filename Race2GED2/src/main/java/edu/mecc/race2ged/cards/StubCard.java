@@ -28,7 +28,7 @@ import edu.mecc.race2ged.widgets.Card;
 /**
  * TODO: document your custom view class.
  */
-public class StubCard extends Card {
+public abstract class StubCard extends Card {
 
     protected View mStubContents;
     protected ViewStub mStub;
@@ -45,17 +45,17 @@ public class StubCard extends Card {
         mStub = new ViewStub(context);
         mStub.setLayoutResource(layoutId);
         addContentView(mStub);
-        inflate(context);
+        inflate();
     }
 
     public void setContents(int id) {
         mStub.setLayoutResource(id);
     }
 
-    public View inflate(Context context){
+    public View inflate(){
         mStubContents = null;
         try {
-            LayoutInflater inflater = (LayoutInflater) context
+            LayoutInflater inflater = (LayoutInflater) getContext()
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mStubContents = mStub.inflate();
         } catch (Exception e) {

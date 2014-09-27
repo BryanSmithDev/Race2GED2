@@ -41,10 +41,12 @@ android {
     buildTypes {
         release {
             versionNameSuffix '-release'
+            debuggable false
         }
         debug {
             applicationIdSuffix '.DEBUG'
             versionNameSuffix '-debug'
+            debuggable true
         }
     }
 }

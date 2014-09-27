@@ -34,6 +34,7 @@ import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.cards.ExpandableCard;
+import edu.mecc.race2ged.cards.TextCard;
 import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
 import edu.mecc.race2ged.helpers.Utils;
@@ -130,18 +131,18 @@ public class HomeActivity extends ActionBarActivity
 
     private void populateHomeCards() {
         mHomeCards.add(new Header(this,getResources().getString(R.string.greeting_header)));
-        mHomeCards.add(new Card(this,getResources().getString(R.string.greeting)));
+        mHomeCards.add(new TextCard(this,getResources().getString(R.string.greeting)));
         mHomeCards.add(new Header(this,getResources().getString(R.string.facebook_feed_header)));
-        mHomeCards.add(new Card(this,"TODO: Add facebook feed"));
+        mHomeCards.add(new TextCard(this,"TODO: Add facebook feed"));
     }
 
     private void populateResourcesCards() {
         mResourceCards.add(new Header(this,"Category 1"));
-        mResourceCards.add(new Card(this,"Resource Item 1"));
-        mResourceCards.add(new Card(this,"Resource Item 2"));
-        mResourceCards.add(new Card(this,"Resource Item 3"));
+        mResourceCards.add(new TextCard(this,"Resource Item 1"));
+        mResourceCards.add(new TextCard(this,"Resource Item 2"));
+        mResourceCards.add(new TextCard(this,"Resource Item 3"));
         mResourceCards.add(new Header(this,"Category 2"));
-        mResourceCards.add(new Card(this,"Resource Item 4"));
+        mResourceCards.add(new TextCard(this,"Resource Item 4"));
     }
 
     private void populateTestingCards() {
@@ -151,11 +152,11 @@ public class HomeActivity extends ActionBarActivity
         mTestingCards.add(new ExpandableCard(this,getResources().getString(R.string.testing_social_studies),getResources().getString(R.string.testing_social_studies_content)));
         mTestingCards.add(new ExpandableCard(this,getResources().getString(R.string.testing_science),getResources().getString(R.string.testing_science_content)));
         mTestingCards.add(new Header(this, getResources().getString(R.string.testing_centers_title)));
-        mTestingCards.add(new Card(this,"TODO: Add testing center info. (Maybe on tabs to organize? This page will have a lot of info for one screen)"));
+        mTestingCards.add(new TextCard(this,"TODO: Add testing center info. (Maybe on tabs to organize? This page will have a lot of info for one screen)"));
         mTestingCards.add(new Header(this, getResources().getString(R.string.testing_cost_title)));
-        mTestingCards.add(new Card(this,"TODO: Add testing cost info. Again, most likely will me moved to a related tab."));
+        mTestingCards.add(new TextCard(this,"TODO: Add testing cost info. Again, most likely will me moved to a related tab."));
         mTestingCards.add(new Header(this, getResources().getString(R.string.testing_passing_title)));
-        mTestingCards.add(new Card(this,"TODO: Add passing score info."));
+        mTestingCards.add(new TextCard(this,"TODO: Add passing score info."));
     }
 
     private void populateAboutCards(){
@@ -233,7 +234,7 @@ public class HomeActivity extends ActionBarActivity
                 break;
             case 4:
                 ArrayList<View> practiceCards = new ArrayList<View>();
-                practiceCards.add(new Card(this, "TODO: Practice test questions"));
+                practiceCards.add(new TextCard(this, "TODO: Practice test questions"));
                 frag = CardListFragment.newInstance(practiceCards);
                 frag.setTitle(navTitles.get(numb-1));
                 replaceFragment(numb, frag, PRACTICE_FRAG_TAG);
@@ -249,7 +250,7 @@ public class HomeActivity extends ActionBarActivity
                 break;
             case 7:
                 ArrayList<View> feedbackCards = new ArrayList<View>();
-                feedbackCards.add(new Card(this,"TODO: Add feedback form."));
+                feedbackCards.add(new TextCard(this,"TODO: Add feedback form."));
                 frag = CardListFragment.newInstance(feedbackCards);
                 frag.setTitle(navTitles.get(numb-1));
                 replaceFragment(numb,frag,FEEDBACK_FRAG_TAG);

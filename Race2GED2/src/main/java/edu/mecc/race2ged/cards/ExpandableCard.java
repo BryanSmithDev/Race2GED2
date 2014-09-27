@@ -18,9 +18,7 @@ package edu.mecc.race2ged.cards;
 
 import android.content.Context;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -28,9 +26,6 @@ import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import edu.mecc.race2ged.R;
@@ -44,7 +39,7 @@ public class ExpandableCard extends Card {
 
     protected LinearLayout mLayout;
     protected LinearLayout mContent;
-    protected  TextView titleView;
+    protected TextView mTitleView;
     protected boolean mExpanded = false;
 
     protected OnClickListener expandClick = new OnClickListener() {
@@ -58,20 +53,25 @@ public class ExpandableCard extends Card {
         }
     };
 
+    public ExpandableCard(Context context){
+        super(context);
+        setupExpandableCard("");
+    }
+
     public ExpandableCard(Context context, String title){
         super(context);
-        setupExpandableCard(context,title);
+        setupExpandableCard(title);
     }
 
     public ExpandableCard(Context context, String title, View view) {
         super(context);
-        setupExpandableCard(context,title);
+        setupExpandableCard(title);
         addViewInExpandableArea(view);
     }
 
     public ExpandableCard(Context context,String title, ArrayList<View> views) {
         super(context);
-        setupExpandableCard(context,title);
+        setupExpandableCard(title);
         if (views.isEmpty()) return;
         for (View view : views) {
             mLayout.addView(view);
@@ -80,19 +80,19 @@ public class ExpandableCard extends Card {
 
     public ExpandableCard(Context context, String title, String message){
         super(context);
-        setupExpandableCard(context,title);
+        setupExpandableCard(title);
         TextView textView = new TextView(context);
         if (Utils.isStringEmpty(message)) message = "TODO";
         textView.setText(message);
         addViewInExpandableArea(textView);
     }
 
-    private void setupExpandableCard(Context context,String title){
-        mContent = new LinearLayout(context);
+    private void setupExpandableCard(String title){
+        mContent = new LinearLayout(getContext());
         mContent.setOrientation(LinearLayout.VERTICAL);
-        setupTitle(context, title);
+        setupTitle(title);
         addContentView(mContent);
-        LinearLayout sep = new LinearLayout(context);
+        LinearLayout sep = new LinearLayout(getContext());
         sep.setBackgroundColor(getResources().getColor(R.color.card_divider));
         LinearLayout.LayoutParams params = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,1);
         params.setMargins(0,getResources().getDimensionPixelSize(R.dimen.card_inside_side_padding),0,getResources().getDimensionPixelSize(R.dimen.card_inside_side_padding));
@@ -101,26 +101,26 @@ public class ExpandableCard extends Card {
         if (!mExpanded) onCollapse();
     }
 
-    protected void setupTitle(Context context, String title){
-        titleView = new TextView(context);
-        titleView.setText(title);
-        titleView.setCompoundDrawablePadding(0);
+    protected void setupTitle(String title){
+        mTitleView = new TextView(getContext());
+        mTitleView.setText(title);
+        mTitleView.setCompoundDrawablePadding(0);
         if (mExpanded) {
 
-            titleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+            mTitleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
                     getResources().getDrawable(R.drawable.ic_collapse), null);
         } else {
-            titleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+            mTitleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
                     getResources().getDrawable(R.drawable.ic_expand), null);
         }
-        MarginLayoutParams params = new MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, titleView.getCompoundDrawables()[2].getIntrinsicHeight());
+        MarginLayoutParams params = new MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mTitleView.getCompoundDrawables()[2].getIntrinsicHeight());
         params.setMargins(0,0,0,getResources().getDimensionPixelSize(R.dimen.card_expandable_title_bottom_margin));
-        titleView.setLayoutParams(params);
-        titleView.setOnClickListener(expandClick);
-        titleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.card_expandable_title_text_size));
-        Utils.setRobotoThin(context, titleView, Typeface.BOLD);
-        titleView.setTypeface(null, Typeface.BOLD);
-        addContentView(titleView);
+        mTitleView.setLayoutParams(params);
+        mTitleView.setOnClickListener(expandClick);
+        mTitleView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.card_expandable_title_text_size));
+        Utils.setRobotoThin(getContext(), mTitleView, Typeface.BOLD);
+        mTitleView.setTypeface(null, Typeface.BOLD);
+        addContentView(mTitleView);
     }
 
     protected void addViewInExpandableArea(View view){
@@ -130,7 +130,7 @@ public class ExpandableCard extends Card {
     protected void onExpand() {
         if (mContent != null){
             mExpanded = true;
-            titleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+            mTitleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
                     getResources().getDrawable(R.drawable.ic_collapse), null);
             expand(mContent);
         }
@@ -139,7 +139,7 @@ public class ExpandableCard extends Card {
     protected void onCollapse() {
         if (mContent != null){
             mExpanded = false;
-            titleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
+            mTitleView.setCompoundDrawablesWithIntrinsicBounds(null, null,
                     getResources().getDrawable(R.drawable.ic_expand), null);
             collapse(mContent);
         }

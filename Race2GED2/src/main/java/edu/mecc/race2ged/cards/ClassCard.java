@@ -51,6 +51,10 @@ public class ClassCard extends StubCard {
 
     private Class mClass = null;
 
+    public ClassCard(Context context) {
+        super(context, R.layout.class_card);
+    }
+
     public ClassCard(Context context, Class mClass) {
         super(context, R.layout.class_card);
         this.mClass = mClass;
