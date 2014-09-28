@@ -41,4 +41,7 @@
     <dimen name="card_expandable_title_text_size">18sp</dimen>
     <dimen name="card_expandable_title_bottom_margin">5dp</dimen>
     <dimen name="card_message_text_size">14.0sp</dimen>
+    <dimen name="dialog_item_margin">4dp</dimen>
+    <dimen name="dialog_item_label_margin">12dp</dimen>
+    <dimen name="dialog_item_indention">5dp</dimen>
 </resources>

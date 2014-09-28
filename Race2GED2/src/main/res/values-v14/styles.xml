@@ -18,7 +18,7 @@
 <resources>
 
     <style name="Theme.Race2ged" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
+        <item name="sdlDialogStyle">@style/gedDialog</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background_race2ged</item>
         <item name="android:popupMenuStyle">@style/PopupMenu.Race2ged</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView.Race2ged</item>
@@ -64,11 +64,12 @@
 
     </style>
 
-    <style name="DialogStyleLight.Custom">
+    <style name="gedDialog">
         <!-- anything can be left out: -->
         <item name="titleTextColor">@color/content_color</item>
         <item name="titleSeparatorColor">@color/content_color</item>
         <item name="buttonBackgroundColorPressed">@color/pressed_race2ged</item>
+        <item name="android:windowSoftInputMode">adjustResize|adjustPan</item>
         <item name="buttonBackgroundColorFocused">@color/focused_race2ged</item>
     </style>
 

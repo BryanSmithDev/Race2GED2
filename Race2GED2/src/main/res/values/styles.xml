@@ -41,7 +41,7 @@
     </style>
 
     <style name="Theme.Race2ged" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
+        <item name="sdlDialogStyle">@style/gedDialog</item>
         <item name="actionBarItemBackground">@drawable/selectable_background_race2ged</item>
         <item name="popupMenuStyle">@style/PopupMenu.Race2ged</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Race2ged</item>
@@ -51,47 +51,31 @@
         <item name="actionModeBackground">@drawable/cab_background_top_race2ged</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_race2ged</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Race2ged</item>
-
         <item name="android:editTextStyle">@style/EditTextrace2ged</item>
-
         <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewrace2ged</item>
-
         <item name="android:checkboxStyle">@style/CheckBoxrace2ged</item>
-
         <item name="android:radioButtonStyle">@style/RadioButtonrace2ged</item>
-
         <item name="android:buttonStyle">@style/Buttonrace2ged</item>
-
         <item name="android:imageButtonStyle">@style/ImageButtonrace2ged</item>
-
         <item name="android:spinnerStyle">@style/Spinnerrace2ged</item>
-
-
-
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemrace2ged</item>
-
         <item name="android:progressBarStyleHorizontal">@style/ProgressBarrace2ged</item>
-
         <item name="android:seekBarStyle">@style/SeekBarrace2ged</item>
-
         <item name="android:buttonStyleToggle">@style/Togglerace2ged</item>
-
         <item name="android:listViewStyle">@style/ListViewrace2ged</item>
-
         <item name="android:listViewWhiteStyle">@style/ListViewrace2ged.White</item>
-
         <item name="android:spinnerItemStyle">@style/SpinnerItemrace2ged</item>
-
         <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Race2ged.Widget</item>
 
     </style>
 
-    <style name="DialogStyleLight.Custom">
+    <style name="gedDialog">
         <!-- anything can be left out: -->
         <item name="titleTextColor">@color/content_color</item>
         <item name="titleSeparatorColor">@color/content_color</item>
         <item name="buttonBackgroundColorPressed">@color/pressed_race2ged</item>
+        <item name="android:windowSoftInputMode">adjustResize|adjustPan</item>
         <item name="buttonBackgroundColorFocused">@color/focused_race2ged</item>
     </style>
 
@@ -222,6 +206,5 @@
     <style name="SpinnerItemrace2ged" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
         <item name="android:textColor">#000000</item>
     </style>
-
 
 </resources>

@@ -60,7 +60,7 @@ import edu.mecc.race2ged.alarm.AlarmReceiver;
  *
  * @author Bryan Smith
  */
-public class Utils {
+public abstract class Utils {
 
     /**
      * Network States

@@ -24,6 +24,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +38,7 @@ import edu.mecc.race2ged.cards.ExpandableCard;
 import edu.mecc.race2ged.cards.TextCard;
 import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
+import edu.mecc.race2ged.helpers.Dialogs;
 import edu.mecc.race2ged.helpers.Utils;
 import edu.mecc.race2ged.navigation.DrawerLayout;
 import edu.mecc.race2ged.navigation.NavigationDrawerFragment;
@@ -249,11 +251,12 @@ public class HomeActivity extends ActionBarActivity
                 startActivity(settingsIntent);
                 break;
             case 7:
-                ArrayList<View> feedbackCards = new ArrayList<View>();
+                Dialogs.createQuestionDialog(this,null).show();
+               /* ArrayList<View> feedbackCards = new ArrayList<View>();
                 feedbackCards.add(new TextCard(this,"TODO: Add feedback form."));
                 frag = CardListFragment.newInstance(feedbackCards);
                 frag.setTitle(navTitles.get(numb-1));
-                replaceFragment(numb,frag,FEEDBACK_FRAG_TAG);
+                replaceFragment(numb,frag,FEEDBACK_FRAG_TAG);*/
                 break;
             case 8:
                 frag = CardListFragment.newInstance(mAboutCards);

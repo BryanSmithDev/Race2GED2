@@ -163,4 +163,39 @@ spend about 10 minutes on each of the Short Answer questions.
     <string name="class_card_alarm_checkbox">Remind me to go to class.</string>
 
     <string name="not_found_exception">Aww. There was an error loading this content. :(</string>
+    <string name="send_question">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="full_name_label">YOUR NAME:</string>
+    <string name="question_hint">What do you have questions about? We will do what we can to help!</string>
+    <string name="question_dialog_title">Submit your Questions</string>
+    <string name="question_label">YOUR QUESTIONS:</string>
+    <string name="zipcodes_label">YOUR ZIPCODE:</string>
+    <string name="email_label">YOUR EMAIL:</string>
+    <string name="sample_name">John Smith</string>
+    <string name="sample_email">john.smith@gmail.com</string>
+
+    <string-array name="zipcodes">
+      <item>24216</item>
+      <item>24219</item>
+      <item>24221</item>
+      <item>24230</item>
+      <item>24243</item>
+      <item>24244</item>
+      <item>24245</item>
+      <item>24248</item>
+      <item>24250</item>
+      <item>24251</item>
+      <item>24258</item>
+      <item>24263</item>
+      <item>24265</item>
+      <item>24271</item>
+      <item>24273</item>
+      <item>24277</item>
+      <item>24279</item>
+      <item>24281</item>
+      <item>24282</item>
+      <item>24283</item>
+      <item>24290</item>
+      <item>24293</item>
+    </string-array>
 </resources>
