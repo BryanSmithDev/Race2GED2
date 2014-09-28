@@ -19,6 +19,7 @@ package edu.mecc.race2ged.activities;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -34,6 +35,7 @@ import edu.mecc.race2ged.GEDApplication;
 import edu.mecc.race2ged.JSON.Region;
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.cards.ExpandableCard;
+import edu.mecc.race2ged.cards.ResourceCard;
 import edu.mecc.race2ged.cards.TextCard;
 import edu.mecc.race2ged.fragments.CardListFragment;
 import edu.mecc.race2ged.fragments.ClassViewPagerFragment;
@@ -137,12 +139,26 @@ public class HomeActivity extends ActionBarActivity
     }
 
     private void populateResourcesCards() {
-        mResourceCards.add(new Header(this,"Category 1"));
-        mResourceCards.add(new TextCard(this,"Resource Item 1"));
-        mResourceCards.add(new TextCard(this,"Resource Item 2"));
-        mResourceCards.add(new TextCard(this,"Resource Item 3"));
-        mResourceCards.add(new Header(this,"Category 2"));
-        mResourceCards.add(new TextCard(this,"Resource Item 4"));
+        mResourceCards.add(new Header(this,getResources().getString(R.string.resources_ged_math)));
+        generateResourceCards(mResourceCards,R.array.resources_ged_math_titles, R.array.resources_ged_math_descriptions, R.array.resources_ged_math_links);
+        mResourceCards.add(new Header(this,getResources().getString(R.string.resources_ged_rla)));
+        mResourceCards.add(new TextCard(this,"Content coming soon."));
+        mResourceCards.add(new Header(this,getResources().getString(R.string.resources_ged_science)));
+        mResourceCards.add(new TextCard(this,"Content coming soon."));
+        mResourceCards.add(new Header(this,getResources().getString(R.string.resources_ged_socialstudies)));
+        mResourceCards.add(new TextCard(this,"Content coming soon."));
+    }
+
+    private void generateResourceCards(ArrayList<View> cards,int titlesID, int descriptionsID, int linksID){
+        ArrayList<String> titles = new ArrayList<String>();
+        titles.addAll(Arrays.asList(getResources().getStringArray(titlesID)));
+        ArrayList<String> descriptions = new ArrayList<String>();
+        descriptions.addAll(Arrays.asList(getResources().getStringArray(descriptionsID)));
+        ArrayList<String> links = new ArrayList<String>();
+        links.addAll(Arrays.asList(getResources().getStringArray(linksID)));
+        for(int i=0;i<titles.size();i++){
+            cards.add(new ResourceCard(this,titles.get(i),descriptions.get(i),links.get(i)));
+        }
     }
 
     private void populateTestingCards() {

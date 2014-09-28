@@ -73,7 +73,7 @@
     <string name="content_provided_by">Content Provided by:</string>
     <string name="disclaimer_text">GED® and GED Testing Service® are registered trademarks of the
         American Council on Education and may not be used or reproduced without express written
-        permission. The GED® and GED Testing Service® brands are administered by GED Testing
+        permission. The GED® and GED® Testing Service® brands are administered by GED® Testing
         Service® LLC under license from the American Council on Education.</string>
     <string name="title_activity_classes">ClassesActivity</string>
     <string name="title_section1">Section 1</string>
@@ -125,7 +125,7 @@
 
     <string name="facebook_feed_header">What\'s new?</string>
 
-    <string name="testing_content_areas">2014 GED Content Areas</string>
+    <string name="testing_content_areas">2014 GED® Content Areas</string>
     <string name="testing_rla">RLA</string>
     <string name="testing_rla_content">The Reasoning Through Language Arts (RLA) test is 150 minutes long and testing is broken down into three sections:\n\n
 • Section 1 (35 minutes*) tests all content\n
@@ -163,4 +163,36 @@ spend about 10 minutes on each of the Short Answer questions.
     <string name="class_card_alarm_checkbox">Remind me to go to class.</string>
 
     <string name="not_found_exception">Aww. There was an error loading this content. :(</string>
+    
+    
+    <string name="resources_ged_math">Math</string>
+    <string name="resources_ged_rla">Reading &amp; Language Arts</string>
+    <string name="resources_ged_science">Science</string>
+    <string name="resources_ged_socialstudies">Social Studies</string>
+    <string name="sample_title">TITLE</string>
+    <string name="sample_description">DESCRIPTION</string>
+
+    <array name="resources_ged_math_titles">
+        <item>GED® Math Formula Sheet</item>
+        <item>TI-30XS Calculator Reference Sheet</item>
+        <item>TI-30XS Calculator Tutorial</item>
+        <item>Math Drills - Time Worksheets</item>
+        <item>Khan Academy GED® Math</item>
+    </array>
+
+    <array name="resources_ged_math_descriptions">
+        <item>Official copy of the Mathematical Reasoning test formula sheet.</item>
+        <item>Official copy of the calculator reference sheet.</item>
+        <item>Atomic Learning\'s guide on how to use the new calculator used for the GED® test.</item>
+        <item>Time worksheets including elapsed time, telling time on analog clocks, calendars and converting time lessons.</item>
+        <item>GED® Math specific playlist of videos by Khan Academy and Florida Literacy Council.</item>
+    </array>
+
+    <array name="resources_ged_math_links">
+        <item><![CDATA[http://race2ged.org/wp-content/uploads/2014/06/2014-GED-Formulas-Page-updated.pdf]]></item>
+        <item><![CDATA[http://race2ged.org/wp-content/uploads/2014/02/TI-30XS-Calculator-Reference-Sheet.pdf]]></item>
+        <item><![CDATA[http://www.atomiclearning.com/ti30xs]]></item>
+        <item><![CDATA[http://www.math-drills.com/timeworksheets.shtml]]></item>
+        <item><![CDATA[https://www.youtube.com/playlist?list=PLc0BtI8B0p-F8SHQ95LUIpBS0zozJIVc3]]></item>
+    </array>
 </resources>
