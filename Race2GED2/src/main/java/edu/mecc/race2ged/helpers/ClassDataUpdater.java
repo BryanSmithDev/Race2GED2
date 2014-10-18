@@ -19,6 +19,7 @@ package edu.mecc.race2ged.helpers;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -167,7 +168,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Integer, Boolean> {
      * @throws IOException
      */
     private boolean updateClassData(int regionNumb) throws IOException{
-        URL url = new URL("http://race2ged.org/wp-content/themes/adulted/ClassSchedule.json");
+        URL url = new URL("http://race2ged.org/External_Data/getClassSchedule.php?all=1");
         boolean value = false;
         InputStream input = null;
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -208,7 +209,7 @@ public class ClassDataUpdater extends AsyncTask<Integer, Integer, Boolean> {
      * @return
      */
     private int retrieveRemoteVersion(int region) throws IOException {
-        URL url = new URL("http://race2ged.org/wp-content/themes/adulted/getClassScheduleVersion.php?region="+region);
+        URL url = new URL("http://race2ged.org/External_Data/getClassSchedule.php?region="+region);
         InputStream input = null;
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(10000 /* milliseconds */);
