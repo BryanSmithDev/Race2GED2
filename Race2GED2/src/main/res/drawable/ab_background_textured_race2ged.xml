@@ -25,7 +25,7 @@
     </item>
     <!-- This is the main color -->
     <item android:bottom="2dp">
-        <shape android:height="@dimen/abc_action_bar_default_height">
+        <shape android:height="48dp">
             <size android:height="48dp"/>
             <solid android:color="@color/primary_color" />
         </shape>
