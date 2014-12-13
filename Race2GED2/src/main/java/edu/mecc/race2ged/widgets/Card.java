@@ -17,13 +17,11 @@
 package edu.mecc.race2ged.widgets;
 
 import android.content.Context;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import edu.mecc.race2ged.R;
 import edu.mecc.race2ged.helpers.Utils;
